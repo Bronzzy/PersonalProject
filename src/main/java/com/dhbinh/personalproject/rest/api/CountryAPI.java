@@ -16,8 +16,9 @@ public interface CountryAPI {
     @GetMapping
     ResponseEntity <List<CountryDTO>> getAllCountry();
 
-    @GetMapping("/{countryid}")
-    ResponseEntity<CountryDTO> getCountryByName();
+    @GetMapping("/getcountrybyname")
+    ResponseEntity<CountryDTO> getCountryByCountryName(@Param("countryName") String countryName);
+
     @PostMapping("/{countryid}")
     ResponseEntity<CountryDTO> updateCountry(@PathVariable
                                              @RequestBody CountryDTO countryDTO);

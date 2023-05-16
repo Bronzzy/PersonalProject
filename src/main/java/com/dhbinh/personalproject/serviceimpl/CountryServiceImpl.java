@@ -33,7 +33,6 @@ public class CountryServiceImpl {
         return countryMapper.toDTO(country);
     }
 
-
     public List<CountryDTO> getAllCountry(){
         List<Country> countryList = countryRepository.findAll();
         if(countryList.isEmpty())
@@ -41,7 +40,7 @@ public class CountryServiceImpl {
         return countryMapper.toDTOs(countryList);
     }
 
-    public CountryDTO getCountryByName(String name){
+    public CountryDTO getCountryByCountryName(String name){//KIEM TRA LAI METHOD, LUON TRA VE EXCEPTION MAC DU CO COUNTRY TRONG DB
         Optional<Country> existingCountry = countryRepository.getCountryByCountryName(name);
         if(existingCountry.isEmpty())
             throw PersonalProjectException.notFound("CountryNotFound","Country is not existed");
@@ -51,7 +50,7 @@ public class CountryServiceImpl {
 
     public CountryDTO updateCountry(CountryDTO countryDTO){
         Optional<Country> existingCountry = countryRepository.getCountryByCountryName(countryDTO.getCountryName());
-        if(!existingCountry.isPresent())
+        if(existingCountry.isEmpty())
             throw PersonalProjectException.badRequest("CountryNotFound","Country is not existed");
 
         Country updateCountry = Country.builder()

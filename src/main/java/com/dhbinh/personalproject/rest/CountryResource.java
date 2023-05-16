@@ -30,8 +30,8 @@ public class CountryResource implements CountryAPI {
     }
 
     @Override
-    public ResponseEntity<CountryDTO> getCountryByName() {
-        return ResponseEntity.ok(countryService.getCountryByName());
+    public ResponseEntity<CountryDTO> getCountryByCountryName(String name) {
+        return ResponseEntity.ok(countryService.getCountryByCountryName(name));
     }
 
     @Override
