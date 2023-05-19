@@ -1,4 +1,9 @@
 package com.dhbinh.personalproject.repository;
 
-public interface PostCommentRepository {
+import com.dhbinh.personalproject.entity.PostComment;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PostCommentRepository extends JpaRepository<PostComment, Long> {
 }

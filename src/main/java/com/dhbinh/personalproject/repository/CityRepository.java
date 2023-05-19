@@ -1,4 +1,9 @@
 package com.dhbinh.personalproject.repository;
 
-public interface CityRepository {
+import com.dhbinh.personalproject.entity.City;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CityRepository extends JpaRepository<City,Long> {
 }
