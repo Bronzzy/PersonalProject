@@ -2,7 +2,7 @@ package com.dhbinh.personalproject.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+//import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 

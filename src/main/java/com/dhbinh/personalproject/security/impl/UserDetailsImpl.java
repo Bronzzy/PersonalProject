@@ -3,6 +3,7 @@ package com.dhbinh.personalproject.security.impl;
 import com.dhbinh.personalproject.entity.Role;
 import com.dhbinh.personalproject.entity.UserAccount;
 import com.dhbinh.personalproject.entity.UserRoleAssignment;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class UserDetailsImpl implements UserDetails {
     private Long id;
     private String username;
+    @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
