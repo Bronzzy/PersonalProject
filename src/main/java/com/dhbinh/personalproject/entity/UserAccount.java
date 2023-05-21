@@ -2,6 +2,7 @@ package com.dhbinh.personalproject.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,19 +27,19 @@ public class UserAccount {
     private Long userAccountID;
 
     @Column(name = "user_first_name")
-    private String userAccountFirstName;
+    private String userFirstName;
 
     @Column(name = "user_last_name")
-    private String userAccountLastName;
+    private String userLastName;
 
-    @Column(name = "user_email",nullable = false)
-    private String userAccountEmail;
+    @Column(name = "username",nullable = false)
+    private String username;
 
     @JsonIgnore
     @Column(name = "user_password",nullable = false)
-    private String userAccountPassword;
+    private String userPassword;
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "userAccounts")
     private List<UserRoleAssignment> roles = new ArrayList<>();
 
 }

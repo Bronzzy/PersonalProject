@@ -19,10 +19,10 @@ public class CountryResource implements CountryAPI {
 
     @Override
     public ResponseEntity<CountryDTO> createCountry(CountryDTO countryDTO) {
-        log.debug("Request to create new country {}", countryDTO);
-        CountryDTO createCountryDTO = countryService.createCountry(countryDTO);
-        return ResponseEntity.created(URI.create("/api/countries/" + createCountryDTO.getCountryName())).body(createCountryDTO);
-    }
+          log.debug("Request to create new country {}", countryDTO);
+          CountryDTO createCountryDTO = countryService.createCountry(countryDTO);
+          return ResponseEntity.created(URI.create("/api/countries/" + createCountryDTO.getCountryName())).body(createCountryDTO);
+      }
 
     @Override
     public ResponseEntity<List<CountryDTO>> getAllCountry() {
@@ -31,15 +31,19 @@ public class CountryResource implements CountryAPI {
 
     @Override
     public ResponseEntity<CountryDTO> getCountryByCountryName(String name) {
-        return ResponseEntity.ok(countryService.getCountryByCountryName(name));
+        return ResponseEntity.ok(countryService.getByCountryID(name));
     }
 
     @Override
     public ResponseEntity<CountryDTO> updateCountry(CountryDTO countryDTO) {
         log.debug("Request to update country {}", countryDTO);
-        CountryDTO updateCountryDTO = countryService.updateCountry(countryDTO);
+        CountryDTO updateCountryDTO = countryService.updateByCountryID(countryDTO);
         return ResponseEntity.created(URI.create("/api/countries" + updateCountryDTO.getCountryName())).body(updateCountryDTO);
     }
 
+    public ResponseEntity<Void> deleteCountry(String countryName) {
+        countryService.deleteByCountryID(countryName);
+        return ResponseEntity.noContent().build();
+    }
 
 }

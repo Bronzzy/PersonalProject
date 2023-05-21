@@ -22,4 +22,7 @@ public interface CountryAPI {
     @PostMapping("/{countryid}")
     ResponseEntity<CountryDTO> updateCountry(@PathVariable
                                              @RequestBody CountryDTO countryDTO);
+
+    @DeleteMapping("/{countryid}")
+    ResponseEntity<Void> deleteCountry(@PathVariable("countryName") String countryName);
 }

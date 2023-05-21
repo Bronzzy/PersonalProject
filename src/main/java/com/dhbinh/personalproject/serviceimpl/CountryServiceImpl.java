@@ -19,44 +19,49 @@ public class CountryServiceImpl {
     private final CountryRepository countryRepository;
     private final CountryMapper countryMapper;
 
-    public CountryDTO createCountry(CountryDTO countryDTO){
+    public CountryDTO createCountry(CountryDTO countryDTO) {
 
-        Optional<Country> existingCountry = countryRepository.getCountryByCountryName(countryDTO.getCountryName());
-        if(existingCountry.isPresent()) {
-            throw PersonalProjectException.badRequest("CountryNotValid", "Country is already existed");
+        Optional<Country> existingCountry = countryRepository.findById(countryDTO.getCountryName());
+        if (existingCountry.isPresent()) {
+            throw PersonalProjectException.badRequest("CountryExisted", "Country is already existed");
         }
+
         Country country = Country.builder()
                 .countryName(countryDTO.getCountryName())
                 .build();
-            countryRepository.save(country);
 
-        return countryMapper.toDTO(country);
+        return countryMapper.toDTO(countryRepository.save(country));
     }
 
-    public List<CountryDTO> getAllCountry(){
+    public List<CountryDTO> getAllCountry() {
         List<Country> countryList = countryRepository.findAll();
-        if(countryList.isEmpty())
+        if (countryList.isEmpty())
             throw PersonalProjectException.countryNotFound();
+
         return countryMapper.toDTOs(countryList);
     }
 
-    public CountryDTO getCountryByCountryName(String name){//KIEM TRA LAI METHOD, LUON TRA VE EXCEPTION MAC DU CO COUNTRY TRONG DB
-        Optional<Country> existingCountry = countryRepository.getCountryByCountryName(name);
-        if(existingCountry.isEmpty())
-            throw PersonalProjectException.notFound("CountryNotFound","Country is not existed");
+    public CountryDTO getByCountryID(String countryName) {
+        Optional<Country> existingCountry = countryRepository.findById(countryName);
+        if (existingCountry.isEmpty())
+            throw PersonalProjectException.notFound("CountryNotFound", "Country is not existed");
 
         return countryMapper.toDTO(existingCountry.get());
     }
 
-    public CountryDTO updateCountry(CountryDTO countryDTO){
-        Optional<Country> existingCountry = countryRepository.getCountryByCountryName(countryDTO.getCountryName());
-        if(existingCountry.isEmpty())
-            throw PersonalProjectException.badRequest("CountryNotFound","Country is not existed");
+    public CountryDTO updateByCountryID(CountryDTO countryDTO) {
+         Country existingCountry = countryRepository.findById(countryDTO.getCountryName()).
+                 orElseThrow(PersonalProjectException::countryNotFound);
 
-        Country updateCountry = Country.builder()
-                .countryName(countryDTO.getCountryName())
-                .build();
+        existingCountry.setCountryName(countryDTO.getCountryName());
 
-        return countryMapper.toDTO(countryRepository.save(updateCountry));
+        return countryMapper.toDTO(countryRepository.save(existingCountry));
+    }
+
+    public void deleteByCountryID(String countryName) {
+        Country existingCountry = countryRepository.findById(countryName).
+                orElseThrow(PersonalProjectException::countryNotFound);
+
+        countryRepository.deleteById(countryName);
     }
 }

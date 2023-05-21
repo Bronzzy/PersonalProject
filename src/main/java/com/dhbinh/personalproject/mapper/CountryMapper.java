@@ -10,10 +10,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CountryMapper {
 
-
     CountryDTO toDTO(Country country);
 
     Country toEntity(CountryDTO countryDTO);
+
     List<CountryDTO> toDTOs(List<Country> countries);
 
     List<Country> toEntitys(List<CountryDTO> countryDTOS);

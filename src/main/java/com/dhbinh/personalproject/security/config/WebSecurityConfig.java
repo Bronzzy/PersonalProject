@@ -31,8 +31,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
         prePostEnabled = true)
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final UserDetailsServiceImpl userDetailsService;
+
     private final AuthEntryPointJwt unauthorizedHandler;
+
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();

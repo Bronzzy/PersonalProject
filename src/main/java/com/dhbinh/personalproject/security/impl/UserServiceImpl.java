@@ -15,6 +15,7 @@ import java.util.List;
 public class UserServiceImpl implements UserAccountServiceImpl {
 
     private final UserAccountRepository userAccountRepository;
+
     private final UserAccountMapper userAccountMapper;
     @Override
     public List<UserAccountDTO> getUserAccounts() {
