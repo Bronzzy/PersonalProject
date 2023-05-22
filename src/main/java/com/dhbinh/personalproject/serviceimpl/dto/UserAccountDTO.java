@@ -1,15 +1,26 @@
 package com.dhbinh.personalproject.serviceimpl.dto;
 
+import com.dhbinh.personalproject.entity.UserRoleAssignment;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class UserAccountDTO {
-    private String principalName;
+    private Long userAccountID;
+
+    private String userFirstName;
+
+    private String userLastName;
+
     private String username;
+
+    private String password;
+
+    private List<UserRoleAssignment> roles = new ArrayList<>();
 }

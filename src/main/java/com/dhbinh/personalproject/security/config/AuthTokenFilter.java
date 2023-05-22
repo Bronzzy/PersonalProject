@@ -1,6 +1,6 @@
 package com.dhbinh.personalproject.security.config;
 
-import com.dhbinh.personalproject.security.impl.UserDetailsServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.UserDetailsServiceImpl;
 import com.dhbinh.personalproject.security.jwt.JwtUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

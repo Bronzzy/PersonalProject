@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.authenticate.impl;
 
 import com.dhbinh.personalproject.authenticate.AuthController;
-import com.dhbinh.personalproject.security.impl.UserDetailsImpl;
+import com.dhbinh.personalproject.serviceimpl.dto.UserDetailsImpl;
 import com.dhbinh.personalproject.security.jwt.JwtRequest;
 import com.dhbinh.personalproject.security.jwt.JwtResponse;
 import com.dhbinh.personalproject.security.jwt.JwtUtils;

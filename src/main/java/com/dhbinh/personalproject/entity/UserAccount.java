@@ -41,7 +41,7 @@ public class UserAccount {
 
     private Boolean active;
 
-    @OneToMany(mappedBy = "userAccounts")
+    @OneToMany(mappedBy = "userAccounts",cascade = CascadeType.PERSIST)
     private List<UserRoleAssignment> roles = new ArrayList<>();
 
 }

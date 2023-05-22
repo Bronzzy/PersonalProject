@@ -1,6 +1,6 @@
 package com.dhbinh.personalproject.security.config;
 
-import com.dhbinh.personalproject.security.impl.UserDetailsServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
