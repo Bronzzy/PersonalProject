@@ -36,8 +36,10 @@ public class UserAccount {
     private String username;
 
     @JsonIgnore
-    @Column(name = "user_password",nullable = false)
-    private String userPassword;
+    @Column(name = "password",nullable = false)
+    private String password;
+
+    private Boolean active;
 
     @OneToMany(mappedBy = "userAccounts")
     private List<UserRoleAssignment> roles = new ArrayList<>();
