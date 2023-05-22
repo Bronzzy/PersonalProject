@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.serviceimpl;
 
 import com.dhbinh.personalproject.PersonalprojectApplication;
+import com.dhbinh.personalproject.entity.Country;
 import com.dhbinh.personalproject.entity.District;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.DistrictMapper;
@@ -64,5 +65,12 @@ public class DistrictServiceImpl {
 
         return districtMapper.toDTO(districtRepository.save(existingDistrict));
 
+    }
+
+    private void deleteByDistrictID(String districtName){
+        District existingDistrict = districtRepository.findById(districtName).
+                orElseThrow(PersonalProjectException::countryNotFound);
+
+        districtRepository.deleteById(districtName);
     }
 }

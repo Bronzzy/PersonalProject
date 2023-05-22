@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -30,7 +31,7 @@ public class CountryResource implements CountryAPI {
     }
 
     @Override
-    public ResponseEntity<CountryDTO> getCountryByCountryName(String name) {
+    public ResponseEntity<Optional<CountryDTO>> getByCountryID(String name) {
         return ResponseEntity.ok(countryService.getByCountryID(name));
     }
 
@@ -41,6 +42,7 @@ public class CountryResource implements CountryAPI {
         return ResponseEntity.created(URI.create("/api/countries" + updateCountryDTO.getCountryName())).body(updateCountryDTO);
     }
 
+    @Override
     public ResponseEntity<Void> deleteCountry(String countryName) {
         countryService.deleteByCountryID(countryName);
         return ResponseEntity.noContent().build();

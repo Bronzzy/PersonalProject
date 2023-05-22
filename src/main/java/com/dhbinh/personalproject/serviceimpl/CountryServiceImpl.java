@@ -41,12 +41,11 @@ public class CountryServiceImpl {
         return countryMapper.toDTOs(countryList);
     }
 
-    public CountryDTO getByCountryID(String countryName) {
-        Optional<Country> existingCountry = countryRepository.findById(countryName);
-        if (existingCountry.isEmpty())
-            throw PersonalProjectException.notFound("CountryNotFound", "Country is not existed");
+    public Optional<CountryDTO> getByCountryID(String countryName) {
+        Country existingCountry = countryRepository.findById(countryName)
+                .orElseThrow(PersonalProjectException::countryNotFound);
 
-        return countryMapper.toDTO(existingCountry.get());
+        return Optional.ofNullable(countryMapper.toDTO(existingCountry));
     }
 
     public CountryDTO updateByCountryID(CountryDTO countryDTO) {
@@ -59,6 +58,7 @@ public class CountryServiceImpl {
     }
 
     public void deleteByCountryID(String countryName) {
+
         Country existingCountry = countryRepository.findById(countryName).
                 orElseThrow(PersonalProjectException::countryNotFound);
 

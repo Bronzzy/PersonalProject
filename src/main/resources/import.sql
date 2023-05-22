@@ -243,33 +243,61 @@ insert into admin_account(admin_name,admin_username,admin_password) values ('Bin
 
 
 -----INSERT DATA INTO USER_ACCOUNT-----
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Federico','Capron','leGSMa','fcapron0@columbia.edu');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Hubey','Ohrtmann','wnz7PnQ4X9Uh','hohrtmann1@alibaba.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Reinald','Tunesi','3fE7izQ9vU','rtunesi2@phoca.cz');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Arch','Reddish','tkIGIRDL','areddish3@spotify.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Adelle','Wyles','L7t0TyP3lt','awyles4@npr.org');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Hoebart','Aymes','B5DbDAtWV','haymes5@uiuc.edu');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Karen','Baukham','Zbszw9','kbaukham6@miibeian.gov.cn');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Gardner','Ivancevic','hDlssiGxvJBL','givancevic7@feedburner.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Krista','Henric','InR0bzQjD','khenric8@ustream.tv');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Fern','Blankenship','liLMWVcrZG','fblankenship9@quantcast.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Genna','Wands','YJk6YN','gwandsa@wisc.edu');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Romonda','Tabord','NTzqoU','rtabordb@unblog.fr');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Leeann','Blaiklock','xXZAiZVG','lblaiklockc@eepurl.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Laverna','Zellner','DUr86r','lzellnerd@msn.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Maribelle','Ferri','IkSi3BeVinMx','mferrie@chron.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Price','Haysham','Q1FGd0YD','phayshamf@auda.org.au');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Angelique','Sture','FqztUTXJVH8F','astureg@engadget.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Gerda','Lazer','ZDtonU0a','glazerh@nature.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Sascha','Ryder','UxLiGYqfT','sryderi@oakley.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Duffy','Konmann','BWT8Ke','dkonmannj@dropbox.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Beth','Birchenhead','2VIggeRuoiG','bbirchenheadk@constantcontact.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Delilah','de la Tremoille','IX7G8w9u4Ujm','ddelatremoillel@linkedin.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Alta','Sharville','DCCgu672x1V','asharvillem@army.mil');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Berry','Curtoys','0oKcKGr','bcurtoysn@alibaba.com');
-INSERT INTO public.user_account (user_first_name,user_last_name,password,username) VALUES ('Lonnie','Roskrug','uOjbWz20','lroskrugo@globo.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Dao','Binh','$2y$10$wxHnxbfjN6CFqMh4f9VgE.GM8Nft9SEY0EFSihLPy5Di2QI8CjOiW','hoabinh0911@gmail.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Federico','Capron','$2y$10$yfPnFue265XH43KXRsBZ3O1sgx5z2zurZfiUIqTm5Hsa6dVvcpHcq','fcapron0@columbia.edu');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Hubey','Ohrtmann','$2y$10$Fc8UD0xTqy2KEflCc9cAGOzzCVOgKcwcmbhIhdhJbTNdTDiC7nDOG','hohrtmann1@alibaba.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Reinald','Tunesi','$2y$10$nGTL8yjIvJBG3MYRJnOsF.fCOl9gdstXHzNgBY5Wvov3.5gR3i5jq','rtunesi2@phoca.cz');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Arch','Reddish','$2y$10$BevL3aKTtGrsa94BPPX/fekcjt5uzop6i.5C5PV6aObSH9YuLqoVG','areddish3@spotify.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Adelle','Wyles','$2y$10$ROaKYf2pVAijaeULfqIyG.RqxxlFOI3v7c.JrhjWsm5yZxejd75oe','awyles4@npr.org');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Hoebart','Aymes','$2y$10$LVOp5XXg.ZkTISYP7YBLWuZEOxaNf7LdbBlbVVbULu5l32quSUZx2','haymes5@uiuc.edu');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Karen','Baukham','$2y$10$sJ2kW/yRsTA4mu/Z4uV2z.Og28wHKdd4KA0tOa9zlgxV3olLo.VBu','kbaukham6@miibeian.gov.cn');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Gardner','Ivancevic','$2y$10$qOEFOaN45DLJhZJH4mrK/O1lDUeCJ8GmxRa7sX0psiyKHwhrwgdsi','givancevic7@feedburner.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Krista','Henric','$2y$10$Kvhm4EFdu5fnJRkgff5M7.xtyoKec05Tn6Qf.SCYj32HrBZxwzqaa','khenric8@ustream.tv');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Fern','Blankenship','$2y$10$VE.9KZU26geed9G2es3OXu7c8x6hoJCVh.t/dDMv5y84vrZnFHvhK','fblankenship9@quantcast.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Genna','Wands','$2y$10$XA73LwaifFU1QOMxlWHXb.85BcsPhqjkow9ooDqLEtz0S.yPiUzb2','gwandsa@wisc.edu');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Romonda','Tabord','$2y$10$WUKxBkl7IhVbwz53N.AB.e6PxpA6VGTDIm7N8cwStvrAAcMuLLAxi','rtabordb@unblog.fr');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Leeann','Blaiklock','$2y$10$1glrNYZjvF5txH0De0KWV.Q1HuPuS2k1bVw0pq9tPpSgqFPlci4vK','lblaiklockc@eepurl.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Laverna','Zellner','$2y$10$yVpQncyylE6dVqhh6qfRr.3Rs.UortVt.UWqFQyO92bK2MAmx39rO','lzellnerd@msn.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Maribelle','Ferri','$2y$10$9IR8ZWX46GVfdY2LRDLOt.2ocl1b5/9t1EZTDrKDr9ZQkBl.K9yDy','mferrie@chron.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Price','Haysham','$2y$10$3HD7kzf6r5CEYWfIw/C5Y.rGIVJfpFZMCmutrTYi.tNP91cWNE6ly','phayshamf@auda.org.au');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Angelique','Sture','$2y$10$npJmGKQB.bP2QZMeAp9Xm.BmlDP9e6ljFcybakj5R.S7ByNon1u.6','astureg@engadget.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Gerda','Lazer','$2y$10$pQimI.7KaFVCjlXIofC9je5Zo4SdKgWjtRBcWegxCFT/fLafPCPwy','glazerh@nature.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Sascha','Ryder','$2y$10$WlX9QJlsZ/8PXETc82LmWePunL5mKuZWYWQBtWt59QOMLkqsfxbQ.','sryderi@oakley.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Duffy','Konmann','$2y$10$a6SUVvue5gOfupi1uxOxg.UqSW8wHPE0JcgrMNdcJgB6gMWrN3dw2','dkonmannj@dropbox.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Beth','Birchenhead','$2y$10$JMNcC/klXeCBmdFti2OzbeG721ViX/l31tj0KVsHR35b.R9pNgWC.','bbirchenheadk@constantcontact.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Delilah','de la Tremoille','$2y$10$qV1fXUn2lXkuJUWwiSv8WeOH3nIMEEHkhBoW3tiQjzrE1.TyjtVR.','ddelatremoillel@linkedin.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Alta','Sharville','$2y$10$HyW45qSlD3U6KcnQ0JopeeC5anxMbF9oO5K2Q0MWngpk8BfIKutEO','asharvillem@army.mil');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Berry','Curtoys','$2y$10$fdVCddOKcnMqZY9eL6rFve97pIfhyKqj.KtlbyIUQc9EZv4V.3QEa','bcurtoysn@alibaba.com');
+INSERT INTO user_account (user_first_name,user_last_name,password,username) VALUES ('Lonnie','Roskrug','$2y$10$h9AyYjBSZXcxr2d/za1ewuszP9dRxnV5mPtPMoRz415ElRtoK1KIm','lroskrugo@globo.com');
 
 
+-----INSERT DATA INTO ROLE ASSIGNMENT----
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_ADMIN', 1);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 2);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 3);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 4);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 5);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 6);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 7);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 8);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 9);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 10);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 11);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 12);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 13);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 14);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 15);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 16);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 17);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 18);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 19);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 20);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 21);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 22);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 23);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 24);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 25);
+insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 26);
 
 
 

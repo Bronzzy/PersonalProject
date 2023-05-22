@@ -1,10 +1,12 @@
 package com.dhbinh.personalproject.serviceimpl;
 
 import com.dhbinh.personalproject.entity.City;
+import com.dhbinh.personalproject.entity.Country;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CityMapper;
 import com.dhbinh.personalproject.repository.CityRepository;
 import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
+import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,52 +23,51 @@ public class CityServiceImpl {
 
     private final CityMapper cityMapper;
 
-    public CityDTO createCity(CityDTO cityDTO){
-        Optional<City> existingCity = cityRepository.findById(cityDTO.getCityName());
-        if(existingCity.isPresent()){
-            throw PersonalProjectException.badRequest("CountryExisted","Country is already existed");
-        }
+    private final CountryServiceImpl countryService;
 
-        City city = City.builder()
-                .cityName(cityDTO.getCityName())
-                .country(cityDTO.getCountry())
-                .build();
-
-        return cityMapper.toDTO(cityRepository.save(city));
-    }
-
-    public List<CityDTO> getAllCity(){
-        List<City> cityList = cityRepository.findAll();
-        if(cityList.isEmpty())
-            throw PersonalProjectException.cityNotFound();
-        return cityMapper.toDTOs(cityList);
-    }
-
-    public CityDTO getByCityID(String cityName){
-        City city = cityRepository.findById(cityName).orElseThrow(PersonalProjectException::cityNotFound);
-
-        return cityMapper.toDTO(city);
-    }
-
-    public CityDTO updateByCityID(CityDTO cityDTO){
-        City existingCity = cityRepository.getByCityName(cityDTO.getCityName()).orElseThrow(PersonalProjectException::cityNotFound);
-
-        City city = City.builder()
-                .cityName(cityDTO.getCityName())
-                .country(cityDTO.getCountry())
-                .build();
-
-        if(cityRepository.getByCityName(cityDTO.getCityName()).equals(cityDTO.getCityName())){
-            throw PersonalProjectException.badRequest("CityExisted","City name is already existed");
-        }
-        return cityMapper.toDTO(cityRepository.save(city));
-    }
-
-    public void deleteByCityID(String cityName){
-        Optional<City> existingCountry = cityRepository.getByCityName(cityName);
-        if(existingCountry.isEmpty())
-            throw PersonalProjectException.badRequest("CountryNotFound","Country is not existed");
-
-        cityRepository.deleteById(cityName);
-    }
+//    public CityDTO createCity(CityDTO cityDTO){
+//        Optional<City> existingCity = cityRepository.findById(cityDTO.getCityName());
+//        if(existingCity.isPresent()){
+//            throw PersonalProjectException.badRequest("CityExisted","City is already existed");
+//        }
+//
+//        City city = new City();
+//
+//
+//
+//        return cityMapper.toDTO(cityRepository.save(city));
+//    }
+//
+//    public List<CityDTO> getAllCity(){
+//        List<City> cityList = cityRepository.findAll();
+//        if(cityList.isEmpty())
+//            throw PersonalProjectException.cityNotFound();
+//        return cityMapper.toDTOs(cityList);
+//    }
+//
+//    public CityDTO getByCityID(String cityName){
+//        City city = cityRepository.findById(cityName).orElseThrow(PersonalProjectException::cityNotFound);
+//
+//        return cityMapper.toDTO(city);
+//    }
+//
+//    public CityDTO updateByCityID(CityDTO cityDTO){
+//
+//        City existingCity = cityRepository.findById(cityDTO.getCityName())
+//                .orElseThrow(PersonalProjectException::cityNotFound);
+//
+//        existingCity.setCityName(cityDTO.getCityName());
+//
+//
+//
+//        return cityMapper.toDTO(cityRepository.save(existingCity));
+//    }
+//
+//    public void deleteByCityID(String cityName){
+//        Optional<City> existingCountry = cityRepository.findById(cityName);
+//        if(existingCountry.isEmpty())
+//            throw PersonalProjectException.badRequest("CountryNotFound","Country is not existed");
+//
+//        cityRepository.deleteById(cityName);
+//    }
 }
