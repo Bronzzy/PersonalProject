@@ -35,4 +35,5 @@ public class UserRoleAssignment {
     @UpdateTimestamp
     @Column(name = "modified_date")
     private LocalDateTime updatedDate;
+
 }

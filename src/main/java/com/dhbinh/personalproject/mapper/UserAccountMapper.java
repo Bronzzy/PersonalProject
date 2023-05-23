@@ -11,4 +11,5 @@ public interface UserAccountMapper {
 
     UserAccountDTO toDTO(UserAccount userAccount);
     List<UserAccountDTO> toDTOs(List<UserAccount> userAccounts);
+
 }

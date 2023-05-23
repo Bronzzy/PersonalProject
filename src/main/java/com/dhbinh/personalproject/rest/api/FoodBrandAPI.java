@@ -1,4 +1,20 @@
 package com.dhbinh.personalproject.rest.api;
 
+import com.dhbinh.personalproject.serviceimpl.dto.FoodBrandDTO;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RequestMapping("/auth/foodbrands")
 public interface FoodBrandAPI {
+
+    @GetMapping
+    ResponseEntity<List<FoodBrandDTO>> getAllFoodBrand();
+
+    @GetMapping("/byfoodbrandid")
+    ResponseEntity<FoodBrandDTO> getByFoodBrandID(@RequestParam("foodBrand") String foodBrand);
+
+    @DeleteMapping("/delete/{foodBrand}")
+    ResponseEntity<Void> deleteFoodBrand(@PathVariable("foodBrand") String foodBrand);
 }

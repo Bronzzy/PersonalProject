@@ -72,6 +72,7 @@ public class UserAccountServiceImpl implements UserAccountService {
                 .userLastName(userAccountDTO.getUserLastName())
                 .username(userAccountDTO.getUsername())
                 .password(encoder.encode(userAccountDTO.getPassword()))
+                .active(true)
                 .build();
         userAccount = userAccountRepository.save(userAccount);
 

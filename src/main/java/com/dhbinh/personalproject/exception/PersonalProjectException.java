@@ -8,8 +8,13 @@ public class PersonalProjectException {
     private static final String COUNTRY_NOT_FOUND_MSG = "Country not found";
     private static final String CITY_NOT_FOUND_MSG_KEY = "CityNotExisted";
     private static final String CITY_NOT_FOUND_MSG = "City not found";
-private static final String DISTRICT_NOT_FOUND_MSG_KEY = "DistrictNotExisted";
+    private static final String DISTRICT_NOT_FOUND_MSG_KEY = "DistrictNotExisted";
     private static final String DISTRICT_NOT_FOUND_MSG = "District not found";
+    private static final String FOODBRAND_NOT_FOUND_MSG_KEY = "FoodBrandNotExisted";
+    private static final String FOODBRAND_NOT_FOUND_MSG = "FoodBrand not found";
+    private static final String RESTAURANT_NOT_FOUND_MSG_KEY = "RestaurantNotExisted";
+    private static final String RESTAURANT_NOT_FOUND_MSG = "Restaurant not found";
+
 
 
     public static ResponseException notFound(String messageKey, String message) {
@@ -34,5 +39,13 @@ private static final String DISTRICT_NOT_FOUND_MSG_KEY = "DistrictNotExisted";
 
     public static ResponseException districtNotFound(){
         return notFound(DISTRICT_NOT_FOUND_MSG_KEY,DISTRICT_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException foodBrandNotFound(){
+        return notFound(FOODBRAND_NOT_FOUND_MSG_KEY,FOODBRAND_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException restaurantNotFound(){
+        return notFound(RESTAURANT_NOT_FOUND_MSG_KEY,RESTAURANT_NOT_FOUND_MSG);
     }
 }

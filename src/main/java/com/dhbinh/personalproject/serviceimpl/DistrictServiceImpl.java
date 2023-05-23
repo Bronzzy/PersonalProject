@@ -24,7 +24,7 @@ public class DistrictServiceImpl {
 
     private final DistrictMapper districtMapper;
 
-//    private DistrictDTO createDistrict(DistrictDTO districtDTO) {
+//    public DistrictDTO createDistrict(DistrictDTO districtDTO) {
 //
 //        Optional<District> existingDistrict = districtRepository.findById(districtDTO.getDistrictName());
 //        if(existingDistrict.isEmpty()){
@@ -39,7 +39,7 @@ public class DistrictServiceImpl {
 //        return districtMapper.toDTO(districtRepository.save(district));
 //    }
 
-    private List<DistrictDTO> getAllDistrict(){
+    public List<DistrictDTO> getAllDistrict(){
         List<District> districtList = districtRepository.findAll();
         if(districtList.isEmpty())
             throw PersonalProjectException.districtNotFound();
@@ -47,13 +47,11 @@ public class DistrictServiceImpl {
         return districtMapper.toDTOs(districtList);
     }
 
-    private DistrictDTO getByDistrictID(String districtName){
-        Optional<District> existingDistrict = districtRepository.findById(districtName);
-        if(existingDistrict.isEmpty()){
-            throw PersonalProjectException.districtNotFound();
-        }
+    public DistrictDTO getByDistrictID(String districtName){
+        District existingDistrict = districtRepository.findById(districtName)
+                .orElseThrow(PersonalProjectException::districtNotFound);
 
-        return districtMapper.toDTO(existingDistrict.get());
+        return districtMapper.toDTO(existingDistrict);
     }
 
 //    private DistrictDTO updateDistrict(DistrictDTO districtDTO){
@@ -67,7 +65,7 @@ public class DistrictServiceImpl {
 //
 //    }
 
-    private void deleteByDistrictID(String districtName){
+    public void deleteByDistrictID(String districtName){
         District existingDistrict = districtRepository.findById(districtName).
                 orElseThrow(PersonalProjectException::countryNotFound);
 

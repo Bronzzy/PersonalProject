@@ -3,7 +3,6 @@ package com.dhbinh.personalproject.mapper;
 import com.dhbinh.personalproject.entity.Country;
 import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -16,5 +15,5 @@ public interface CountryMapper {
 
     List<CountryDTO> toDTOs(List<Country> countries);
 
-    List<Country> toEntitys(List<CountryDTO> countryDTOS);
+    List<Country> toEntities(List<CountryDTO> countryDTOS);
 }

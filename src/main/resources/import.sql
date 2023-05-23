@@ -84,6 +84,7 @@ insert into food_brand(food_brand) values ('Chickita');
 insert into food_brand(food_brand) values ('Hoang Ty');
 insert into food_brand(food_brand) values ('Hua Wu Lou');
 insert into food_brand(food_brand) values ('Kowloon Bingsutt');
+insert into food_brand(food_brand) values ('Dummy');
 
 
 

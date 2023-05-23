@@ -39,7 +39,7 @@ public class Restaurant {
     private LocalTime openHour;
 
     @Column(name = "closing_hour",nullable = false)
-    private LocalTime privateHour;
+    private LocalTime closingHour;
 
     @Column(name = "picture", length = 1000)
     @Length(max = 1000)
