@@ -24,4 +24,9 @@ public class UserAccountResource implements UserAccountAPI {
         SignupDTO signupDTO = userAccountService.createUserAccount(userAccountDTO);
         return ResponseEntity.created(URI.create("/useraccounts/" + signupDTO.getUserAccountID())).body(signupDTO);
     }
+
+    @Override
+    public ResponseEntity<UserAccountDTO> getUserFromToken(String token) {
+        return ResponseEntity.ok(userAccountService.getUserFromToken(token));
+    }
 }

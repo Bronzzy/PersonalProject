@@ -22,7 +22,7 @@ public class CountryResource implements CountryAPI {
     public ResponseEntity<CountryDTO> createCountry(CountryDTO countryDTO) {
           log.debug("Request to create new country {}", countryDTO);
           CountryDTO createCountryDTO = countryService.createCountry(countryDTO);
-          return ResponseEntity.created(URI.create("/api/countries/" + createCountryDTO.getCountryName())).body(createCountryDTO);
+          return ResponseEntity.created(URI.create("/countries/" + createCountryDTO.getCountryName())).body(createCountryDTO);
       }
 
     @Override

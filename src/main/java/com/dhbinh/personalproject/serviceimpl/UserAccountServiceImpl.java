@@ -7,10 +7,12 @@ import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.UserAccountMapper;
 import com.dhbinh.personalproject.repository.UserAccountRepository;
 import com.dhbinh.personalproject.repository.UserRoleAssignmentRepository;
+import com.dhbinh.personalproject.security.jwt.JwtUtils;
 import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.PersistentObjectException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +31,8 @@ public class UserAccountServiceImpl implements UserAccountService {
     private final PasswordEncoder encoder;
 
     private final UserRoleAssignmentRepository userRoleAssignmentRepository;
+
+    private final JwtUtils jwtUtils;
 
     @Override
     public List<UserAccountDTO> getUserAccounts() {
@@ -134,6 +138,11 @@ public class UserAccountServiceImpl implements UserAccountService {
                 .build();
 
         return signupDTO;
+    }
+
+    public UserAccountDTO getUserFromToken(String token){
+        String username = jwtUtils.getUserNameFromJwtToken(token);
+        return userAccountMapper.toDTO(userAccountRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Username not found")));
     }
 
     public boolean isValidPassword(String password) {

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@RequestMapping("/countries")
+@RequestMapping("/auth/countries")
 public interface CountryAPI {
 
     @PostMapping
@@ -20,7 +20,7 @@ public interface CountryAPI {
     @GetMapping
     ResponseEntity<List<CountryDTO>> getAllCountry();
 
-    @GetMapping("/getcountrybyname")
+    @GetMapping("/bycountryid")
     ResponseEntity<Optional<CountryDTO>> getByCountryID(@Param("countryName") String countryName);
 
     @PostMapping("/{countryid}")

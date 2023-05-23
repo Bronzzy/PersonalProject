@@ -24,20 +24,20 @@ public class DistrictServiceImpl {
 
     private final DistrictMapper districtMapper;
 
-    private DistrictDTO createDistrict(DistrictDTO districtDTO) {
-
-        Optional<District> existingDistrict = districtRepository.findById(districtDTO.getDistrictName());
-        if(existingDistrict.isEmpty()){
-            throw PersonalProjectException.badRequest("DistrictExisted","District name is already existed");
-        }
-
-        District district = District.builder()
-                .districtName(districtDTO.getDistrictName())
-                .city(districtDTO.getCity())
-                .build();
-
-        return districtMapper.toDTO(districtRepository.save(district));
-    }
+//    private DistrictDTO createDistrict(DistrictDTO districtDTO) {
+//
+//        Optional<District> existingDistrict = districtRepository.findById(districtDTO.getDistrictName());
+//        if(existingDistrict.isEmpty()){
+//            throw PersonalProjectException.badRequest("DistrictExisted","District name is already existed");
+//        }
+//
+//        District district = District.builder()
+//                .districtName(districtDTO.getDistrictName())
+//                .city(districtDTO.getCity())
+//                .build();
+//
+//        return districtMapper.toDTO(districtRepository.save(district));
+//    }
 
     private List<DistrictDTO> getAllDistrict(){
         List<District> districtList = districtRepository.findAll();
@@ -56,21 +56,21 @@ public class DistrictServiceImpl {
         return districtMapper.toDTO(existingDistrict.get());
     }
 
-    private DistrictDTO updateDistrict(DistrictDTO districtDTO){
-        District existingDistrict = districtRepository.findById(districtDTO.getDistrictName()).
-                orElseThrow(PersonalProjectException::districtNotFound);
-
-        existingDistrict.setDistrictName(districtDTO.getDistrictName());
-        existingDistrict.setCity(districtDTO.getCity());
-
-        return districtMapper.toDTO(districtRepository.save(existingDistrict));
-
-    }
+//    private DistrictDTO updateDistrict(DistrictDTO districtDTO){
+//        District existingDistrict = districtRepository.findById(districtDTO.getDistrictName()).
+//                orElseThrow(PersonalProjectException::districtNotFound);
+//
+//        existingDistrict.setDistrictName(districtDTO.getDistrictName());
+//        existingDistrict.setCity(districtDTO.getCity());
+//
+//        return districtMapper.toDTO(districtRepository.save(existingDistrict));
+//
+//    }
 
     private void deleteByDistrictID(String districtName){
         District existingDistrict = districtRepository.findById(districtName).
                 orElseThrow(PersonalProjectException::countryNotFound);
 
-        districtRepository.deleteById(districtName);
+        districtRepository.delete(existingDistrict);
     }
 }
