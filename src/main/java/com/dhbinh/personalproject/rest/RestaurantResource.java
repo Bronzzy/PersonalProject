@@ -25,4 +25,10 @@ public class RestaurantResource implements RestaurantAPI {
     public ResponseEntity<RestaurantStatisticDTO> getByRestaurantName(String restaurantName) {
         return ResponseEntity.ok(restaurantService.getByRestaurantName(restaurantName));
     }
+
+    @Override
+    public ResponseEntity<Void> deleteByRestaurantName(String restaurantName) {
+        restaurantService.deleteByRestaurantName(restaurantName);
+        return ResponseEntity.noContent().build();
+    }
 }

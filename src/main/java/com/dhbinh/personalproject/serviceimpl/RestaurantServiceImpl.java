@@ -23,11 +23,11 @@ public class RestaurantServiceImpl {
     private final RestaurantMapper restaurantMapper;
 
 
-    public List<RestaurantStatisticDTO> getAllRestaurant(){
+    public List<RestaurantStatisticDTO> getAllRestaurant() {
         List<RestaurantStatisticDTO> resultList = new ArrayList<>();
 
         List<Restaurant> restaurantList = restaurantRepository.findAll();
-        if(restaurantList.isEmpty()){
+        if (restaurantList.isEmpty()) {
             throw PersonalProjectException.restaurantNotFound();
         }
 
@@ -50,7 +50,7 @@ public class RestaurantServiceImpl {
         return resultList;
     }
 
-    public RestaurantStatisticDTO getByRestaurantName(String restaurantName){
+    public RestaurantStatisticDTO getByRestaurantName(String restaurantName) {
         Restaurant restaurant = restaurantRepository.getByRestaurantName(restaurantName)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
@@ -65,7 +65,14 @@ public class RestaurantServiceImpl {
                 .foodBrand(restaurant.getFoodBrand() == null ? null : restaurant.getFoodBrand().getFoodBrand())
                 .build();
 
-        return  restaurantStatisticDTO;
+        return restaurantStatisticDTO;
+    }
+
+    public void deleteByRestaurantName(String restaurantName) {
+        Restaurant restaurant = restaurantRepository.getByRestaurantName(restaurantName)
+                .orElseThrow(PersonalProjectException::restaurantNotFound);
+
+        restaurantRepository.delete(restaurant);
     }
 
 }

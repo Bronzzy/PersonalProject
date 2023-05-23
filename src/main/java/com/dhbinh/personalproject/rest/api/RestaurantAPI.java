@@ -2,9 +2,7 @@ package com.dhbinh.personalproject.rest.api;
 
 import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,4 +14,7 @@ public interface RestaurantAPI {
 
     @GetMapping("/byrestaurantname")
     ResponseEntity<RestaurantStatisticDTO> getByRestaurantName(@RequestParam("restaurantName") String restaurantName);
+
+    @DeleteMapping("/delete")
+    ResponseEntity<Void> deleteByRestaurantName(@RequestParam("restaurantName") String restaurantName);
 }
