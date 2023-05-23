@@ -1,18 +1,17 @@
 package com.dhbinh.personalproject.serviceimpl.dto;
 
-import com.dhbinh.personalproject.entity.UserRoleAssignment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserAccountDTO {
+public class SignupDTO {
+    @JsonIgnore
     private Long userAccountID;
 
     private String userFirstName;
@@ -20,8 +19,4 @@ public class UserAccountDTO {
     private String userLastName;
 
     private String username;
-
-    private String password;
-
-    private List<UserRoleAssignment> roles = new ArrayList<>();
 }

@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.serviceimpl;
 
 
+import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
 
 import java.util.List;
@@ -8,5 +9,8 @@ import java.util.List;
 public interface UserAccountService {
     List<UserAccountDTO> getUserAccounts();
 
-    UserAccountDTO createAccount(UserAccountDTO userAccountDTO);
+    SignupDTO createUserAccount(UserAccountDTO userAccountDTO);
+
+    SignupDTO createAdminAccount(UserAccountDTO userAccountDTO);
+
 }

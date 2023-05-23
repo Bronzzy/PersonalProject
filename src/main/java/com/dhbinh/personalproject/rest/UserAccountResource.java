@@ -2,6 +2,7 @@ package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.UserAccountAPI;
 import com.dhbinh.personalproject.serviceimpl.UserAccountServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,8 @@ public class UserAccountResource implements UserAccountAPI {
 
 
     @Override
-    public ResponseEntity<UserAccountDTO> createUserAccount(UserAccountDTO userAccountDTO) {
-        UserAccountDTO userAccount = userAccountService.createAccount(userAccountDTO);
-        return ResponseEntity.created(URI.create("/useraccounts/" + userAccount.getUserAccountID())).body(userAccount);
+    public ResponseEntity<SignupDTO> createUserAccount(UserAccountDTO userAccountDTO) {
+        SignupDTO signupDTO = userAccountService.createUserAccount(userAccountDTO);
+        return ResponseEntity.created(URI.create("/useraccounts/" + signupDTO.getUserAccountID())).body(signupDTO);
     }
 }
