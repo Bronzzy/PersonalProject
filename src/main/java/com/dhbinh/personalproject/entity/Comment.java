@@ -14,18 +14,18 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostComment {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postCommentID;
 
-    @Column(name = "post_comment_comment", length = 10000,nullable = false)
+    @Column(name = "comment", length = 10000,nullable = false)
     @Length(max = 10000)
-    private String postCommentComment;
+    private String comment;
 
-    @Column(name = "post_comment_date")
-    private LocalDate postCommentDate;
+    @Column(name = "comment_date")
+    private LocalDate commentDate;
 
     @ManyToOne
     @JoinColumn(name = "user_account_id")
