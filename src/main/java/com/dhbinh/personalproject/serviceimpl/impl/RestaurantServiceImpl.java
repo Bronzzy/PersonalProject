@@ -5,7 +5,6 @@ import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.RestaurantMapper;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.serviceimpl.RestaurantService;
-import com.dhbinh.personalproject.serviceimpl.dto.RestaurantDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
