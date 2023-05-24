@@ -1,4 +1,4 @@
 package com.dhbinh.personalproject.rest.api;
 
-public interface PostCommentAPI {
+public interface CommentAPI {
 }

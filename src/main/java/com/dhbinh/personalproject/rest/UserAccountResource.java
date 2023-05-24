@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.UserAccountAPI;
-import com.dhbinh.personalproject.serviceimpl.UserAccountServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.impl.UserAccountServiceImpl;
 import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
 import lombok.RequiredArgsConstructor;

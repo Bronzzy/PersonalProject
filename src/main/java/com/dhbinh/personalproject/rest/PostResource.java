@@ -1,8 +1,7 @@
 package com.dhbinh.personalproject.rest;
 
-import com.dhbinh.personalproject.entity.Post;
 import com.dhbinh.personalproject.rest.api.PostAPI;
-import com.dhbinh.personalproject.serviceimpl.PostServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.PostService;
 import com.dhbinh.personalproject.serviceimpl.dto.PostStatisticDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostResource implements PostAPI {
 
-    private final PostServiceImpl postService;
+    private final PostService postService;
 
     @Override
     public ResponseEntity<List<PostStatisticDTO>> getAllPost() {
@@ -28,7 +27,7 @@ public class PostResource implements PostAPI {
         return ResponseEntity.ok(postService.getPostByRestaurantName(restaurant));
     }
 
-//    public ResponseEntity<Void> deleteByPostID(Long postID){
-//        Post
-//    }
+    public ResponseEntity<Void> deleteByPostID(Long postID){
+        return ResponseEntity.noContent().build();
+    }
 }

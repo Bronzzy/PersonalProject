@@ -1,25 +1,27 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.serviceimpl.impl;
 
 import com.dhbinh.personalproject.entity.City;
-import com.dhbinh.personalproject.entity.Country;
 
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CityMapper;
 import com.dhbinh.personalproject.mapper.CountryMapper;
 import com.dhbinh.personalproject.repository.CityRepository;
+import com.dhbinh.personalproject.serviceimpl.CityService;
+import com.dhbinh.personalproject.serviceimpl.CountryService;
 import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CityServiceImpl {
+public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
 
@@ -27,7 +29,7 @@ public class CityServiceImpl {
 
     private final CountryMapper countryMapper;
 
-    private final CountryServiceImpl countryService;
+    private final CountryService countryService;
 
 //    public CityDTO createCity(CityDTO cityDTO) {
 //        Optional<City> existingCity = cityRepository.findById(cityDTO.getCityName());
@@ -46,18 +48,32 @@ public class CityServiceImpl {
 //    }
 
     public List<CityDTO> getAllCity() {
+
+        List<CityDTO> results = new ArrayList<>();
+
         List<City> cityList = cityRepository.findAll();
         if (cityList.isEmpty())
             throw PersonalProjectException.cityNotFound();
 
-        return cityMapper.toDTOs(cityList);
+        for (City city : cityList) {
+            CityDTO cityDTO = CityDTO.builder()
+                    .cityName(city.getCityName())
+                    .countryName(city.getCountry().getCountryName())
+                    .build();
+
+            results.add(cityDTO);
+        }
+        return results;
     }
 
     public CityDTO getByCityID(String cityName) {
         City city = cityRepository.findById(cityName).
                 orElseThrow(PersonalProjectException::cityNotFound);
 
-        return cityMapper.toDTO(city);
+        return CityDTO.builder()
+                .cityName(cityName)
+                .countryName(city.getCountry().getCountryName())
+                .build();
     }
 
 //    public CityDTO updateByCityID(CityDTO cityDTO) {

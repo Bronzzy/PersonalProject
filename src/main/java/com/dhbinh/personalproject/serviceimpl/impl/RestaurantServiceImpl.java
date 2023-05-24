@@ -1,9 +1,10 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.serviceimpl.impl;
 
 import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.RestaurantMapper;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
+import com.dhbinh.personalproject.serviceimpl.RestaurantService;
 import com.dhbinh.personalproject.serviceimpl.dto.RestaurantDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RestaurantServiceImpl {
+public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
 
@@ -75,10 +76,30 @@ public class RestaurantServiceImpl {
         restaurantRepository.delete(restaurant);
     }
 
-    public List<RestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName){
+    public List<RestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName) {
 
         dishCategory = "%" + dishCategory + "%";
         districtName = "%" + districtName + "%";
-        return restaurantRepository.getRestaurantByDishCategory(dishCategory, districtName);
+
+        List<RestaurantStatisticDTO> restaurantStatisticDTOList = new ArrayList<>();
+
+        List<Restaurant> restaurantList = restaurantRepository.getRestaurantByDishCategory(dishCategory, districtName);
+
+        for (Restaurant res : restaurantList) {
+            RestaurantStatisticDTO restaurantStatisticDTO = RestaurantStatisticDTO.builder()
+                    .restaurantName(res.getRestaurantName())
+                    .restaurantAddress(res.getRestaurantAddress())
+                    .description(res.getDescription())
+                    .telephoneNumber(res.getTelephoneNumber())
+                    .openHour(res.getOpenHour())
+                    .closingHour(res.getClosingHour())
+                    .picture(res.getPicture())
+                    .district(res.getDistrict().getDistrictName())
+                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getFoodBrand())
+                    .build();
+
+            restaurantStatisticDTOList.add(restaurantStatisticDTO);
+        }
+        return restaurantStatisticDTOList;
     }
 }

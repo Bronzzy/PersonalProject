@@ -14,15 +14,13 @@ import java.util.Optional;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> getByRestaurantName(String restaurantName);
 
-
-    @Query(" select new com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO (r.restaurantName, r.restaurantAddress, r.description, r.telephoneNumber, r.openHour, r.closingHour, r.picture, d.districtName, f.foodBrand) " +
+    @Query(" select distinct r " +
             " from Restaurant r, Menu m, DishCategory dc, District d, FoodBrand f " +
             " where dc.dishCategoryID = m.dishCategory.dishCategoryID " +
             " and m.restaurant.restaurantID = r.restaurantID " +
-            " and r.foodBrand.foodBrand = f.foodBrand " +
             " and r.district.districtName = d.districtName " +
             " and dc.dishCategory like :dishCategory " +
             " and d.districtName like :districtName")
-    List<RestaurantStatisticDTO> getRestaurantByDishCategory(@Param("dishCategory") String dishCategory,
-                                                             @Param("districtName") String districtName);
+    List<Restaurant> getRestaurantByDishCategory(@Param("dishCategory") String dishCategory,
+                                                 @Param("districtName") String districtName);
 }

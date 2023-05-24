@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.CountryAPI;
-import com.dhbinh.personalproject.serviceimpl.CountryServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.CountryService;
 import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,8 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 public class CountryResource implements CountryAPI {
-    private final CountryServiceImpl countryService;
+
+    private final CountryService countryService;
 
     @Override
     public ResponseEntity<CountryDTO> createCountry(CountryDTO countryDTO) {
@@ -31,7 +32,7 @@ public class CountryResource implements CountryAPI {
     }
 
     @Override
-    public ResponseEntity<Optional<CountryDTO>> getByCountryID(String name) {
+    public ResponseEntity<CountryDTO> getByCountryID(String name) {
         return ResponseEntity.ok(countryService.getByCountryID(name));
     }
 

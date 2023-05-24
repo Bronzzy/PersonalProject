@@ -15,7 +15,7 @@ public interface DistrictAPI {
     @GetMapping("/bycityid")
     ResponseEntity<DistrictDTO> getByDistrictID(@RequestParam("districtName") String districtName);
 
-    @DeleteMapping("/delete/{districtName}")
-    ResponseEntity<Void> deleteCity(@PathVariable("districtName") String districtName);
+    @DeleteMapping("/delete")
+    ResponseEntity<Void> deleteCity(@RequestParam("districtName") String districtName);
 
 }

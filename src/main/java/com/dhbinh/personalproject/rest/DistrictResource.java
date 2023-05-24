@@ -2,7 +2,7 @@ package com.dhbinh.personalproject.rest;
 
 
 import com.dhbinh.personalproject.rest.api.DistrictAPI;
-import com.dhbinh.personalproject.serviceimpl.DistrictServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.DistrictService;
 import com.dhbinh.personalproject.serviceimpl.dto.DistrictDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DistrictResource implements DistrictAPI {
 
-    private final DistrictServiceImpl districtService;
+    private final DistrictService districtService;
     @Override
     public ResponseEntity<List<DistrictDTO>> getAllDistrict() {
         return ResponseEntity.ok(districtService.getAllDistrict());

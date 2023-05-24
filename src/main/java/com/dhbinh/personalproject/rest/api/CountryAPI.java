@@ -13,20 +13,20 @@ import java.util.Optional;
 @RequestMapping("/auth/countries")
 public interface CountryAPI {
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     ResponseEntity<CountryDTO> createCountry(@RequestBody CountryDTO countryDTO);
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     ResponseEntity<List<CountryDTO>> getAllCountry();
 
     @GetMapping("/bycountryid")
-    ResponseEntity<Optional<CountryDTO>> getByCountryID(@Param("countryName") String countryName);
+    ResponseEntity<CountryDTO> getByCountryID(@Param("countryName") String countryName);
 
     @PostMapping("/{countryid}")
     ResponseEntity<CountryDTO> updateCountry(@PathVariable
                                              @RequestBody CountryDTO countryDTO);
 
-    @DeleteMapping("/{countryid}")
-    ResponseEntity<Void> deleteCountry(@PathVariable("countryName") String countryName);
+    @DeleteMapping("/delete")
+    ResponseEntity<Void> deleteCountry(@RequestParam("countryName") String countryName);
 }

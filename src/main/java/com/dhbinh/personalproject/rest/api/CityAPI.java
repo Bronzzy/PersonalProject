@@ -22,7 +22,7 @@ public interface CityAPI {
     @GetMapping("/bycityid")
     ResponseEntity<CityDTO> getByCityID(@RequestParam("cityName") String cityName);
 
-    @DeleteMapping("/delete/{cityName}")
-    ResponseEntity<Void> deleteCity(@PathVariable("cityName") String cityName);
+    @DeleteMapping("/delete")
+    ResponseEntity<Void> deleteCity(@RequestParam("cityName") String cityName);
 
 }

@@ -1,4 +1,4 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.serviceimpl.impl;
 
 import com.dhbinh.personalproject.entity.Role;
 import com.dhbinh.personalproject.entity.UserAccount;
@@ -8,6 +8,7 @@ import com.dhbinh.personalproject.mapper.UserAccountMapper;
 import com.dhbinh.personalproject.repository.UserAccountRepository;
 import com.dhbinh.personalproject.repository.UserRoleAssignmentRepository;
 import com.dhbinh.personalproject.security.jwt.JwtUtils;
+import com.dhbinh.personalproject.serviceimpl.UserAccountService;
 import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
 import lombok.RequiredArgsConstructor;

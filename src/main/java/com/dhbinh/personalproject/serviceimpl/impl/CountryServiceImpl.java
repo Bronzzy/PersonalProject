@@ -1,9 +1,10 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.serviceimpl.impl;
 
 import com.dhbinh.personalproject.entity.Country;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CountryMapper;
 import com.dhbinh.personalproject.repository.CountryRepository;
+import com.dhbinh.personalproject.serviceimpl.CountryService;
 import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CountryServiceImpl {
+public class CountryServiceImpl implements CountryService {
+
     private final CountryRepository countryRepository;
     private final CountryMapper countryMapper;
 
@@ -41,11 +43,11 @@ public class CountryServiceImpl {
         return countryMapper.toDTOs(countryList);
     }
 
-    public Optional<CountryDTO> getByCountryID(String countryName) {
+    public CountryDTO getByCountryID(String countryName) {
         Country existingCountry = countryRepository.findById(countryName)
                 .orElseThrow(PersonalProjectException::countryNotFound);
 
-        return Optional.ofNullable(countryMapper.toDTO(existingCountry));
+        return (countryMapper.toDTO(existingCountry));
     }
 
     public CountryDTO updateByCountryID(CountryDTO countryDTO) {
@@ -62,6 +64,6 @@ public class CountryServiceImpl {
         Country existingCountry = countryRepository.findById(countryName).
                 orElseThrow(PersonalProjectException::countryNotFound);
 
-        countryRepository.deleteById(countryName);
+        countryRepository.delete(existingCountry);
     }
 }

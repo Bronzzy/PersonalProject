@@ -1,5 +1,6 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.serviceimpl.impl;
 
+import com.dhbinh.personalproject.serviceimpl.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,5 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class DishCategoryImpl {
+public class CommentServiceImpl implements CommentService {
 }

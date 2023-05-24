@@ -15,6 +15,6 @@ public interface FoodBrandAPI {
     @GetMapping("/byfoodbrandid")
     ResponseEntity<FoodBrandDTO> getByFoodBrandID(@RequestParam("foodBrand") String foodBrand);
 
-    @DeleteMapping("/delete/{foodBrand}")
-    ResponseEntity<Void> deleteFoodBrand(@PathVariable("foodBrand") String foodBrand);
+    @DeleteMapping("/delete")
+    ResponseEntity<Void> deleteFoodBrand(@RequestParam("foodBrand") String foodBrand);
 }

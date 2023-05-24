@@ -1,4 +1,4 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.serviceimpl.impl;
 
 import com.dhbinh.personalproject.entity.Role;
 import com.dhbinh.personalproject.entity.UserAccount;

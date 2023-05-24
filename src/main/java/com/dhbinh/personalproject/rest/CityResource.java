@@ -1,23 +1,21 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.CityAPI;
-import com.dhbinh.personalproject.serviceimpl.CityServiceImpl;
+import com.dhbinh.personalproject.serviceimpl.CityService;
 import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
 public class CityResource implements CityAPI {
 
-    private final CityServiceImpl cityService;
+    private final CityService cityService;
 
 
 //    @Override

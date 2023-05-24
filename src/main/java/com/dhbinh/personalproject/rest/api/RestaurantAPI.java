@@ -1,5 +1,6 @@
 package com.dhbinh.personalproject.rest.api;
 
+import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

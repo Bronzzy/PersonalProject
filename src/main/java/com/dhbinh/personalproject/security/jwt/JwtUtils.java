@@ -1,6 +1,6 @@
 package com.dhbinh.personalproject.security.jwt;
 
-import com.dhbinh.personalproject.serviceimpl.UserDetailsImpl;
+import com.dhbinh.personalproject.serviceimpl.impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
