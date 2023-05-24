@@ -150,6 +150,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         String regex = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).{12,}$";
         return password.matches(regex);
     }
+
     public boolean isUsernameValid(String input) {
         String regex = "^[a-zA-Z0-9]+$";
         return input.matches(regex);

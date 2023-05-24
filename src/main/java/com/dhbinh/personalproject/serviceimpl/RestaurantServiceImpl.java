@@ -75,4 +75,10 @@ public class RestaurantServiceImpl {
         restaurantRepository.delete(restaurant);
     }
 
+    public List<RestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName){
+
+        dishCategory = "%" + dishCategory + "%";
+        districtName = "%" + districtName + "%";
+        return restaurantRepository.getRestaurantByDishCategory(dishCategory, districtName);
+    }
 }

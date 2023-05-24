@@ -14,6 +14,8 @@ public class PersonalProjectException {
     private static final String FOODBRAND_NOT_FOUND_MSG = "FoodBrand not found";
     private static final String RESTAURANT_NOT_FOUND_MSG_KEY = "RestaurantNotExisted";
     private static final String RESTAURANT_NOT_FOUND_MSG = "Restaurant not found";
+    private static final String POST_NOT_FOUND_MSG_KEY = "PostNotExisted";
+    private static final String POST_NOT_FOUND_MSG = "Post not found";
 
 
 
@@ -47,5 +49,9 @@ public class PersonalProjectException {
 
     public static ResponseException restaurantNotFound(){
         return notFound(RESTAURANT_NOT_FOUND_MSG_KEY,RESTAURANT_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException postNotFound(){
+        return notFound(POST_NOT_FOUND_MSG_KEY,POST_NOT_FOUND_MSG);
     }
 }

@@ -31,4 +31,9 @@ public class RestaurantResource implements RestaurantAPI {
         restaurantService.deleteByRestaurantName(restaurantName);
         return ResponseEntity.noContent().build();
     }
+
+    @Override
+    public ResponseEntity<List<RestaurantStatisticDTO>> getRestaurantByDishCategory(String dishCategory, String districtName) {
+        return ResponseEntity.ok(restaurantService.getRestaurantByDishCategory(dishCategory, districtName));
+    }
 }

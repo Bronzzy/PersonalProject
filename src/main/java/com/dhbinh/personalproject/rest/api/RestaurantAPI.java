@@ -17,4 +17,8 @@ public interface RestaurantAPI {
 
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteByRestaurantName(@RequestParam("restaurantName") String restaurantName);
+
+    @GetMapping("/bydishcategory")
+    ResponseEntity<List<RestaurantStatisticDTO>> getRestaurantByDishCategory(@RequestParam("dishCategory") String dishCategory,
+                                                                             @RequestParam("districtName") String districtName);
 }
