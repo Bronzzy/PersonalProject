@@ -20,7 +20,7 @@ public class Post {
     private Long postID;
 
     @Column(name = "post_date")
-    private LocalDate postDate;
+    private LocalDate date;
 
     @Column(name = "description", length = 10000,nullable = false)
     @Length(max = 10000)

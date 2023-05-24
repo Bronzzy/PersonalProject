@@ -5,13 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -24,13 +20,13 @@ public class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userAccountID;
+    private Long ID;
 
     @Column(name = "user_first_name")
-    private String userFirstName;
+    private String firstName;
 
     @Column(name = "user_last_name")
-    private String userLastName;
+    private String lastName;
 
     @Column(name = "username",nullable = false)
     private String username;

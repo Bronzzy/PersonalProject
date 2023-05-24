@@ -1,7 +1,6 @@
 package com.dhbinh.personalproject.serviceimpl;
 
 import com.dhbinh.personalproject.entity.Post;
-import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.PostMapper;
 import com.dhbinh.personalproject.repository.PostRepository;
@@ -37,10 +36,10 @@ public class PostServiceImpl {
         for (Post post : postList) {
             PostStatisticDTO postStatisticDTO = new PostStatisticDTO();
             postStatisticDTO = PostStatisticDTO.builder()
-                    .postDate(post.getPostDate())
+                    .postDate(post.getDate())
                     .description(post.getDescription())
                     .rating(post.getRating())
-                    .restaurantName(post.getRestaurant().getRestaurantName())
+                    .restaurantName(post.getRestaurant().getName())
                     .picture(post.getPicture())
                     .adminName(post.getAdminAccount().getAdminName())
                     .build();

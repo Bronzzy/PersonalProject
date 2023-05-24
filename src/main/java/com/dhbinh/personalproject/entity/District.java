@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 public class District {
     @Id
-    private String districtName;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "city_name")

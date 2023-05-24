@@ -16,5 +16,5 @@ import javax.persistence.Id;
 public class FoodBrand {
 
     @Id
-    private String foodBrand;
+    private String name;
 }

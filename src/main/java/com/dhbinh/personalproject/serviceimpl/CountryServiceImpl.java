@@ -27,7 +27,7 @@ public class CountryServiceImpl {
         }
 
         Country country = Country.builder()
-                .countryName(countryDTO.getCountryName())
+                .name(countryDTO.getCountryName())
                 .build();
 
         return countryMapper.toDTO(countryRepository.save(country));
@@ -52,7 +52,7 @@ public class CountryServiceImpl {
          Country existingCountry = countryRepository.findById(countryDTO.getCountryName()).
                  orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCountry.setCountryName(countryDTO.getCountryName());
+        existingCountry.setName(countryDTO.getCountryName());
 
         return countryMapper.toDTO(countryRepository.save(existingCountry));
     }

@@ -16,5 +16,5 @@ import javax.persistence.Id;
 public class Country {
 
     @Id
-    private String countryName;
+    private String name;
 }

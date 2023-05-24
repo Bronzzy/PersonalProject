@@ -18,14 +18,14 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postCommentID;
+    private Long ID;
 
     @Column(name = "comment", length = 10000,nullable = false)
     @Length(max = 10000)
     private String comment;
 
     @Column(name = "comment_date")
-    private LocalDate commentDate;
+    private LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "user_account_id")

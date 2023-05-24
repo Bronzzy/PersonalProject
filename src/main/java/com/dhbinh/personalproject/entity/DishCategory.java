@@ -16,8 +16,8 @@ public class DishCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dish_category_id")
-    private Long dishCategoryID;
+    private Long ID;
 
     @Column(name = "dish_category")
-    private String dishCategory;
+    private String category;
 }

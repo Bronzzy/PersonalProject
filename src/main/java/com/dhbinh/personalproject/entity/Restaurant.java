@@ -18,14 +18,14 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long restaurantID;
+    private Long ID;
 
     @Column(name = "restaurant_name", nullable = false)
-    private String restaurantName;
+    private String name;
 
     @Column(name = "restaurant_address", length = 1000, nullable = false)
     @Length(max = 1000)
-    private String restaurantAddress;
+    private String address;
 
     @Column(name = "description", length = 10000)
     @Length(max = 10000)

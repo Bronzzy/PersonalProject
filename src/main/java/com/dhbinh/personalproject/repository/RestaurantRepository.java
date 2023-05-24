@@ -15,12 +15,12 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> getByRestaurantName(String restaurantName);
 
 
-    @Query(" select new com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO (r.restaurantName, r.restaurantAddress, r.description, r.telephoneNumber, r.openHour, r.closingHour, r.picture, d.districtName, f.foodBrand) " +
+    @Query(" select new com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO (r.name, r.address, r.description, r.telephoneNumber, r.openHour, r.closingHour, r.picture, d.districtName, f.name) " +
             " from Restaurant r, Menu m, DishCategory dc, District d, FoodBrand f " +
-            " where dc.dishCategoryID = m.dishCategory.dishCategoryID " +
-            " and m.restaurant.restaurantID = r.restaurantID " +
-            " and r.foodBrand.foodBrand = f.foodBrand " +
-            " and r.district.districtName = d.districtName " +
+            " where dc.ID = m.dishCategory.ID " +
+            " and m.restaurant.ID = r.ID " +
+            " and r.foodBrand.name = f.name " +
+            " and r.district.name = d.name " +
             " and dc.dishCategory like :dishCategory " +
             " and d.districtName like :districtName")
     List<RestaurantStatisticDTO> getRestaurantByDishCategory(@Param("dishCategory") String dishCategory,

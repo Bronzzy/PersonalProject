@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class City {
 
     @Id
-    private String cityName;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "country_name")

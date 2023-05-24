@@ -11,8 +11,6 @@ import com.dhbinh.personalproject.security.jwt.JwtUtils;
 import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
 import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.PersistentObjectException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,8 +66,8 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw PersonalProjectException.badRequest("PasswordEmpty", "Password can't be empty or null");
 
         UserAccount userAccount = UserAccount.builder()
-                .userFirstName(userAccountDTO.getUserFirstName())
-                .userLastName(userAccountDTO.getUserLastName())
+                .firstName(userAccountDTO.getUserFirstName())
+                .lastName(userAccountDTO.getUserLastName())
                 .username(userAccountDTO.getUsername())
                 .password(encoder.encode(userAccountDTO.getPassword()))
                 .active(true)
@@ -119,8 +117,8 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw PersonalProjectException.badRequest("PasswordEmpty", "Password can't be empty or null");
 
         UserAccount userAccount = UserAccount.builder()
-                .userFirstName(userAccountDTO.getUserFirstName())
-                .userLastName(userAccountDTO.getUserLastName())
+                .firstName(userAccountDTO.getUserFirstName())
+                .lastName(userAccountDTO.getUserLastName())
                 .username(userAccountDTO.getUsername())
                 .password(encoder.encode(userAccountDTO.getPassword()))
                 .active(true)
