@@ -48,7 +48,7 @@ public class DistrictServiceImpl implements DistrictService {
         for (District district : districtList) {
             DistrictDTO dto = DistrictDTO.builder()
                     .districtName(district.getDistrictName())
-                    .cityName(district.getCity().getCityName())
+                    .cityName(district.getCity())
                     .build();
             results.add(dto);
         }
@@ -61,7 +61,7 @@ public class DistrictServiceImpl implements DistrictService {
 
         return DistrictDTO.builder()
                 .districtName(districtName)
-                .cityName(existingDistrict.getCity().getCityName())
+                .cityName(existingDistrict.getCity())
                 .build();
     }
 

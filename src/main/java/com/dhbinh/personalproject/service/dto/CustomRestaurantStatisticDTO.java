@@ -1,7 +1,5 @@
-package com.dhbinh.personalproject.serviceimpl.dto;
+package com.dhbinh.personalproject.service.dto;
 
-import com.dhbinh.personalproject.entity.District;
-import com.dhbinh.personalproject.entity.FoodBrand;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

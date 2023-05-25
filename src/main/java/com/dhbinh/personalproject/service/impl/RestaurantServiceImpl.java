@@ -7,9 +7,15 @@ import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.serviceimpl.RestaurantService;
 import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.asm.Advice;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,14 +81,15 @@ public class RestaurantServiceImpl implements RestaurantService {
         restaurantRepository.delete(restaurant);
     }
 
-    public List<RestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName) {
+    @Override
+    public List<RestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable) {
 
         dishCategory = "%" + dishCategory + "%";
         districtName = "%" + districtName + "%";
 
         List<RestaurantStatisticDTO> restaurantStatisticDTOList = new ArrayList<>();
 
-        List<Restaurant> restaurantList = restaurantRepository.getRestaurantByDishCategory(dishCategory, districtName);
+        List<Restaurant> restaurantList = restaurantRepository.getRestaurantByDishCategory(dishCategory, districtName, pageable);
 
         for (Restaurant res : restaurantList) {
             RestaurantStatisticDTO restaurantStatisticDTO = RestaurantStatisticDTO.builder()
@@ -100,5 +107,53 @@ public class RestaurantServiceImpl implements RestaurantService {
             restaurantStatisticDTOList.add(restaurantStatisticDTO);
         }
         return restaurantStatisticDTOList;
+    }
+
+    @Override
+    public List<Object[]> getNumberOfRestaurantByDistrict() {
+        return restaurantRepository.getNumberOfRestaurantByDistrict();
+    }
+
+    @Override
+    public List<RestaurantStatisticDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
+        if (!isValidTimeFormat(openHour))
+            throw PersonalProjectException.badRequest("WrongTimeFormat", "Time format must be hh:mm:ss");
+
+        if (!isValidTimeFormat(closingHour))
+            throw PersonalProjectException.badRequest("WrongTimeFormat", "Time format must be hh:mm:ss");
+
+        LocalTime open =  LocalTime.parse(openHour);
+        LocalTime closing = LocalTime.parse(closingHour);
+
+        List<RestaurantStatisticDTO> results = new ArrayList<>();
+
+        List<Restaurant> raw = restaurantRepository.getByRatingOpenHourAndClosingHour(rating, open, closing);
+        for (Restaurant restaurant : raw) {
+            RestaurantStatisticDTO dto = RestaurantStatisticDTO.builder()
+                    .restaurantName(restaurant.getRestaurantName())
+                    .restaurantAddress(restaurant.getRestaurantAddress())
+                    .description(restaurant.getDescription())
+                    .telephoneNumber(restaurant.getTelephoneNumber())
+                    .openHour(restaurant.getOpenHour())
+                    .closingHour(restaurant.getClosingHour())
+                    .picture(restaurant.getPicture())
+                    .district(restaurant.getDistrict().getDistrictName())
+                    .foodBrand(restaurant.getFoodBrand() == null ? null : restaurant.getFoodBrand().getFoodBrand())
+                    .build();
+
+            results.add(dto);
+        }
+        return results;
+    }
+
+
+    public boolean isValidTimeFormat(String timeString) {
+        String pattern = "^(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$";
+        return timeString.matches(pattern);
+    }
+
+    public LocalTime formatStringToLocaltime(String time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
+        return LocalTime.parse(time, formatter);
     }
 }
