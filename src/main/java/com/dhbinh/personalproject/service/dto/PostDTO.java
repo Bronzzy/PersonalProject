@@ -1,8 +1,7 @@
-package com.dhbinh.personalproject.serviceimpl.dto;
+package com.dhbinh.personalproject.service.dto;
 
 import com.dhbinh.personalproject.entity.AdminAccount;
 import com.dhbinh.personalproject.entity.Restaurant;
-import com.dhbinh.personalproject.entity.UserAccount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

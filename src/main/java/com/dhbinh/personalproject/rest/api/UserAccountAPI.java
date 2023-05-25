@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.rest.api;
 
-import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
-import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
+import com.dhbinh.personalproject.service.dto.SignupDTO;
+import com.dhbinh.personalproject.service.dto.UserAccountDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

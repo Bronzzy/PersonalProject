@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.mapper;
 
 import com.dhbinh.personalproject.entity.Country;
-import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
+import com.dhbinh.personalproject.service.dto.CountryDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

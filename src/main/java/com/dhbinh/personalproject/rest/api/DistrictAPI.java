@@ -1,6 +1,6 @@
 package com.dhbinh.personalproject.rest.api;
 
-import com.dhbinh.personalproject.serviceimpl.dto.DistrictDTO;
+import com.dhbinh.personalproject.service.dto.DistrictDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,8 +1,8 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.CountryAPI;
-import com.dhbinh.personalproject.serviceimpl.CountryService;
-import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
+import com.dhbinh.personalproject.service.CountryService;
+import com.dhbinh.personalproject.service.dto.CountryDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController

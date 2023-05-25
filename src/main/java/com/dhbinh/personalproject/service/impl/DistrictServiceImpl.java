@@ -1,12 +1,12 @@
-package com.dhbinh.personalproject.serviceimpl.impl;
+package com.dhbinh.personalproject.service.impl;
 
 
 import com.dhbinh.personalproject.entity.District;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.DistrictMapper;
 import com.dhbinh.personalproject.repository.DistrictRepository;
-import com.dhbinh.personalproject.serviceimpl.DistrictService;
-import com.dhbinh.personalproject.serviceimpl.dto.DistrictDTO;
+import com.dhbinh.personalproject.service.DistrictService;
+import com.dhbinh.personalproject.service.dto.DistrictDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

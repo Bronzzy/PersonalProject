@@ -1,7 +1,6 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.entity.Country;
-import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
+import com.dhbinh.personalproject.service.dto.CountryDTO;
 
 import java.util.List;
 

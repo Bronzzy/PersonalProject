@@ -1,8 +1,8 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.FoodBrandAPI;
-import com.dhbinh.personalproject.serviceimpl.FoodBrandService;
-import com.dhbinh.personalproject.serviceimpl.dto.FoodBrandDTO;
+import com.dhbinh.personalproject.service.FoodBrandService;
+import com.dhbinh.personalproject.service.dto.FoodBrandDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

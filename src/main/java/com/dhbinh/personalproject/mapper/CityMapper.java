@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.mapper;
 
 import com.dhbinh.personalproject.entity.City;
-import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
+import com.dhbinh.personalproject.service.dto.CityDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

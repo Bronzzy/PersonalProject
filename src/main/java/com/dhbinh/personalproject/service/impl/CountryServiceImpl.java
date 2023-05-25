@@ -1,11 +1,11 @@
-package com.dhbinh.personalproject.serviceimpl.impl;
+package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.Country;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CountryMapper;
 import com.dhbinh.personalproject.repository.CountryRepository;
-import com.dhbinh.personalproject.serviceimpl.CountryService;
-import com.dhbinh.personalproject.serviceimpl.dto.CountryDTO;
+import com.dhbinh.personalproject.service.CountryService;
+import com.dhbinh.personalproject.service.dto.CountryDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

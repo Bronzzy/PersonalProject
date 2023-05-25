@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.mapper;
 
 import com.dhbinh.personalproject.entity.FoodBrand;
-import com.dhbinh.personalproject.serviceimpl.dto.FoodBrandDTO;
+import com.dhbinh.personalproject.service.dto.FoodBrandDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

@@ -1,7 +1,6 @@
-package com.dhbinh.personalproject.serviceimpl.dto;
+package com.dhbinh.personalproject.service.dto;
 
 import com.dhbinh.personalproject.entity.UserRoleAssignment;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

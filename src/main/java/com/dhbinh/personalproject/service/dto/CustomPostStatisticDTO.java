@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostStatisticDTO {
+public class CustomPostStatisticDTO {
     private LocalDate postDate;
     private String adminName;
     private String restaurantName;

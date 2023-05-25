@@ -1,8 +1,8 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.CityAPI;
-import com.dhbinh.personalproject.serviceimpl.CityService;
-import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
+import com.dhbinh.personalproject.service.CityService;
+import com.dhbinh.personalproject.service.dto.CityDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

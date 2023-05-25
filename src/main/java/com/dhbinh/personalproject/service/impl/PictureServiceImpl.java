@@ -1,11 +1,12 @@
 package com.dhbinh.personalproject.service.impl;
 
+import com.dhbinh.personalproject.service.PictureService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
-@Transactional
 @RequiredArgsConstructor
-public class AdminAccountImpl {
+public class PictureServiceImpl implements PictureService {
 }

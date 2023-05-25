@@ -1,26 +1,23 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.entity.Restaurant;
-import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
-import org.apache.tomcat.jni.Local;
+import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalTime;
 import java.util.List;
 
 public interface RestaurantService {
 
-    List<RestaurantStatisticDTO> getAllRestaurant();
+    List<CustomRestaurantStatisticDTO> getAllRestaurant();
 
-    RestaurantStatisticDTO getByRestaurantName(String restaurantName);
+    CustomRestaurantStatisticDTO getByRestaurantName(String restaurantName);
 
     void deleteByRestaurantName(String restaurantName);
 
-    List<RestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable);
+    List<CustomRestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable);
 
     List<Object[]> getNumberOfRestaurantByDistrict();
 
-    List<RestaurantStatisticDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour);
+    List<CustomRestaurantStatisticDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour);
 
 }
 

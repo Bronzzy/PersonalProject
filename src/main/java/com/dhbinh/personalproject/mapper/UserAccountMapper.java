@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.mapper;
 
 import com.dhbinh.personalproject.entity.UserAccount;
-import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
+import com.dhbinh.personalproject.service.dto.UserAccountDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

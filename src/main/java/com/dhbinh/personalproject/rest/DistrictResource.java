@@ -2,8 +2,8 @@ package com.dhbinh.personalproject.rest;
 
 
 import com.dhbinh.personalproject.rest.api.DistrictAPI;
-import com.dhbinh.personalproject.serviceimpl.DistrictService;
-import com.dhbinh.personalproject.serviceimpl.dto.DistrictDTO;
+import com.dhbinh.personalproject.service.DistrictService;
+import com.dhbinh.personalproject.service.dto.DistrictDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

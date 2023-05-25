@@ -1,4 +1,4 @@
 package com.dhbinh.personalproject.service;
 
-public interface DishCategoryService {
+public interface PictureService {
 }

@@ -1,6 +1,6 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
+import com.dhbinh.personalproject.service.dto.CityDTO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.dhbinh.personalproject.rest.api;
 
-import com.dhbinh.personalproject.serviceimpl.dto.FoodBrandDTO;
+import com.dhbinh.personalproject.service.dto.FoodBrandDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

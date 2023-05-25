@@ -1,10 +1,12 @@
 package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.RestaurantAPI;
-import com.dhbinh.personalproject.serviceimpl.RestaurantService;
-import com.dhbinh.personalproject.serviceimpl.dto.RestaurantStatisticDTO;
+import com.dhbinh.personalproject.service.RestaurantService;
+import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,13 +18,14 @@ import java.util.List;
 public class RestaurantResource implements RestaurantAPI {
 
     private final RestaurantService restaurantService;
+
     @Override
-    public ResponseEntity<List<RestaurantStatisticDTO>> getAllRestaurants() {
+    public ResponseEntity<List<CustomRestaurantStatisticDTO>> getAllRestaurants() {
         return ResponseEntity.ok(restaurantService.getAllRestaurant());
     }
 
     @Override
-    public ResponseEntity<RestaurantStatisticDTO> getByRestaurantName(String restaurantName) {
+    public ResponseEntity<CustomRestaurantStatisticDTO> getByRestaurantName(String restaurantName) {
         return ResponseEntity.ok(restaurantService.getByRestaurantName(restaurantName));
     }
 
@@ -33,7 +36,27 @@ public class RestaurantResource implements RestaurantAPI {
     }
 
     @Override
-    public ResponseEntity<List<RestaurantStatisticDTO>> getRestaurantByDishCategory(String dishCategory, String districtName) {
-        return ResponseEntity.ok(restaurantService.getRestaurantByDishCategory(dishCategory, districtName));
+    public ResponseEntity<List<CustomRestaurantStatisticDTO>> getRestaurantByDishCategory(String dishCategory, String districtName, int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
+        List<CustomRestaurantStatisticDTO> restaurants = restaurantService.getRestaurantByDishCategory(dishCategory, districtName, pageable);
+
+        if (!restaurants.isEmpty()) {
+            return ResponseEntity.ok(restaurants);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+    @Override
+    public ResponseEntity<List<Object[]>> getNumberOfRestaurantByDistrict() {
+        return ResponseEntity.ok(restaurantService.getNumberOfRestaurantByDistrict());
+    }
+
+    @Override
+    public ResponseEntity<List<CustomRestaurantStatisticDTO>> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
+        return ResponseEntity.ok(restaurantService.getByRatingOpenHourAndClosingHour(rating, openHour, closingHour));
+    }
+
+
 }
+

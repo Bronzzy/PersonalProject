@@ -1,4 +1,4 @@
-package com.dhbinh.personalproject.serviceimpl.impl;
+package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.City;
 
@@ -6,9 +6,9 @@ import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CityMapper;
 import com.dhbinh.personalproject.mapper.CountryMapper;
 import com.dhbinh.personalproject.repository.CityRepository;
-import com.dhbinh.personalproject.serviceimpl.CityService;
-import com.dhbinh.personalproject.serviceimpl.CountryService;
-import com.dhbinh.personalproject.serviceimpl.dto.CityDTO;
+import com.dhbinh.personalproject.service.CityService;
+import com.dhbinh.personalproject.service.CountryService;
+import com.dhbinh.personalproject.service.dto.CityDTO;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

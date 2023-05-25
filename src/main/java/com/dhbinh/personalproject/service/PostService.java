@@ -1,14 +1,14 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.serviceimpl.dto.PostStatisticDTO;
+import com.dhbinh.personalproject.service.dto.CustomPostStatisticDTO;
 
 import java.util.List;
 
 public interface PostService {
 
-    List<PostStatisticDTO> getAllPost();
+    List<CustomPostStatisticDTO> getAllPost();
 
-    List<PostStatisticDTO> getPostByRestaurantName(String restaurantName);
+    List<CustomPostStatisticDTO> getPostByRestaurantName(String restaurantName);
 
     void deleteByPostID(Long postID);
 }

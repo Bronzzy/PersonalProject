@@ -1,9 +1,8 @@
-package com.dhbinh.personalproject.serviceimpl.impl;
+package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.UserAccount;
 import com.dhbinh.personalproject.repository.UserAccountRepository;
 
-import com.dhbinh.personalproject.serviceimpl.impl.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.serviceimpl.dto.FoodBrandDTO;
+import com.dhbinh.personalproject.service.dto.FoodBrandDTO;
 
 import java.util.List;
 

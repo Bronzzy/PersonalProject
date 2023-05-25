@@ -1,13 +1,10 @@
-package com.dhbinh.personalproject.serviceimpl.dto;
+package com.dhbinh.personalproject.service.dto;
 
 import com.dhbinh.personalproject.entity.City;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Data
 @Builder

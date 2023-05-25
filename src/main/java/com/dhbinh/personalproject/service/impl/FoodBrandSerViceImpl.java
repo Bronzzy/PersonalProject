@@ -1,11 +1,11 @@
-package com.dhbinh.personalproject.serviceimpl.impl;
+package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.FoodBrand;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.FoodBrandMapper;
 import com.dhbinh.personalproject.repository.FoodBrandRepository;
-import com.dhbinh.personalproject.serviceimpl.FoodBrandService;
-import com.dhbinh.personalproject.serviceimpl.dto.FoodBrandDTO;
+import com.dhbinh.personalproject.service.FoodBrandService;
+import com.dhbinh.personalproject.service.dto.FoodBrandDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

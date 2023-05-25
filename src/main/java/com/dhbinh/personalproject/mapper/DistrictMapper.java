@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.mapper;
 
 import com.dhbinh.personalproject.entity.District;
-import com.dhbinh.personalproject.serviceimpl.dto.DistrictDTO;
+import com.dhbinh.personalproject.service.dto.DistrictDTO;
 import org.mapstruct.Mapper;
 
 import java.util.List;

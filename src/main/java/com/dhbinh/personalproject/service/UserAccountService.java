@@ -1,8 +1,8 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
 
-import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
-import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
+import com.dhbinh.personalproject.service.dto.SignupDTO;
+import com.dhbinh.personalproject.service.dto.UserAccountDTO;
 
 import java.util.List;
 

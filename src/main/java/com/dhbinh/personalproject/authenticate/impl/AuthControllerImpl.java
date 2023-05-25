@@ -1,10 +1,10 @@
 package com.dhbinh.personalproject.authenticate.impl;
 
 import com.dhbinh.personalproject.authenticate.AuthController;
-import com.dhbinh.personalproject.serviceimpl.impl.UserAccountServiceImpl;
-import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
-import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
-import com.dhbinh.personalproject.serviceimpl.impl.UserDetailsImpl;
+import com.dhbinh.personalproject.service.impl.UserAccountServiceImpl;
+import com.dhbinh.personalproject.service.dto.SignupDTO;
+import com.dhbinh.personalproject.service.dto.UserAccountDTO;
+import com.dhbinh.personalproject.service.impl.UserDetailsImpl;
 import com.dhbinh.personalproject.security.jwt.JwtRequest;
 import com.dhbinh.personalproject.security.jwt.JwtResponse;
 import com.dhbinh.personalproject.security.jwt.JwtUtils;

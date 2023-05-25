@@ -1,6 +1,6 @@
-package com.dhbinh.personalproject.serviceimpl;
+package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.serviceimpl.dto.DistrictDTO;
+import com.dhbinh.personalproject.service.dto.DistrictDTO;
 
 import java.util.List;
 public interface DistrictService {

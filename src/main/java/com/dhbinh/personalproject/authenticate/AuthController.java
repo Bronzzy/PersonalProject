@@ -1,9 +1,8 @@
 package com.dhbinh.personalproject.authenticate;
 import com.dhbinh.personalproject.security.jwt.JwtRequest;
 
-import com.dhbinh.personalproject.serviceimpl.dto.SignupDTO;
-import com.dhbinh.personalproject.serviceimpl.dto.UserAccountDTO;
-import org.apache.catalina.User;
+import com.dhbinh.personalproject.service.dto.SignupDTO;
+import com.dhbinh.personalproject.service.dto.UserAccountDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

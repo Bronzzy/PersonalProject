@@ -1,16 +1,19 @@
 package com.dhbinh.personalproject.service.dto;
 
-import com.dhbinh.personalproject.entity.Country;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.time.LocalDate;
+
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CityDTO {
-    private String cityName;
-    private Country countryName;
+public class CustomCommentStatisticDTO {
+    private String comment;
+    private LocalDate commentDate;
+    private String userName;
+    private Long postID;
 }

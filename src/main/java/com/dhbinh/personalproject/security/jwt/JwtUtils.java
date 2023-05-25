@@ -1,12 +1,13 @@
 package com.dhbinh.personalproject.security.jwt;
 
-import com.dhbinh.personalproject.serviceimpl.impl.UserDetailsImpl;
+import com.dhbinh.personalproject.service.impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -30,7 +31,13 @@ public class JwtUtils implements Serializable {
     }
 
     public String getUserNameFromJwtToken(String token){
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+        logger.warn("signing key " + jwtSecret);
+        String nameToken ="";
+        if(StringUtils.hasText(token) && token.startsWith("Bearer ")){
+            nameToken = token.substring(7);
+        }
+
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(nameToken).getBody().getSubject();
     }
 
     public boolean validateJwtToken(String authToken) {

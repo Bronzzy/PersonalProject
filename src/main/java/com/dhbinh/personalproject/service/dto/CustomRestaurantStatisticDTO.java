@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RestaurantStatisticDTO {
+public class CustomRestaurantStatisticDTO {
     private String restaurantName;
     private String restaurantAddress;
     private String description;

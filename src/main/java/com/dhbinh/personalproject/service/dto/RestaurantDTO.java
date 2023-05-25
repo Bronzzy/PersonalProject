@@ -1,4 +1,4 @@
-package com.dhbinh.personalproject.serviceimpl.dto;
+package com.dhbinh.personalproject.service.dto;
 
 
 import com.dhbinh.personalproject.entity.District;
