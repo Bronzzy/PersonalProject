@@ -17,9 +17,5 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
             " AND ua.username like :username")
     List<Comment> getByUsername(@Param("username") String username);
 
-//    @Query(" SELECT c " +
-//            " FROM Comment c, UserAccount u " +
-//            " WHERE c.userAccount.userAccountID = u.userAccountID " + //tempt delete .userAccountID
-//            " AND u.username like :username")
-//    List<Object[]> getByUsername1(@Param("username") String username);
+
 }
