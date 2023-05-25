@@ -15,11 +15,23 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FoodBrandSerViceImpl implements FoodBrandService {
+public class FoodBrandServiceImpl implements FoodBrandService {
 
     private final FoodBrandRepository foodBrandRepository;
 
     private final FoodBrandMapper foodBrandMapper;
+
+    public FoodBrandDTO createFoodBrand(FoodBrandDTO foodBrandDTO){
+        if(foodBrandRepository.existsById(foodBrandDTO.getFoodBrand()))
+            throw PersonalProjectException.badRequest("FoodBrandAlreadyExisted","Foodbrand is already existed");
+
+        FoodBrand foodBrand = FoodBrand.builder()
+                .foodBrand(foodBrandDTO.getFoodBrand())
+                .build();
+
+        return foodBrandMapper.toDTO(foodBrandRepository.save(foodBrand));
+    }
+
     public List<FoodBrandDTO> getAllFoodBrand(){
         List<FoodBrand> foodBrands = foodBrandRepository.findAll();
         if(foodBrands.isEmpty())

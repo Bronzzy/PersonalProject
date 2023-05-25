@@ -8,4 +8,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class AdminAccountImpl {
+
 }

@@ -4,6 +4,7 @@ package com.dhbinh.personalproject.service.impl;
 import com.dhbinh.personalproject.entity.District;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.DistrictMapper;
+import com.dhbinh.personalproject.repository.CityRepository;
 import com.dhbinh.personalproject.repository.DistrictRepository;
 import com.dhbinh.personalproject.service.DistrictService;
 import com.dhbinh.personalproject.service.dto.DistrictDTO;
@@ -23,20 +24,23 @@ public class DistrictServiceImpl implements DistrictService {
 
     private final DistrictMapper districtMapper;
 
-//    public DistrictDTO createDistrict(DistrictDTO districtDTO) {
-//
-//        Optional<District> existingDistrict = districtRepository.findById(districtDTO.getDistrictName());
-//        if(existingDistrict.isEmpty()){
-//            throw PersonalProjectException.badRequest("DistrictExisted","District name is already existed");
-//        }
-//
-//        District district = District.builder()
-//                .districtName(districtDTO.getDistrictName())
-//                .city(districtDTO.getCity())
-//                .build();
-//
-//        return districtMapper.toDTO(districtRepository.save(district));
-//    }
+    private final CityRepository cityRepository;
+
+    public DistrictDTO createDistrict(DistrictDTO districtDTO) {
+
+        if(districtRepository.existsById(districtDTO.getDistrictName()))
+            throw PersonalProjectException.badRequest("DistrictNameExisted","District name is already existed");
+
+        if(!cityRepository.existsById(districtDTO.getCityName()))
+            throw PersonalProjectException.cityNotFound();
+
+        District district = District.builder()
+                .districtName(districtDTO.getDistrictName())
+                .city(cityRepository.findById(districtDTO.getCityName()).get())
+                .build();
+
+        return districtMapper.toDTO(districtRepository.save(district));
+    }
 
     public List<DistrictDTO> getAllDistrict() {
         List<DistrictDTO> results = new ArrayList<>();
@@ -48,22 +52,23 @@ public class DistrictServiceImpl implements DistrictService {
         for (District district : districtList) {
             DistrictDTO dto = DistrictDTO.builder()
                     .districtName(district.getDistrictName())
-                    .cityName(district.getCity())
+                    .cityName(district.getCity().getCityName())
                     .build();
             results.add(dto);
         }
+
         return results;
     }
 
-    public DistrictDTO getByDistrictID(String districtName) {
-        District existingDistrict = districtRepository.findById(districtName)
-                .orElseThrow(PersonalProjectException::districtNotFound);
-
-        return DistrictDTO.builder()
-                .districtName(districtName)
-                .cityName(existingDistrict.getCity())
-                .build();
-    }
+//    public DistrictDTO getByDistrictID(String districtName) {
+//        District existingDistrict = districtRepository.findById(districtName)
+//                .orElseThrow(PersonalProjectException::districtNotFound);
+//
+//        return DistrictDTO.builder()
+//                .districtName(districtName)
+//                .cityName(existingDistrict.getCity())
+//                .build();
+//    }
 
 //    private DistrictDTO updateDistrict(DistrictDTO districtDTO){
 //        District existingDistrict = districtRepository.findById(districtDTO.getDistrictName()).
@@ -82,4 +87,5 @@ public class DistrictServiceImpl implements DistrictService {
 
         districtRepository.delete(existingDistrict);
     }
+
 }

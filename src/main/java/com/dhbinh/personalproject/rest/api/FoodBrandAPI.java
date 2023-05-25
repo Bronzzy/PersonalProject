@@ -9,6 +9,9 @@ import java.util.List;
 @RequestMapping("/auth/foodbrands")
 public interface FoodBrandAPI {
 
+    @PostMapping
+    ResponseEntity<FoodBrandDTO> createFoodBrand(@RequestBody FoodBrandDTO foodBrandDTO);
+
     @GetMapping
     ResponseEntity<List<FoodBrandDTO>> getAllFoodBrand();
 

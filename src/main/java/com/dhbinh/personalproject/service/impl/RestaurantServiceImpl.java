@@ -1,12 +1,17 @@
 package com.dhbinh.personalproject.service.impl;
 
+import com.dhbinh.personalproject.entity.FoodBrand;
 import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.RestaurantMapper;
+import com.dhbinh.personalproject.repository.DistrictRepository;
+import com.dhbinh.personalproject.repository.FoodBrandRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.RestaurantService;
 import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -24,10 +30,31 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
 
     private final RestaurantMapper restaurantMapper;
+    private final DistrictRepository districtRepository;
+    private final FoodBrandRepository foodBrandRepository;
 
+    @Override
+    public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
+        log.info("restaurantDTO {}",restaurantDTO);
+        Restaurant restaurant = Restaurant.builder()
+                .restaurantName(restaurantDTO.getRestaurantName())
+                .restaurantAddress(restaurantDTO.getRestaurantAddress())
+                .description(restaurantDTO.getDescription())
+                .telephoneNumber(restaurantDTO.getTelephoneNumber())
+                .openHour(restaurantDTO.getOpenHour())
+                .closingHour(restaurantDTO.getClosingHour())
+                .district(districtRepository.findById(restaurantDTO.getDistrictName())
+                        .orElseThrow(PersonalProjectException::districtNotFound))
+                .foodBrand(foodBrandRepository.findById(restaurantDTO.getFoodBrand()).isEmpty() ? null :
+                        foodBrandRepository.findById(restaurantDTO.getFoodBrand()).get())
+                .build();
 
-    public List<CustomRestaurantStatisticDTO> getAllRestaurant() {
-        List<CustomRestaurantStatisticDTO> resultList = new ArrayList<>();
+        return restaurantMapper.toDTO(restaurantRepository.save(restaurant));
+    }
+
+    public List<RestaurantDTO> getAllRestaurant() {
+
+        List<RestaurantDTO> resultList = new ArrayList<>();
 
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         if (restaurantList.isEmpty()) {
@@ -35,40 +62,27 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         for (Restaurant res : restaurantList) {
-            CustomRestaurantStatisticDTO customRestaurantStatisticDTO = new CustomRestaurantStatisticDTO();
-
-            customRestaurantStatisticDTO = CustomRestaurantStatisticDTO.builder()
+            RestaurantDTO dto = RestaurantDTO.builder()
                     .restaurantName(res.getRestaurantName())
                     .restaurantAddress(res.getRestaurantAddress())
                     .telephoneNumber(res.getTelephoneNumber())
                     .openHour(res.getOpenHour())
                     .closingHour(res.getClosingHour())
                     .picture(res.getPicture())
-                    .district(res.getDistrict().getDistrictName())
+                    .districtName(res.getDistrict().getDistrictName())
                     .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getFoodBrand())
                     .build();
 
-            resultList.add(customRestaurantStatisticDTO);
+            resultList.add(dto);
         }
         return resultList;
     }
 
-    public CustomRestaurantStatisticDTO getByRestaurantName(String restaurantName) {
+    public RestaurantDTO getByRestaurantName(String restaurantName) {
         Restaurant restaurant = restaurantRepository.getByRestaurantName(restaurantName)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
-        CustomRestaurantStatisticDTO customRestaurantStatisticDTO = CustomRestaurantStatisticDTO.builder()
-                .restaurantName(restaurant.getRestaurantName())
-                .restaurantAddress(restaurant.getRestaurantAddress())
-                .telephoneNumber(restaurant.getTelephoneNumber())
-                .openHour(restaurant.getOpenHour())
-                .closingHour(restaurant.getClosingHour())
-                .picture(restaurant.getPicture())
-                .district(restaurant.getDistrict().getDistrictName())
-                .foodBrand(restaurant.getFoodBrand() == null ? null : restaurant.getFoodBrand().getFoodBrand())
-                .build();
-
-        return customRestaurantStatisticDTO;
+        return restaurantMapper.toDTO(restaurant);
     }
 
     public void deleteByRestaurantName(String restaurantName) {
@@ -79,17 +93,17 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<CustomRestaurantStatisticDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable) {
+    public List<RestaurantDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable) {
 
         dishCategory = "%" + dishCategory + "%";
         districtName = "%" + districtName + "%";
 
-        List<CustomRestaurantStatisticDTO> customRestaurantStatisticDTOList = new ArrayList<>();
+        List<RestaurantDTO> dtoList = new ArrayList<>();
 
         List<Restaurant> restaurantList = restaurantRepository.getRestaurantByDishCategory(dishCategory, districtName, pageable);
 
         for (Restaurant res : restaurantList) {
-            CustomRestaurantStatisticDTO customRestaurantStatisticDTO = CustomRestaurantStatisticDTO.builder()
+            RestaurantDTO dto = RestaurantDTO.builder()
                     .restaurantName(res.getRestaurantName())
                     .restaurantAddress(res.getRestaurantAddress())
                     .description(res.getDescription())
@@ -97,13 +111,13 @@ public class RestaurantServiceImpl implements RestaurantService {
                     .openHour(res.getOpenHour())
                     .closingHour(res.getClosingHour())
                     .picture(res.getPicture())
-                    .district(res.getDistrict().getDistrictName())
+                    .districtName(res.getDistrict().getDistrictName())
                     .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getFoodBrand())
                     .build();
 
-            customRestaurantStatisticDTOList.add(customRestaurantStatisticDTO);
+            dtoList.add(dto);
         }
-        return customRestaurantStatisticDTOList;
+        return dtoList;
     }
 
     @Override
@@ -112,7 +126,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<CustomRestaurantStatisticDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
+    public List<RestaurantDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
         if (!isValidTimeFormat(openHour))
             throw PersonalProjectException.badRequest("WrongTimeFormat", "Time format must be hh:mm:ss");
 
@@ -122,11 +136,11 @@ public class RestaurantServiceImpl implements RestaurantService {
         LocalTime open =  LocalTime.parse(openHour);
         LocalTime closing = LocalTime.parse(closingHour);
 
-        List<CustomRestaurantStatisticDTO> results = new ArrayList<>();
+        List<RestaurantDTO> results = new ArrayList<>();
 
         List<Restaurant> raw = restaurantRepository.getByRatingOpenHourAndClosingHour(rating, open, closing);
         for (Restaurant restaurant : raw) {
-            CustomRestaurantStatisticDTO dto = CustomRestaurantStatisticDTO.builder()
+            RestaurantDTO dto = RestaurantDTO.builder()
                     .restaurantName(restaurant.getRestaurantName())
                     .restaurantAddress(restaurant.getRestaurantAddress())
                     .description(restaurant.getDescription())
@@ -134,7 +148,7 @@ public class RestaurantServiceImpl implements RestaurantService {
                     .openHour(restaurant.getOpenHour())
                     .closingHour(restaurant.getClosingHour())
                     .picture(restaurant.getPicture())
-                    .district(restaurant.getDistrict().getDistrictName())
+                    .districtName(restaurant.getDistrict().getDistrictName())
                     .foodBrand(restaurant.getFoodBrand() == null ? null : restaurant.getFoodBrand().getFoodBrand())
                     .build();
 
@@ -143,14 +157,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         return results;
     }
 
-
     public boolean isValidTimeFormat(String timeString) {
         String pattern = "^(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$";
         return timeString.matches(pattern);
-    }
-
-    public LocalTime formatStringToLocaltime(String time) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss");
-        return LocalTime.parse(time, formatter);
     }
 }

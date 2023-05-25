@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.List;
 
 @Slf4j
@@ -18,12 +19,12 @@ public class CityResource implements CityAPI {
     private final CityService cityService;
 
 
-//    @Override
-//    public ResponseEntity<CityDTO> createCity(CityDTO cityDTO) {
-//        log.debug("Request to create new city{}", cityDTO);
-//        CityDTO createCityDTO = cityService.createCity(cityDTO);
-//        return ResponseEntity.created(URI.create("/cities/" + createCityDTO.getCityName())).body(createCityDTO);
-//    }
+    @Override
+    public ResponseEntity<CityDTO> createCity(CityDTO cityDTO) {
+        log.debug("Request to create new city{}", cityDTO);
+        CityDTO dto = cityService.createCity(cityDTO);
+        return ResponseEntity.created(URI.create("/cities/" + dto.getCityName())).body(dto);
+    }
 
     @Override
     public ResponseEntity<List<CityDTO>> getAllCity() {
@@ -31,8 +32,16 @@ public class CityResource implements CityAPI {
     }
 
     @Override
-    public ResponseEntity <CityDTO> getByCityID(String cityName) {
+    public ResponseEntity<CityDTO> getByCityID(String cityName) {
         return ResponseEntity.ok(cityService.getByCityID(cityName));
+    }
+
+    @Override
+    public ResponseEntity<CityDTO> updateCity(String cityID, CityDTO cityDTO) {
+        log.debug("Request to update city {}", cityID);
+        log.debug("Request to update city {}", cityDTO);
+        CityDTO dto = cityService.updateCity(cityID, cityDTO);
+        return ResponseEntity.created(URI.create("/cities" + dto.getCityName())).body(dto);
     }
 
     @Override

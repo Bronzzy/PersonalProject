@@ -10,14 +10,18 @@ import java.util.List;
 public interface CityAPI {
 
 //    @PreAuthorize("hasRole('ADMIN')")
-//    @PostMapping
-//    ResponseEntity<CityDTO> createCity(@RequestBody CityDTO cityDTO);
+    @PostMapping
+    ResponseEntity<CityDTO> createCity(@RequestBody CityDTO cityDTO);
 
     @GetMapping
     ResponseEntity<List<CityDTO>> getAllCity();
 
     @GetMapping("/bycityid")
     ResponseEntity<CityDTO> getByCityID(@RequestParam("cityName") String cityName);
+
+    @PutMapping("/{cityid}")
+    ResponseEntity<CityDTO> updateCity(@PathVariable("cityid") String cityID,
+                                       @RequestBody CityDTO cityDTO);
 
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteCity(@RequestParam("cityName") String cityName);

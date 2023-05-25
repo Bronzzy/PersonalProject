@@ -17,13 +17,23 @@ import java.time.LocalTime;
 @AllArgsConstructor
 public class RestaurantDTO {
 
+    private Long restaurantID;
+
     private String restaurantName;
+
     private String restaurantAddress;
+
     private String description;
+
     private String telephoneNumber;
+
     private LocalTime openHour;
+
     private LocalTime closingHour;
+
     private String picture;
-    private District district;
-    private FoodBrand foodBrand;
+
+    private String districtName;
+
+    private String foodBrand;
 }

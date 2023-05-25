@@ -9,13 +9,16 @@ import java.util.List;
 @RequestMapping("/auth/districts")
 public interface DistrictAPI {
 
+    @PostMapping
+    ResponseEntity<DistrictDTO> createDistrict(@RequestBody DistrictDTO districtDTO);
+
     @GetMapping
     ResponseEntity<List<DistrictDTO>> getAllDistrict();
-
-    @GetMapping("/bycityid")
-    ResponseEntity<DistrictDTO> getByDistrictID(@RequestParam("districtName") String districtName);
-
-    @DeleteMapping("/delete")
-    ResponseEntity<Void> deleteCity(@RequestParam("districtName") String districtName);
+//
+//    @GetMapping("/bycityid")
+//    ResponseEntity<DistrictDTO> getByDistrictID(@RequestParam("districtName") String districtName);
+//
+//    @DeleteMapping("/delete")
+//    ResponseEntity<Void> deleteCity(@RequestParam("districtName") String districtName);
 
 }

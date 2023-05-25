@@ -2,10 +2,13 @@ package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.City;
 
+import com.dhbinh.personalproject.entity.Country;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CityMapper;
 import com.dhbinh.personalproject.mapper.CountryMapper;
 import com.dhbinh.personalproject.repository.CityRepository;
+import com.dhbinh.personalproject.repository.CountryRepository;
+import com.dhbinh.personalproject.rest.api.CityAPI;
 import com.dhbinh.personalproject.service.CityService;
 import com.dhbinh.personalproject.service.CountryService;
 import com.dhbinh.personalproject.service.dto.CityDTO;
@@ -27,21 +30,21 @@ public class CityServiceImpl implements CityService {
 
     private final CityMapper cityMapper;
 
-    private final CountryMapper countryMapper;
-
     private final CountryService countryService;
 
+    private final CountryRepository countryRepository;
+
     public CityDTO createCity(CityDTO cityDTO) {
-        Optional<City> existingCity = cityRepository.findById(cityDTO.getCityName());
-        if (existingCity.isPresent()) {
-            throw PersonalProjectException.badRequest("CityExisted", "City is already existed");
-        }
 
+        if (cityRepository.existsById(cityDTO.getCityName()))
+            throw PersonalProjectException.badRequest("CityNameExisted", "City name is already existed");
 
+        if (!countryRepository.existsById(cityDTO.getCountryName()))
+            throw PersonalProjectException.countryNotFound();
 
         City city = City.builder()
                 .cityName(cityDTO.getCityName())
-                .country(cityDTO.getCountryName())
+                .country(countryRepository.findById(cityDTO.getCountryName()).get())
                 .build();
 
         return cityMapper.toDTO(cityRepository.save(city));
@@ -58,7 +61,7 @@ public class CityServiceImpl implements CityService {
         for (City city : cityList) {
             CityDTO cityDTO = CityDTO.builder()
                     .cityName(city.getCityName())
-                    .countryName(city.getCountry())
+                    .countryName(city.getCountry().getCountryName())
                     .build();
 
             results.add(cityDTO);
@@ -70,21 +73,22 @@ public class CityServiceImpl implements CityService {
         City city = cityRepository.findById(cityName).
                 orElseThrow(PersonalProjectException::cityNotFound);
 
-        return CityDTO.builder()
-                .cityName(cityName)
-                .countryName(city.getCountry())
-                .build();
+        return cityMapper.toDTO(city);
     }
 
-//    public CityDTO updateByCityID(CityDTO cityDTO) {
-//
-//        City existingCity = cityRepository.findById(cityDTO.getCityName())
-//                .orElseThrow(PersonalProjectException::cityNotFound);
-//
-//        existingCity.setCityName(cityDTO.getCityName());
-//
-//        return cityMapper.toDTO(cityRepository.save(existingCity));
-//    }
+    public CityDTO updateCity(String cityID,CityDTO cityDTO) {
+
+        City existingCity = cityRepository.findById(cityID)
+                .orElseThrow(PersonalProjectException::cityNotFound);
+
+        Country existingCountry = countryRepository.findById(cityDTO.getCountryName())
+                .orElseThrow(PersonalProjectException::countryNotFound);
+
+        existingCity.setCityName(cityDTO.getCityName());
+        existingCity.setCountry(existingCountry);
+
+        return cityMapper.toDTO(cityRepository.save(existingCity));
+    }
 
     public void deleteByCityID(String cityName) {
         Optional<City> existingCountry = cityRepository.findById(cityName);
