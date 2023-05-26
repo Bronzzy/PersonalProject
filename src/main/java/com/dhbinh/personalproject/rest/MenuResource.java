@@ -22,7 +22,7 @@ public class MenuResource implements MenuAPI {
     @Override
     public ResponseEntity<MenuDTO> createMenu(MenuDTO menuDTO) {
         MenuDTO dto = menuService.createMenu(menuDTO);
-        return ResponseEntity.created(URI.create("/api/menus/" + dto.getMenuID())).body(dto);
+        return ResponseEntity.created(URI.create("/api/menus/" + dto.getID())).body(dto);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MenuResource implements MenuAPI {
     @Override
     public ResponseEntity<MenuDTO> updateMenu(Long menuID, MenuDTO menuDTO) {
         MenuDTO dto = menuService.updateMenu(menuID, menuDTO);
-        return ResponseEntity.created(URI.create("/api/menus/" + dto.getMenuID())).body(dto);
+        return ResponseEntity.created(URI.create("/api/menus/" + dto.getID())).body(dto);
     }
 
     @Override

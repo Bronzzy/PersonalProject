@@ -23,7 +23,7 @@ public class CityResource implements CityAPI {
     public ResponseEntity<CityDTO> createCity(CityDTO cityDTO) {
         log.debug("Request to create new city{}", cityDTO);
         CityDTO dto = cityService.createCity(cityDTO);
-        return ResponseEntity.created(URI.create("/cities/" + dto.getCityName())).body(dto);
+        return ResponseEntity.created(URI.create("/cities/" + dto.getName())).body(dto);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class CityResource implements CityAPI {
         log.debug("Request to update city {}", cityID);
         log.debug("Request to update city {}", cityDTO);
         CityDTO dto = cityService.updateCity(cityID, cityDTO);
-        return ResponseEntity.created(URI.create("/cities" + dto.getCityName())).body(dto);
+        return ResponseEntity.created(URI.create("/cities" + dto.getName())).body(dto);
     }
 
     @Override

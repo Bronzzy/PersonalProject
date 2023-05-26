@@ -11,8 +11,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface RestaurantMapper {
 
-    @Mapping(target = "districtName", source = "district.districtName")
-    @Mapping(target = "foodBrand", source = "foodBrand.foodBrand")
+    @Mapping(target = "districtName", source = "district.name")
+    @Mapping(target = "foodBrand", source = "foodBrand.name")
 
     RestaurantDTO toDTO(Restaurant restaurant);
 

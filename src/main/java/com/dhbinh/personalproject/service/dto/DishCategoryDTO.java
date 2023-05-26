@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DishCategoryDTO {
-    private Long dishCategoryID;
-    private String dishCategory;
+    private Long ID;
+    private String type;
 }

@@ -1,8 +1,6 @@
 package com.dhbinh.personalproject.service.impl;
 
-import com.dhbinh.personalproject.entity.AdminAccount;
 import com.dhbinh.personalproject.entity.Post;
-import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.PostMapper;
 import com.dhbinh.personalproject.mapper.RestaurantMapper;
@@ -12,7 +10,6 @@ import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.PostService;
 import com.dhbinh.personalproject.service.RestaurantService;
 import com.dhbinh.personalproject.service.dto.PostDTO;
-import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -41,17 +37,17 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO createPost(PostDTO postDTO) {
-        if(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).isEmpty())
+        if(restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
         if(adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
             throw PersonalProjectException.adminNotFound();
 
         Post post = Post.builder()
-                .postDate(LocalDate.now())
+                .createDate(LocalDate.now())
                 .description(postDTO.getDescription())
                 .rating(postDTO.getRating())
-                .restaurant(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).get())
+                .restaurant(restaurantRepository.findByName(postDTO.getRestaurantName()).get())
                 .adminAccount(adminAccountRepository.findByAdminName(postDTO.getAdminName()).get())
                 .picture(postDTO.getPicture())
                 .build();
@@ -69,11 +65,11 @@ public class PostServiceImpl implements PostService {
 
         for (Post post : postList) {
             PostDTO dto = PostDTO.builder()
-                    .postID(post.getPostID())
-                    .postDate(post.getPostDate())
+                    .ID(post.getID())
+                    .createDate(post.getCreateDate())
                     .description(post.getDescription())
                     .rating(post.getRating())
-                    .restaurantName(post.getRestaurant().getRestaurantName())
+                    .restaurantName(post.getRestaurant().getName())
                     .picture(post.getPicture())
                     .adminName(post.getAdminAccount().getAdminName())
                     .build();
@@ -94,14 +90,14 @@ public class PostServiceImpl implements PostService {
 
         Post existingPost = postRepository.findById(postID)
                 .orElseThrow(PersonalProjectException::postNotFound);
-        if(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).isEmpty())
+        if(restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
-        existingPost.setPostDate(LocalDate.now());
+        existingPost.setCreateDate(LocalDate.now());
         existingPost.setDescription(postDTO.getDescription());
         existingPost.setRating(postDTO.getRating());
         existingPost.setPicture(postDTO.getPicture());
-        existingPost.setRestaurant(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).get());
+        existingPost.setRestaurant(restaurantRepository.findByName(postDTO.getRestaurantName()).get());
 
         return postMapper.toDTO(postRepository.save(existingPost));
     }

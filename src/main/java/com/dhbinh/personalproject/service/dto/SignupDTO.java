@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SignupDTO {
     @JsonIgnore
-    private Long userAccountID;
+    private Long ID;
 
-    private String userFirstName;
+    private String firstName;
 
-    private String userLastName;
+    private String lastName;
 
     private String username;
 }

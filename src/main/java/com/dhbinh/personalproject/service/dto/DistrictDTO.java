@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DistrictDTO {
 
-    private String districtName;
+    private String name;
 
     private String cityName;
 

@@ -14,8 +14,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDTO {
-    private Long postID;
-    private LocalDate postDate;
+    private Long ID;
+    private LocalDate createDate;
     private String adminName;
     private String restaurantName;
     private String picture;

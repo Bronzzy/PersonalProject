@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CityDTO {
-    private String cityName;
+    private String name;
     private String countryName;
 }

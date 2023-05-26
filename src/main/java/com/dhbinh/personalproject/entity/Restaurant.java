@@ -18,22 +18,22 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long restaurantID;
+    private Long ID;
 
-    @Column(name = "restaurant_name", nullable = false)
-    private String restaurantName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "restaurant_address", length = 1000, nullable = false)
+    @Column(name = "address", length = 1000, nullable = false)
     @Length(max = 1000)
-    private String restaurantAddress;
+    private String address;
 
     @Column(name = "description", length = 10000)
     @Length(max = 10000)
     private String description;
 
-    @Column(name = "telephone_number", length = 50)
+    @Column(name = "phone_number", length = 50)
     @Length(max = 50)
-    private String telephoneNumber;
+    private String phoneNumber;
 
     @Column(name = "open_hour",nullable = false)
     private LocalTime openHour;

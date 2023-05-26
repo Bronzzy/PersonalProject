@@ -9,9 +9,9 @@ public interface DishCategoryService {
 
     List<DishCategoryDTO> getAllDishCategory();
 
-    DishCategoryDTO getByDishCategory(String dishCategory);
+    DishCategoryDTO getByType(String dishCategory);
 
     DishCategoryDTO updateDishCategory(Long dishCategoryID, DishCategoryDTO dishCategoryDTO);
 
-    void deleteByDishCategory(String dishCategory);
+    void deleteByType(String dishCategory);
 }

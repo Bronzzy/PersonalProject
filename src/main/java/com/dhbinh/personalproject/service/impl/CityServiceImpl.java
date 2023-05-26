@@ -36,14 +36,14 @@ public class CityServiceImpl implements CityService {
 
     public CityDTO createCity(CityDTO cityDTO) {
 
-        if (cityRepository.existsById(cityDTO.getCityName()))
+        if (cityRepository.existsById(cityDTO.getName()))
             throw PersonalProjectException.badRequest("CityNameExisted", "City name is already existed");
 
         if (!countryRepository.existsById(cityDTO.getCountryName()))
             throw PersonalProjectException.countryNotFound();
 
         City city = City.builder()
-                .cityName(cityDTO.getCityName())
+                .name(cityDTO.getName())
                 .country(countryRepository.findById(cityDTO.getCountryName()).get())
                 .build();
 
@@ -60,8 +60,8 @@ public class CityServiceImpl implements CityService {
 
         for (City city : cityList) {
             CityDTO cityDTO = CityDTO.builder()
-                    .cityName(city.getCityName())
-                    .countryName(city.getCountry().getCountryName())
+                    .name(city.getName())
+                    .countryName(city.getCountry().getName())
                     .build();
 
             results.add(cityDTO);
@@ -84,7 +84,7 @@ public class CityServiceImpl implements CityService {
         Country existingCountry = countryRepository.findById(cityDTO.getCountryName())
                 .orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCity.setCityName(cityDTO.getCityName());
+        existingCity.setName(cityDTO.getName());
         existingCity.setCountry(existingCountry);
 
         return cityMapper.toDTO(cityRepository.save(existingCity));

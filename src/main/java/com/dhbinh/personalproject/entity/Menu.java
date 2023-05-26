@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long menuID;
+    private Long ID;
 
     @Column(name = "starting_price")
     private Double startingPrice;

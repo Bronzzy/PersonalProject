@@ -44,10 +44,10 @@ public class CommentServiceImpl implements CommentService {
             throw PersonalProjectException.postNotFound();
 
         Comment comment = Comment.builder()
-                .commentID(commentDTO.getCommentID())
-                .comment(commentDTO.getComment())
+                .ID(commentDTO.getCommentID())
+                .content(commentDTO.getContent())
                 .userAccount(userAccountRepository.findByUsername(username).get())
-                .commentDate(LocalDate.now())
+                .createDate(LocalDate.now())
                 .post(postRepository.findById(commentDTO.getPostID()).get())
                 .build();
 
@@ -64,11 +64,11 @@ public class CommentServiceImpl implements CommentService {
 
         for (Comment comment : commentList) {
             CommentDTO dto = CommentDTO.builder()
-                    .commentID(comment.getCommentID())
-                    .comment(comment.getComment())
-                    .commentDate(comment.getCommentDate())
+                    .commentID(comment.getID())
+                    .content(comment.getContent())
+                    .createDate(comment.getCreateDate())
                     .username(comment.getUserAccount().getUsername())
-                    .postID(comment.getPost().getPostID())
+                    .postID(comment.getPost().getID())
                     .build();
             resultList.add(dto);
         }

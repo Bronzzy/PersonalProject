@@ -28,14 +28,14 @@ public class DistrictServiceImpl implements DistrictService {
 
     public DistrictDTO createDistrict(DistrictDTO districtDTO) {
 
-        if(districtRepository.existsById(districtDTO.getDistrictName()))
+        if(districtRepository.existsById(districtDTO.getName()))
             throw PersonalProjectException.badRequest("DistrictNameExisted","District name is already existed");
 
         if(!cityRepository.existsById(districtDTO.getCityName()))
             throw PersonalProjectException.cityNotFound();
 
         District district = District.builder()
-                .districtName(districtDTO.getDistrictName())
+                .name(districtDTO.getName())
                 .city(cityRepository.findById(districtDTO.getCityName()).get())
                 .build();
 
@@ -51,8 +51,8 @@ public class DistrictServiceImpl implements DistrictService {
 
         for (District district : districtList) {
             DistrictDTO dto = DistrictDTO.builder()
-                    .districtName(district.getDistrictName())
-                    .cityName(district.getCity().getCityName())
+                    .name(district.getName())
+                    .cityName(district.getCity().getName())
                     .build();
             results.add(dto);
         }

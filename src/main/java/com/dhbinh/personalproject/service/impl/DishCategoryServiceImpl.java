@@ -22,12 +22,12 @@ public class DishCategoryServiceImpl implements DishCategoryService {
     private final DishCategoryMapper dishCategoryMapper;
     @Override
     public DishCategoryDTO createDishCategory(DishCategoryDTO dishCategoryDTO) {
-        if(dishCategoryRepository.existsByDishCategory(dishCategoryDTO.getDishCategory()))
+        if(dishCategoryRepository.existsByType(dishCategoryDTO.getType()))
             throw PersonalProjectException.badRequest("DishCategoryAlreadyExists","Dish Category already exists");
 
         DishCategory dishCategory = DishCategory.builder()
-                .dishCategoryID(dishCategoryDTO.getDishCategoryID())
-                .dishCategory(dishCategoryDTO.getDishCategory())
+                .ID(dishCategoryDTO.getID())
+                .type(dishCategoryDTO.getType())
                 .build();
 
         return dishCategoryMapper.toDTO(dishCategoryRepository.save(dishCategory));
@@ -39,27 +39,27 @@ public class DishCategoryServiceImpl implements DishCategoryService {
     }
 
     @Override
-    public DishCategoryDTO getByDishCategory(String dishCategory) {
-        DishCategory existing = dishCategoryRepository.findByDishCategory(dishCategory)
+    public DishCategoryDTO getByType(String type) {
+        DishCategory existing = dishCategoryRepository.findByType(type)
                 .orElseThrow(PersonalProjectException::dishCategoryNotFound);
         return dishCategoryMapper.toDTO(existing);
     }
 
     @Override
-    public DishCategoryDTO updateDishCategory(Long dishCategoryID, DishCategoryDTO dishCategoryDTO) {
-        if(!dishCategoryRepository.existsById(dishCategoryID))
+    public DishCategoryDTO updateDishCategory(Long ID, DishCategoryDTO dishCategoryDTO) {
+        if(!dishCategoryRepository.existsById(ID))
             throw PersonalProjectException.dishCategoryNotFound();
 
         DishCategory dishCategory = DishCategory.builder()
-                .dishCategoryID(dishCategoryID)
-                .dishCategory(dishCategoryDTO.getDishCategory())
+                .ID(ID)
+                .type(dishCategoryDTO.getType())
                 .build();
 
         return dishCategoryMapper.toDTO(dishCategoryRepository.save(dishCategory));
     }
 
     @Override
-    public void deleteByDishCategory(String dishCategory) {
-        dishCategoryRepository.deleteByDishCategory(dishCategory);
+    public void deleteByType(String type) {
+        dishCategoryRepository.deleteByType(type);
     }
 }

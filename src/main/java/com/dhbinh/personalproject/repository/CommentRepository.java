@@ -13,9 +13,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @Query(" SELECT c " +
             " FROM Comment c, UserAccount ua " +
-            " WHERE c.userAccount.userAccountID = ua.userAccountID " +
+            " WHERE c.userAccount.ID = ua.ID " +
             " AND ua.username like :username")
     List<Comment> getByUsername(@Param("username") String username);
-
-
 }

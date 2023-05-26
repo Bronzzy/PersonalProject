@@ -9,9 +9,9 @@ import java.util.Optional;
 @Repository
 public interface DishCategoryRepository extends JpaRepository<DishCategory, Long> {
 
-    Boolean existsByDishCategory(String dishCategory);
+    Boolean existsByType(String type);
 
-    Optional<DishCategory> findByDishCategory(String dishCategory);
+    Optional<DishCategory> findByType(String type);
 
-    void deleteByDishCategory(String dishCategory);
+    void deleteByType(String type);
 }

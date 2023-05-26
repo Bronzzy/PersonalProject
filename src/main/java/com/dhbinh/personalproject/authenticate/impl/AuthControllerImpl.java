@@ -52,13 +52,13 @@ public class AuthControllerImpl implements AuthController {
     @Override
     public ResponseEntity<SignupDTO> createUserAccount(UserAccountDTO userAccountDTO) {
         SignupDTO userAccount = userAccountService.createUserAccount(userAccountDTO);
-        return ResponseEntity.created(URI.create("/useraccounts/" + userAccount.getUserAccountID())).body(userAccount);
+        return ResponseEntity.created(URI.create("/useraccounts/" + userAccount.getID())).body(userAccount);
     }
 
     @Override
     public ResponseEntity<SignupDTO> createAdminAccount(UserAccountDTO userAccountDTO) {
         SignupDTO userAccount = userAccountService.createAdminAccount(userAccountDTO);
-        return ResponseEntity.created(URI.create("/useraccounts/" + userAccount.getUserAccountID())).body(userAccount);
+        return ResponseEntity.created(URI.create("/useraccounts/" + userAccount.getID())).body(userAccount);
     }
 
 }

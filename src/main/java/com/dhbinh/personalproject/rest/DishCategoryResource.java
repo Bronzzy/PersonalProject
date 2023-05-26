@@ -20,7 +20,7 @@ public class DishCategoryResource implements DishCategoryAPI {
     @Override
     public ResponseEntity<DishCategoryDTO> createDishCategory(DishCategoryDTO dishCategoryDTO) {
         DishCategoryDTO dto = dishCategoryService.createDishCategory(dishCategoryDTO);
-        return ResponseEntity.created(URI.create("/api/dishcategories/" + dto.getDishCategoryID())).body(dto);
+        return ResponseEntity.created(URI.create("/api/dishcategories/" + dto.getID())).body(dto);
     }
 
     @Override
@@ -30,12 +30,12 @@ public class DishCategoryResource implements DishCategoryAPI {
 
     @Override
     public ResponseEntity<DishCategoryDTO> getDishCategoryByDishCategory(String dishCategory) {
-        return ResponseEntity.ok(dishCategoryService.getByDishCategory(dishCategory));
+        return ResponseEntity.ok(dishCategoryService.getByType(dishCategory));
     }
 
     @Override
     public ResponseEntity<Void> deleteDishCategory(String dishCategory) {
-        dishCategoryService.deleteByDishCategory(dishCategory);
+        dishCategoryService.deleteByType(dishCategory);
         return ResponseEntity.noContent().build();
     }
 }

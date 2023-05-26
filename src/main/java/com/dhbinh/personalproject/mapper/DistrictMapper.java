@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface DistrictMapper {
 
-    @Mapping(target = "cityName", source = "city.cityName")
+    @Mapping(target = "cityName", source = "city.name")
     DistrictDTO toDTO(District district);
 
     List<DistrictDTO> toDTOs(List<District> districts);

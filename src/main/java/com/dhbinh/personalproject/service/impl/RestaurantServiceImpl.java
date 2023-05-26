@@ -1,6 +1,5 @@
 package com.dhbinh.personalproject.service.impl;
 
-import com.dhbinh.personalproject.entity.FoodBrand;
 import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.RestaurantMapper;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,6 @@ import java.util.List;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-
     private final RestaurantMapper restaurantMapper;
     private final DistrictRepository districtRepository;
     private final FoodBrandRepository foodBrandRepository;
@@ -36,10 +33,10 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
         log.info("restaurantDTO {}", restaurantDTO);
         Restaurant restaurant = Restaurant.builder()
-                .restaurantName(restaurantDTO.getRestaurantName())
-                .restaurantAddress(restaurantDTO.getRestaurantAddress())
+                .name(restaurantDTO.getName())
+                .address(restaurantDTO.getAddress())
                 .description(restaurantDTO.getDescription())
-                .telephoneNumber(restaurantDTO.getTelephoneNumber())
+                .phoneNumber(restaurantDTO.getPhoneNumber())
                 .openHour(restaurantDTO.getOpenHour())
                 .closingHour(restaurantDTO.getClosingHour())
                 .district(districtRepository.findById(restaurantDTO.getDistrictName())
@@ -62,15 +59,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         for (Restaurant res : restaurantList) {
             RestaurantDTO dto = RestaurantDTO.builder()
-                    .restaurantID(res.getRestaurantID())
-                    .restaurantName(res.getRestaurantName())
-                    .restaurantAddress(res.getRestaurantAddress())
-                    .telephoneNumber(res.getTelephoneNumber())
+                    .ID(res.getID())
+                    .name(res.getName())
+                    .address(res.getAddress())
+                    .phoneNumber(res.getPhoneNumber())
                     .openHour(res.getOpenHour())
                     .closingHour(res.getClosingHour())
                     .picture(res.getPicture())
-                    .districtName(res.getDistrict().getDistrictName())
-                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getFoodBrand())
+                    .districtName(res.getDistrict().getName())
+                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getName())
                     .build();
 
             resultList.add(dto);
@@ -79,7 +76,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public RestaurantDTO getByRestaurantName(String restaurantName) {
-        Restaurant restaurant = restaurantRepository.getByRestaurantName(restaurantName)
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
         return restaurantMapper.toDTO(restaurant);
@@ -90,10 +87,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant existingRestaurant = restaurantRepository.findById(restaurantID)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
-        existingRestaurant.setRestaurantName(restaurantDTO.getRestaurantName());
-        existingRestaurant.setRestaurantAddress(restaurantDTO.getRestaurantAddress());
+        existingRestaurant.setName(restaurantDTO.getName());
+        existingRestaurant.setAddress(restaurantDTO.getAddress());
         existingRestaurant.setDescription(restaurantDTO.getDescription());
-        existingRestaurant.setTelephoneNumber(restaurantDTO.getTelephoneNumber());
+        existingRestaurant.setPhoneNumber(restaurantDTO.getPhoneNumber());
         existingRestaurant.setOpenHour(restaurantDTO.getOpenHour());
         existingRestaurant.setClosingHour(restaurantDTO.getClosingHour());
         existingRestaurant.setPicture(restaurantDTO.getPicture());
@@ -106,7 +103,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public void deleteByRestaurantName(String restaurantName) {
-        Restaurant restaurant = restaurantRepository.getByRestaurantName(restaurantName)
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
         restaurantRepository.delete(restaurant);
@@ -124,15 +121,15 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         for (Restaurant res : restaurantList) {
             RestaurantDTO dto = RestaurantDTO.builder()
-                    .restaurantName(res.getRestaurantName())
-                    .restaurantAddress(res.getRestaurantAddress())
+                    .name(res.getName())
+                    .address(res.getAddress())
                     .description(res.getDescription())
-                    .telephoneNumber(res.getTelephoneNumber())
+                    .phoneNumber(res.getPhoneNumber())
                     .openHour(res.getOpenHour())
                     .closingHour(res.getClosingHour())
                     .picture(res.getPicture())
-                    .districtName(res.getDistrict().getDistrictName())
-                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getFoodBrand())
+                    .districtName(res.getDistrict().getName())
+                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getName())
                     .build();
 
             dtoList.add(dto);
@@ -161,15 +158,15 @@ public class RestaurantServiceImpl implements RestaurantService {
         List<Restaurant> raw = restaurantRepository.getByRatingOpenHourAndClosingHour(rating, open, closing);
         for (Restaurant restaurant : raw) {
             RestaurantDTO dto = RestaurantDTO.builder()
-                    .restaurantName(restaurant.getRestaurantName())
-                    .restaurantAddress(restaurant.getRestaurantAddress())
+                    .name(restaurant.getName())
+                    .address(restaurant.getAddress())
                     .description(restaurant.getDescription())
-                    .telephoneNumber(restaurant.getTelephoneNumber())
+                    .phoneNumber(restaurant.getPhoneNumber())
                     .openHour(restaurant.getOpenHour())
                     .closingHour(restaurant.getClosingHour())
                     .picture(restaurant.getPicture())
-                    .districtName(restaurant.getDistrict().getDistrictName())
-                    .foodBrand(restaurant.getFoodBrand() == null ? null : restaurant.getFoodBrand().getFoodBrand())
+                    .districtName(restaurant.getDistrict().getName())
+                    .foodBrand(restaurant.getFoodBrand() == null ? null : restaurant.getFoodBrand().getName())
                     .build();
 
             results.add(dto);

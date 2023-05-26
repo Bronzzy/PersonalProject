@@ -13,33 +13,32 @@ import java.util.Optional;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
-    Optional<Restaurant> getByRestaurantName(String restaurantName);
+    Optional<Restaurant> findByName(String restaurantName);
 
     @Query(" SELECT distinct r " +
             " FROM Restaurant r, Menu m, DishCategory dc, District d, FoodBrand f " +
-            " WHERE dc.dishCategoryID = m.dishCategory.dishCategoryID " +
-            " AND m.restaurant.restaurantID = r.restaurantID " +
-            " AND r.district.districtName = d.districtName " +
-            " AND dc.dishCategory like :dishCategory " +
-            " AND d.districtName like :districtName")
-    List<Restaurant> getRestaurantByDishCategory(@Param("dishCategory") String dishCategory,
-                                                 @Param("districtName") String districtName,
+            " WHERE dc.ID = m.dishCategory.ID " +
+            " AND m.restaurant.ID = r.ID " +
+            " AND r.district.name = d.name " +
+            " AND dc.type like :type " +
+            " AND d.name like :name")
+    List<Restaurant> getRestaurantByDishCategory(@Param("type") String dishCategory,
+                                                 @Param("name") String districtName,
                                                  Pageable pageable);
 
-    @Query(" SELECT count(r.restaurantID), d.districtName" +
+    @Query(" SELECT count(r.ID), d.name" +
             " FROM Restaurant r, District d" +
-            " WHERE r.district.districtName = d.districtName" +
-            " group by d.districtName")
+            " WHERE r.district.name = d.name" +
+            " group by d.name")
     List<Object[]> getNumberOfRestaurantByDistrict();
 
     @Query(" SELECT distinct r " +
             " FROM Restaurant r, Post p " +
-            " WHERE r.restaurantID = p.restaurant.restaurantID " +
+            " WHERE r.ID = p.restaurant.ID " +
             " AND p.rating > :rating " +
             " AND r.openHour > :openHour " +
             " AND r.closingHour < :closingHour")
     List<Restaurant> getByRatingOpenHourAndClosingHour(@Param("rating") double rating,
                                                        @Param("openHour") LocalTime openHour,
                                                        @Param("closingHour") LocalTime closingHour);
-    Optional<Restaurant> findByRestaurantName(String restaurantName);
 }

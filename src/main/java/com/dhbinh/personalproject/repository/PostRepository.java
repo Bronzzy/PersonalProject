@@ -14,7 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query(" SELECT p " +
             " FROM Post p, Restaurant r " +
-            " WHERE p.restaurant.restaurantID = r.restaurantID " +
-            " AND r.restaurantName like :restaurantName")
+            " WHERE p.restaurant.ID = r.ID " +
+            " AND r.name like :restaurantName")
     Optional<List<Post>> getPostByRestaurantName(@Param("restaurantName") String restaurantName);
 }

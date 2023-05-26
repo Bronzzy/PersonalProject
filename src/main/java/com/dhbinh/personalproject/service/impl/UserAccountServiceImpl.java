@@ -54,10 +54,10 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw PersonalProjectException.badRequest("InvalidPassword",
                     "Password must at least 12 characters, at least 1 uppercase, 1 number and 1 special character");
 
-        if (userAccountDTO.getUserLastName().isBlank() || userAccountDTO.getUserLastName() == null)
+        if (userAccountDTO.getLastName().isBlank() || userAccountDTO.getLastName() == null)
             throw PersonalProjectException.badRequest("LastNameEmpty", "Last name can't be empty or null");
 
-        if (userAccountDTO.getUserFirstName().isBlank() || userAccountDTO.getUserFirstName() == null)
+        if (userAccountDTO.getFirstName().isBlank() || userAccountDTO.getFirstName() == null)
             throw PersonalProjectException.badRequest("FirstNameEmpty", "First name can't be empty or null");
 
         if (userAccountDTO.getUsername().isBlank() || userAccountDTO.getUsername() == null)
@@ -67,8 +67,8 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw PersonalProjectException.badRequest("PasswordEmpty", "Password can't be empty or null");
 
         UserAccount userAccount = UserAccount.builder()
-                .userFirstName(userAccountDTO.getUserFirstName())
-                .userLastName(userAccountDTO.getUserLastName())
+                .firstName(userAccountDTO.getFirstName())
+                .lastName(userAccountDTO.getLastName())
                 .username(userAccountDTO.getUsername())
                 .password(encoder.encode(userAccountDTO.getPassword()))
                 .active(true)
@@ -81,8 +81,8 @@ public class UserAccountServiceImpl implements UserAccountService {
         userRoleAssignmentRepository.save(assignment);
 
         SignupDTO signupDTO = SignupDTO.builder()
-                .userFirstName(userAccountDTO.getUserFirstName())
-                .userLastName(userAccountDTO.getUserLastName())
+                .firstName(userAccountDTO.getFirstName())
+                .lastName(userAccountDTO.getLastName())
                 .username(userAccountDTO.getUsername())
                 .build();
 
@@ -105,10 +105,10 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw PersonalProjectException.badRequest("InvalidPassword",
                     "Password must at least 12 characters, at least 1 uppercase, 1 number and 1 special character");
 
-        if (userAccountDTO.getUserLastName().isBlank() || userAccountDTO.getUserLastName() == null)
+        if (userAccountDTO.getLastName().isBlank() || userAccountDTO.getLastName() == null)
             throw PersonalProjectException.badRequest("LastNameEmpty", "Last name can't be empty or null");
 
-        if (userAccountDTO.getUserFirstName().isBlank() || userAccountDTO.getUserFirstName() == null)
+        if (userAccountDTO.getFirstName().isBlank() || userAccountDTO.getFirstName() == null)
             throw PersonalProjectException.badRequest("FirstNameEmpty", "First name can't be empty or null");
 
         if (userAccountDTO.getUsername().isBlank() || userAccountDTO.getUsername() == null)
@@ -118,8 +118,8 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw PersonalProjectException.badRequest("PasswordEmpty", "Password can't be empty or null");
 
         UserAccount userAccount = UserAccount.builder()
-                .userFirstName(userAccountDTO.getUserFirstName())
-                .userLastName(userAccountDTO.getUserLastName())
+                .firstName(userAccountDTO.getFirstName())
+                .lastName(userAccountDTO.getLastName())
                 .username(userAccountDTO.getUsername())
                 .password(encoder.encode(userAccountDTO.getPassword()))
                 .active(true)
@@ -132,8 +132,8 @@ public class UserAccountServiceImpl implements UserAccountService {
         userRoleAssignmentRepository.save(assignment);
 
         SignupDTO signupDTO = SignupDTO.builder()
-                .userFirstName(userAccountDTO.getUserFirstName())
-                .userLastName(userAccountDTO.getUserLastName())
+                .firstName(userAccountDTO.getFirstName())
+                .lastName(userAccountDTO.getLastName())
                 .username(userAccountDTO.getUsername())
                 .build();
 

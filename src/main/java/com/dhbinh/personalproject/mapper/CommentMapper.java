@@ -9,9 +9,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CommentMapper {
-    @Mapping(source = "post.postID", target = "postID")
+    @Mapping(source = "post.ID", target = "postID")
     @Mapping(source = "userAccount.username", target = "username")
-    @Mapping(source = "comment.commentID", target = "commentID")
+    @Mapping(source = "comment.ID", target = "commentID")
     CommentDTO toDTO(Comment comment);
 
     List<CommentDTO> toDTOs(List<Comment> comments);

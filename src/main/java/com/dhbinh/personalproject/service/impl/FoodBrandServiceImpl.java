@@ -22,11 +22,11 @@ public class FoodBrandServiceImpl implements FoodBrandService {
     private final FoodBrandMapper foodBrandMapper;
 
     public FoodBrandDTO createFoodBrand(FoodBrandDTO foodBrandDTO){
-        if(foodBrandRepository.existsById(foodBrandDTO.getFoodBrand()))
+        if(foodBrandRepository.existsById(foodBrandDTO.getName()))
             throw PersonalProjectException.badRequest("FoodBrandAlreadyExisted","Foodbrand is already existed");
 
         FoodBrand foodBrand = FoodBrand.builder()
-                .foodBrand(foodBrandDTO.getFoodBrand())
+                .name(foodBrandDTO.getName())
                 .build();
 
         return foodBrandMapper.toDTO(foodBrandRepository.save(foodBrand));

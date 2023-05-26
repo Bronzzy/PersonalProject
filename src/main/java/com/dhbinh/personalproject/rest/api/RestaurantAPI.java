@@ -27,14 +27,14 @@ public interface RestaurantAPI {
 
     @GetMapping("/bydishcategory")
     ResponseEntity<List<RestaurantDTO>> getRestaurantByDishCategory(@RequestParam("dishCategory") String dishCategory,
-                                                                                   @RequestParam("districtName") String districtName,
-                                                                                   @RequestParam("limit") int limit);
+                                                                    @RequestParam("districtName") String districtName,
+                                                                    @RequestParam("limit") int limit);
 
     @GetMapping("/numberofrestaurantbydistrict")
     ResponseEntity<List<Object[]>> getNumberOfRestaurantByDistrict();
 
     @GetMapping("/byratingopenhourclosinghour")
     ResponseEntity<List<RestaurantDTO>> getByRatingOpenHourAndClosingHour(@RequestParam("rating") double rating,
-                                                                                         @RequestParam("openHour") String openHour,
-                                                                                         @RequestParam("closingHour") String closingHour);
+                                                                          @RequestParam("openHour") String openHour,
+                                                                          @RequestParam("closingHour") String closingHour);
 }

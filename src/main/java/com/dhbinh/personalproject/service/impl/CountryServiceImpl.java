@@ -23,13 +23,13 @@ public class CountryServiceImpl implements CountryService {
 
     public CountryDTO createCountry(CountryDTO countryDTO) {
 
-        Optional<Country> existingCountry = countryRepository.findById(countryDTO.getCountryName());
+        Optional<Country> existingCountry = countryRepository.findById(countryDTO.getName());
         if (existingCountry.isPresent()) {
             throw PersonalProjectException.badRequest("CountryExisted", "Country is already existed");
         }
 
         Country country = Country.builder()
-                .countryName(countryDTO.getCountryName())
+                .name(countryDTO.getName())
                 .build();
 
         return countryMapper.toDTO(countryRepository.save(country));
@@ -51,10 +51,10 @@ public class CountryServiceImpl implements CountryService {
     }
 
     public CountryDTO updateByCountryID(CountryDTO countryDTO) {
-         Country existingCountry = countryRepository.findById(countryDTO.getCountryName()).
+         Country existingCountry = countryRepository.findById(countryDTO.getName()).
                  orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCountry.setCountryName(countryDTO.getCountryName());
+        existingCountry.setName(countryDTO.getName());
 
         return countryMapper.toDTO(countryRepository.save(existingCountry));
     }

@@ -36,13 +36,15 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public MenuDTO createMenu(MenuDTO menuDTO) {
         Menu menu = Menu.builder()
-                .menuID(menuDTO.getMenuID())
+                .ID(menuDTO.getID())
                 .startingPrice(menuDTO.getStartingPrice())
                 .endingPrice(menuDTO.getEndingPrice())
                 .ingredients(menuDTO.getIngredients())
                 .description(menuDTO.getDescription())
-                .dishCategory(dishCategoryRepository.findByDishCategory(menuDTO.getDishCategory()).orElseThrow(PersonalProjectException::dishCategoryNotFound))
-                .restaurant(restaurantRepository.findByRestaurantName(menuDTO.getRestaurantName()).orElseThrow(PersonalProjectException::restaurantNotFound))
+                .dishCategory(dishCategoryRepository.findByType(menuDTO.getDishCategory())
+                        .orElseThrow(PersonalProjectException::dishCategoryNotFound))
+                .restaurant(restaurantRepository.findByName(menuDTO.getRestaurantName())
+                        .orElseThrow(PersonalProjectException::restaurantNotFound))
                 .build();
 
         return menuMapper.toDTO(menuRepository.save(menu));
@@ -71,9 +73,9 @@ public class MenuServiceImpl implements MenuService {
         existingMenu.setEndingPrice(menuDTO.getEndingPrice());
         existingMenu.setIngredients(menuDTO.getIngredients());
         existingMenu.setDescription(menuDTO.getDescription());
-        existingMenu.setDishCategory(dishCategoryRepository.findByDishCategory(menuDTO.getDishCategory())
+        existingMenu.setDishCategory(dishCategoryRepository.findByType(menuDTO.getDishCategory())
                 .orElseThrow(PersonalProjectException::dishCategoryNotFound));
-        existingMenu.setRestaurant(restaurantRepository.findByRestaurantName(menuDTO.getRestaurantName())
+        existingMenu.setRestaurant(restaurantRepository.findByName(menuDTO.getRestaurantName())
                 .orElseThrow(PersonalProjectException::restaurantNotFound));
 
         return menuMapper.toDTO(menuRepository.save(existingMenu));
@@ -90,13 +92,13 @@ public class MenuServiceImpl implements MenuService {
 
         List<Menu> rawList = menuRepository.findAll().stream()
                 .filter(m -> m.getStartingPrice() < startingPrice)
-                .filter(m -> "Quan 1".equals(m.getRestaurant().getDistrict().getDistrictName()))
+                .filter(m -> "Quan 1".equals(m.getRestaurant().getDistrict().getName()))
                 .collect(Collectors.toList());
         for (Menu menu : rawList) {
             MonAnQuanAnDTO dto = MonAnQuanAnDTO.builder()
-                    .dishCategory(menu.getDishCategory().getDishCategory())
-                    .restaurantName(menu.getRestaurant().getRestaurantName())
-                    .address(menu.getRestaurant().getRestaurantAddress())
+                    .dishCategory(menu.getDishCategory().getType())
+                    .restaurantName(menu.getRestaurant().getName())
+                    .address(menu.getRestaurant().getAddress())
                     .openHour(menu.getRestaurant().getOpenHour())
                     .closeHour(menu.getRestaurant().getClosingHour())
                     .build();

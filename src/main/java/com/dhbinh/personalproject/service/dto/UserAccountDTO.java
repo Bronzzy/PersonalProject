@@ -12,11 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAccountDTO {
-    private Long userAccountID;
+    private Long ID;
 
-    private String userFirstName;
+    private String firstName;
 
-    private String userLastName;
+    private String lastName;
 
     private String username;
 

@@ -24,13 +24,13 @@ public class UserAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userAccountID;
+    private Long ID;
 
-    @Column(name = "user_first_name")
-    private String userFirstName;
+    @Column(name = "first_name")
+    private String firstName;
 
-    @Column(name = "user_last_name")
-    private String userLastName;
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "username",nullable = false)
     private String username;

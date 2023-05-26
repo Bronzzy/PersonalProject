@@ -24,7 +24,7 @@ public class RestaurantResource implements RestaurantAPI {
     public ResponseEntity<RestaurantDTO> createRestaurant(RestaurantDTO restaurantDTO) {
         log.debug("Request to create new country {}", restaurantDTO);
         RestaurantDTO dto = restaurantService.createRestaurant(restaurantDTO);
-        return ResponseEntity.created(URI.create("/api/restaurants/" + dto.getRestaurantID())).body(dto);
+        return ResponseEntity.created(URI.create("/api/restaurants/" + dto.getID())).body(dto);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class RestaurantResource implements RestaurantAPI {
     public ResponseEntity<RestaurantDTO> updateRestaurant(Long restaurantID, RestaurantDTO restaurantDTO) {
         log.debug("Request to update restaurant {}", restaurantDTO);
         RestaurantDTO dto = restaurantService.updateRestaurant(restaurantID, restaurantDTO);
-        return ResponseEntity.created(URI.create("/api/restaurants/" + dto.getRestaurantID())).body(dto);
+        return ResponseEntity.created(URI.create("/api/restaurants/" + dto.getID())).body(dto);
     }
 
     @Override

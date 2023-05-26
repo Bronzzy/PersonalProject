@@ -17,10 +17,10 @@ import java.time.LocalDate;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postID;
+    private Long ID;
 
-    @Column(name = "post_date")
-    private LocalDate postDate;
+    @Column(name = "create_date")
+    private LocalDate createDate;
 
     @Column(name = "description", length = 10000,nullable = false)
     @Length(max = 10000)
