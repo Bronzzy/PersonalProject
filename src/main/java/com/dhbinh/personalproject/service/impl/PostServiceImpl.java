@@ -1,17 +1,20 @@
 package com.dhbinh.personalproject.service.impl;
 
+import com.dhbinh.personalproject.entity.AdminAccount;
 import com.dhbinh.personalproject.entity.Post;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.PostMapper;
+import com.dhbinh.personalproject.repository.AdminAccountRepository;
 import com.dhbinh.personalproject.repository.PostRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.PostService;
 import com.dhbinh.personalproject.service.RestaurantService;
-import com.dhbinh.personalproject.service.dto.CustomPostStatisticDTO;
+import com.dhbinh.personalproject.service.dto.PostDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,16 +30,38 @@ public class PostServiceImpl implements PostService {
     private final RestaurantService restaurantService;
 
     private final RestaurantRepository restaurantRepository;
+    private final AdminAccountRepository adminAccountRepository;
 
-    public List<CustomPostStatisticDTO> getAllPost() {
-        List<CustomPostStatisticDTO> result = new ArrayList<>();
+    @Override
+    public PostDTO createPost(PostDTO postDTO) {
+        if(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).isEmpty())
+            throw PersonalProjectException.restaurantNotFound();
+
+        if(adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
+            throw PersonalProjectException.adminNotFound();
+
+        Post post = Post.builder()
+                .postDate(LocalDate.now())
+                .description(postDTO.getDescription())
+                .rating(postDTO.getRating())
+                .restaurant(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).get())
+                .adminAccount(adminAccountRepository.findByAdminName(postDTO.getAdminName()).get())
+                .picture(postDTO.getPicture())
+                .build();
+
+        return postMapper.toDTO(postRepository.save(post));
+    }
+
+    public List<PostDTO> getAllPost() {
+        List<PostDTO> result = new ArrayList<>();
 
         List<Post> postList = postRepository.findAll();
         if (postList.isEmpty())
             throw PersonalProjectException.postNotFound();
 
         for (Post post : postList) {
-            CustomPostStatisticDTO customPostStatisticDTO = CustomPostStatisticDTO.builder()
+            PostDTO dto = PostDTO.builder()
+                    .postID(post.getPostID())
                     .postDate(post.getPostDate())
                     .description(post.getDescription())
                     .rating(post.getRating())
@@ -44,21 +69,50 @@ public class PostServiceImpl implements PostService {
                     .picture(post.getPicture())
                     .adminName(post.getAdminAccount().getAdminName())
                     .build();
-            result.add(customPostStatisticDTO);
+            result.add(dto);
         }
         return result;
     }
 
-    public List<CustomPostStatisticDTO> getPostByRestaurantName(String restaurantName) {
-        return postRepository.getPostByRestaurantName(restaurantName);
+    public PostDTO getPostByID(Long postID) {
+        Post existingPost = postRepository.findById(postID)
+                .orElseThrow(PersonalProjectException::postNotFound);
+
+        return postMapper.toDTO(existingPost);
     }
 
     @Override
+    public PostDTO updatePost(Long postID, PostDTO postDTO) {
+        Post existingPost = postRepository.findById(postID)
+                .orElseThrow(PersonalProjectException::postNotFound);
+        if(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).isEmpty())
+            throw PersonalProjectException.restaurantNotFound();
+
+        existingPost.setPostDate(LocalDate.now());
+        existingPost.setDescription(postDTO.getDescription());
+        existingPost.setRating(postDTO.getRating());
+        existingPost.setPicture(postDTO.getPicture());
+        existingPost.setRestaurant(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).get());
+
+        return postMapper.toDTO(postRepository.save(existingPost));
+
+    }
+
+
+    @Override
     public void deleteByPostID(Long postID) {
+
         Post existingPost = postRepository.findById(postID)
                 .orElseThrow(PersonalProjectException::postNotFound);
 
         postRepository.delete(existingPost);
+    }
+    public List<PostDTO> getPostByRestaurantName(String restaurantName) {
+
+        List<Post> postList = postRepository.getPostByRestaurantName(restaurantName)
+                .orElseThrow(PersonalProjectException::restaurantNotFound);
+
+        return postMapper.toDTOs(postList);
     }
 
 

@@ -5,11 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class SecurityUserAccountDTO {
-    private String principalName;
-    private String username;
+public class DishCategoryDTO {
+    private Long dishCategoryID;
+    private String dishCategory;
 }

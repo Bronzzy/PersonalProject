@@ -2,7 +2,6 @@ package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.Comment;
 import com.dhbinh.personalproject.service.CommentService;
-import com.dhbinh.personalproject.service.dto.CustomCommentStatisticDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

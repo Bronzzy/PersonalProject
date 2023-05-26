@@ -18,7 +18,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long postCommentID;
+    private Long commentID;
 
     @Column(name = "comment", length = 10000,nullable = false)
     @Length(max = 10000)

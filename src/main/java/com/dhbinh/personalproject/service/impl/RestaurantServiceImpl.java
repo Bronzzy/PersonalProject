@@ -8,7 +8,6 @@ import com.dhbinh.personalproject.repository.DistrictRepository;
 import com.dhbinh.personalproject.repository.FoodBrandRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.RestaurantService;
-import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +34,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
-        log.info("restaurantDTO {}",restaurantDTO);
+        log.info("restaurantDTO {}", restaurantDTO);
         Restaurant restaurant = Restaurant.builder()
                 .restaurantName(restaurantDTO.getRestaurantName())
                 .restaurantAddress(restaurantDTO.getRestaurantAddress())
@@ -63,6 +62,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         for (Restaurant res : restaurantList) {
             RestaurantDTO dto = RestaurantDTO.builder()
+                    .restaurantID(res.getRestaurantID())
                     .restaurantName(res.getRestaurantName())
                     .restaurantAddress(res.getRestaurantAddress())
                     .telephoneNumber(res.getTelephoneNumber())
@@ -83,6 +83,26 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
         return restaurantMapper.toDTO(restaurant);
+    }
+
+    @Override
+    public RestaurantDTO updateRestaurant(Long restaurantID, RestaurantDTO restaurantDTO) {
+        Restaurant existingRestaurant = restaurantRepository.findById(restaurantID)
+                .orElseThrow(PersonalProjectException::restaurantNotFound);
+
+        existingRestaurant.setRestaurantName(restaurantDTO.getRestaurantName());
+        existingRestaurant.setRestaurantAddress(restaurantDTO.getRestaurantAddress());
+        existingRestaurant.setDescription(restaurantDTO.getDescription());
+        existingRestaurant.setTelephoneNumber(restaurantDTO.getTelephoneNumber());
+        existingRestaurant.setOpenHour(restaurantDTO.getOpenHour());
+        existingRestaurant.setClosingHour(restaurantDTO.getClosingHour());
+        existingRestaurant.setPicture(restaurantDTO.getPicture());
+        existingRestaurant.setDistrict(districtRepository.findById(restaurantDTO.getDistrictName())
+                .orElseThrow(PersonalProjectException::districtNotFound));
+        existingRestaurant.setFoodBrand(foodBrandRepository.findById(restaurantDTO.getFoodBrand()).isEmpty() ? null :
+                foodBrandRepository.findById(restaurantDTO.getFoodBrand()).get());
+
+        return restaurantMapper.toDTO(restaurantRepository.save(existingRestaurant));
     }
 
     public void deleteByRestaurantName(String restaurantName) {
@@ -133,7 +153,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         if (!isValidTimeFormat(closingHour))
             throw PersonalProjectException.badRequest("WrongTimeFormat", "Time format must be hh:mm:ss");
 
-        LocalTime open =  LocalTime.parse(openHour);
+        LocalTime open = LocalTime.parse(openHour);
         LocalTime closing = LocalTime.parse(closingHour);
 
         List<RestaurantDTO> results = new ArrayList<>();

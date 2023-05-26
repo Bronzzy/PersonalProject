@@ -16,7 +16,14 @@ public class PersonalProjectException {
     private static final String RESTAURANT_NOT_FOUND_MSG = "Restaurant not found";
     private static final String POST_NOT_FOUND_MSG_KEY = "PostNotExisted";
     private static final String POST_NOT_FOUND_MSG = "Post not found";
-
+    private static final String ADMINACCOUNT_NOT_FOUND_MSG_KEY = "AdminNotExisted";
+    private static final String ADMINACCOUNT_NOT_FOUND_MSG = "Admin not found";
+    private static final String COMMENT_NOT_FOUND_MSG_KEY = "AdminNotExisted";
+    private static final String COMMENT_NOT_FOUND_MSG = "Admin not found";
+    private static final String DISHCATEGORY_NOT_FOUND_MSG_KEY = "DishCategoryNotExisted";
+    private static final String DISHCATEGORY_NOT_FOUND_MSG = "DishCategory not found";
+    private static final String MENU_NOT_FOUND_MSG_KEY = "MenuNotExisted";
+    private static final String MENU_NOT_FOUND_MSG = "Menu not found";
 
 
     public static ResponseException notFound(String messageKey, String message) {
@@ -53,5 +60,21 @@ public class PersonalProjectException {
 
     public static ResponseException postNotFound(){
         return notFound(POST_NOT_FOUND_MSG_KEY,POST_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException adminNotFound(){
+        return notFound(ADMINACCOUNT_NOT_FOUND_MSG_KEY,ADMINACCOUNT_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException commentNotFound(){
+        return notFound(COMMENT_NOT_FOUND_MSG_KEY,COMMENT_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException dishCategoryNotFound(){
+        return notFound(DISHCATEGORY_NOT_FOUND_MSG_KEY,DISHCATEGORY_NOT_FOUND_MSG);
+    }
+
+    public static ResponseException menuNotFound(){
+        return notFound(MENU_NOT_FOUND_MSG_KEY,MENU_NOT_FOUND_MSG);
     }
 }

@@ -22,7 +22,7 @@ public class FoodBrandResource implements FoodBrandAPI {
     public ResponseEntity<FoodBrandDTO> createFoodBrand(FoodBrandDTO foodBrandDTO) {
         log.debug("Request to create food brand {}",foodBrandDTO);
         FoodBrandDTO dto = foodBrandService.createFoodBrand(foodBrandDTO);
-        return ResponseEntity.created(URI.create("/foodbrands" + dto.getFoodBrand())).body(dto);
+        return ResponseEntity.created(URI.create("/api/foodbrands/" + dto.getFoodBrand())).body(dto);
     }
 
     @Override

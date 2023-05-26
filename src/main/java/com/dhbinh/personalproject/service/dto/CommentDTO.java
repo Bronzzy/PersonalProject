@@ -14,10 +14,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CommentDTO {
 
-    private Long postCommentID;
+    private Long postID;
+    private Long commentID;
     private String comment;
     private LocalDate commentDate;
-    private UserAccount userAccount;
-    private Post post;
+    private String username;
 
 }

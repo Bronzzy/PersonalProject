@@ -1,6 +1,5 @@
 package com.dhbinh.personalproject.service;
 
-import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.data.domain.Pageable;
 
@@ -13,6 +12,8 @@ public interface RestaurantService {
     List<RestaurantDTO> getAllRestaurant();
 
     RestaurantDTO getByRestaurantName(String restaurantName);
+
+    RestaurantDTO updateRestaurant(Long restaurantID, RestaurantDTO restaurantDTO);
 
     void deleteByRestaurantName(String restaurantName);
 

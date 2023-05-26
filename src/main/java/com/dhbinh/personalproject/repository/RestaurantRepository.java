@@ -41,4 +41,5 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> getByRatingOpenHourAndClosingHour(@Param("rating") double rating,
                                                        @Param("openHour") LocalTime openHour,
                                                        @Param("closingHour") LocalTime closingHour);
+    Optional<Restaurant> findByRestaurantName(String restaurantName);
 }

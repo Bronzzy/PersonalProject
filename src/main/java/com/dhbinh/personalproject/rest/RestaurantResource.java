@@ -2,7 +2,6 @@ package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.RestaurantAPI;
 import com.dhbinh.personalproject.service.RestaurantService;
-import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +35,13 @@ public class RestaurantResource implements RestaurantAPI {
     @Override
     public ResponseEntity<RestaurantDTO> getByRestaurantName(String restaurantName) {
         return ResponseEntity.ok(restaurantService.getByRestaurantName(restaurantName));
+    }
+
+    @Override
+    public ResponseEntity<RestaurantDTO> updateRestaurant(Long restaurantID, RestaurantDTO restaurantDTO) {
+        log.debug("Request to update restaurant {}", restaurantDTO);
+        RestaurantDTO dto = restaurantService.updateRestaurant(restaurantID, restaurantDTO);
+        return ResponseEntity.created(URI.create("/api/restaurants/" + dto.getRestaurantID())).body(dto);
     }
 
     @Override

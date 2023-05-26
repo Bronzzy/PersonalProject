@@ -5,17 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-@Data
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomPostStatisticDTO {
-    private LocalDate postDate;
-    private String adminName;
+public class MenuDTO {
+    private Long menuID;
     private String restaurantName;
-    private String picture;
+    private String dishCategory;
+    private String ingredients;
+    private Double startingPrice;
+    private Double endingPrice;
     private String description;
-    private Double rating;
 }

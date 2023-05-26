@@ -14,11 +14,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostDTO {
+    private Long postID;
     private LocalDate postDate;
+    private String adminName;
+    private String restaurantName;
+    private String picture;
     private String description;
     private Double rating;
-    private String picture;
-    private AdminAccount adminAccount;
-    private Restaurant restaurant;
 
 }

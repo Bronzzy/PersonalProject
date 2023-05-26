@@ -1,22 +1,24 @@
 package com.dhbinh.personalproject.rest.api;
 
-import com.dhbinh.personalproject.service.dto.CustomCommentStatisticDTO;
+import com.dhbinh.personalproject.service.dto.CommentDTO;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/auth/comments")
 public interface CommentAPI {
 
+    @PostMapping
+    ResponseEntity<CommentDTO> userCreateComment(@RequestHeader("Authorization") String token,
+                                             @RequestBody CommentDTO commentDTO);
+
     @GetMapping
-    ResponseEntity<List<CustomCommentStatisticDTO>> getAllComments();
+    ResponseEntity<List<CommentDTO>> getAllComments();
 
     @GetMapping("/username")
-    ResponseEntity<List<CustomCommentStatisticDTO>> getByUsername(@RequestHeader("Authorization")  String token);
+    ResponseEntity<List<CommentDTO>> getByUsername(@RequestHeader("Authorization")  String token);
 
-
+    @DeleteMapping("/delete/{commentID}")
+    ResponseEntity<Void> deleteComment(@PathVariable("commentID") Long commentID);
 }

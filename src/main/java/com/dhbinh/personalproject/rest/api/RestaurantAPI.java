@@ -1,6 +1,5 @@
 package com.dhbinh.personalproject.rest.api;
 
-import com.dhbinh.personalproject.service.dto.CustomRestaurantStatisticDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,10 @@ public interface RestaurantAPI {
 
     @GetMapping("/byrestaurantname")
     ResponseEntity<RestaurantDTO> getByRestaurantName(@RequestParam("restaurantName") String restaurantName);
+
+    @PutMapping("/update/{restaurantID}")
+    ResponseEntity<RestaurantDTO> updateRestaurant(@PathVariable("restaurantID") Long restaurantID,
+                                                   @RequestBody RestaurantDTO restaurantDTO);
 
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteByRestaurantName(@RequestParam("restaurantName") String restaurantName);
