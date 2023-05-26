@@ -8,12 +8,15 @@ import com.dhbinh.personalproject.repository.MenuRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.MenuService;
 import com.dhbinh.personalproject.service.dto.MenuDTO;
+import com.dhbinh.personalproject.service.dto.MonAnQuanAnDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Slf4j
@@ -29,8 +32,6 @@ public class MenuServiceImpl implements MenuService {
     private final DishCategoryRepository dishCategoryRepository;
 
     private final MenuMapper menuMapper;
-
-
 
     @Override
     public MenuDTO createMenu(MenuDTO menuDTO) {
@@ -70,8 +71,10 @@ public class MenuServiceImpl implements MenuService {
         existingMenu.setEndingPrice(menuDTO.getEndingPrice());
         existingMenu.setIngredients(menuDTO.getIngredients());
         existingMenu.setDescription(menuDTO.getDescription());
-        existingMenu.setDishCategory(dishCategoryRepository.findByDishCategory(menuDTO.getDishCategory()).orElseThrow(PersonalProjectException::dishCategoryNotFound));
-        existingMenu.setRestaurant(restaurantRepository.findByRestaurantName(menuDTO.getRestaurantName()).orElseThrow(PersonalProjectException::restaurantNotFound));
+        existingMenu.setDishCategory(dishCategoryRepository.findByDishCategory(menuDTO.getDishCategory())
+                .orElseThrow(PersonalProjectException::dishCategoryNotFound));
+        existingMenu.setRestaurant(restaurantRepository.findByRestaurantName(menuDTO.getRestaurantName())
+                .orElseThrow(PersonalProjectException::restaurantNotFound));
 
         return menuMapper.toDTO(menuRepository.save(existingMenu));
 
@@ -81,4 +84,25 @@ public class MenuServiceImpl implements MenuService {
     public void deleteMenu(Long menuID) {
         menuRepository.deleteById(menuID);
     }
+
+    public List<MonAnQuanAnDTO> getByPriceAndDistrict(Double startingPrice, String district) {
+        List<MonAnQuanAnDTO> result = new ArrayList<>();
+
+        List<Menu> rawList = menuRepository.findAll().stream()
+                .filter(m -> m.getStartingPrice() < startingPrice)
+                .filter(m -> "Quan 1".equals(m.getRestaurant().getDistrict().getDistrictName()))
+                .collect(Collectors.toList());
+        for (Menu menu : rawList) {
+            MonAnQuanAnDTO dto = MonAnQuanAnDTO.builder()
+                    .dishCategory(menu.getDishCategory().getDishCategory())
+                    .restaurantName(menu.getRestaurant().getRestaurantName())
+                    .address(menu.getRestaurant().getRestaurantAddress())
+                    .openHour(menu.getRestaurant().getOpenHour())
+                    .closeHour(menu.getRestaurant().getClosingHour())
+                    .build();
+            result.add(dto);
+        }
+        return result;
+    }
+
 }

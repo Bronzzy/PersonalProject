@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.service;
 
 import com.dhbinh.personalproject.service.dto.PostDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface PostService {
     List<PostDTO> getPostByRestaurantName(String restaurantName);
 
     void deleteByPostID(Long postID);
+
 }

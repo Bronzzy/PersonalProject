@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.rest.api;
 
 import com.dhbinh.personalproject.service.dto.PostDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,4 +28,5 @@ public interface PostAPI {
 
     @GetMapping("/byrestaurant")
     ResponseEntity<List<PostDTO>> getPostByRestaurantName(@RequestParam("restaurantName") String restaurantName);
+
 }

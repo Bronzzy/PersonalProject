@@ -2,14 +2,17 @@ package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.AdminAccount;
 import com.dhbinh.personalproject.entity.Post;
+import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.PostMapper;
+import com.dhbinh.personalproject.mapper.RestaurantMapper;
 import com.dhbinh.personalproject.repository.AdminAccountRepository;
 import com.dhbinh.personalproject.repository.PostRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.PostService;
 import com.dhbinh.personalproject.service.RestaurantService;
 import com.dhbinh.personalproject.service.dto.PostDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,7 +34,10 @@ public class PostServiceImpl implements PostService {
     private final RestaurantService restaurantService;
 
     private final RestaurantRepository restaurantRepository;
+
     private final AdminAccountRepository adminAccountRepository;
+
+    private final RestaurantMapper restaurantMapper;
 
     @Override
     public PostDTO createPost(PostDTO postDTO) {
@@ -53,6 +60,7 @@ public class PostServiceImpl implements PostService {
     }
 
     public List<PostDTO> getAllPost() {
+
         List<PostDTO> result = new ArrayList<>();
 
         List<Post> postList = postRepository.findAll();
@@ -83,6 +91,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO updatePost(Long postID, PostDTO postDTO) {
+
         Post existingPost = postRepository.findById(postID)
                 .orElseThrow(PersonalProjectException::postNotFound);
         if(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).isEmpty())
@@ -95,9 +104,7 @@ public class PostServiceImpl implements PostService {
         existingPost.setRestaurant(restaurantRepository.findByRestaurantName(postDTO.getRestaurantName()).get());
 
         return postMapper.toDTO(postRepository.save(existingPost));
-
     }
-
 
     @Override
     public void deleteByPostID(Long postID) {
@@ -107,6 +114,7 @@ public class PostServiceImpl implements PostService {
 
         postRepository.delete(existingPost);
     }
+
     public List<PostDTO> getPostByRestaurantName(String restaurantName) {
 
         List<Post> postList = postRepository.getPostByRestaurantName(restaurantName)
@@ -114,6 +122,4 @@ public class PostServiceImpl implements PostService {
 
         return postMapper.toDTOs(postList);
     }
-
-
 }
