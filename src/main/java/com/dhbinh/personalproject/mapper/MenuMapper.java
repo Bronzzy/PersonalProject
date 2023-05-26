@@ -10,8 +10,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MenuMapper {
 
-    @Mapping(source = "dishCategory.type", target = "dishCategory")
-    @Mapping(source = "restaurant.name", target = "restaurantName")
+    @Mapping(target = "dishCategory", source = "dishCategory.type")
+    @Mapping(target = "restaurantName", source = "restaurant.name")
     MenuDTO toDTO(Menu menu);
+
     List<MenuDTO> toDTOs(List<Menu> menus);
 }

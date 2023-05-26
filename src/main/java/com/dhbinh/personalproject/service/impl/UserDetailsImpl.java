@@ -19,13 +19,17 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Data
 public class UserDetailsImpl implements UserDetails {
+
     private Long id;
+
     private String username;
+
     @JsonIgnore
     private String password;
+
     private Collection<? extends GrantedAuthority> authorities;
 
-    public static UserDetailsImpl build (UserAccount userAccount){
+    public static UserDetailsImpl build(UserAccount userAccount) {
         List<Role> roles = userAccount.getRoles()
                 .stream()
                 .map(UserRoleAssignment::getRole)
@@ -39,6 +43,7 @@ public class UserDetailsImpl implements UserDetails {
                 userAccount.getPassword(),
                 authorities);
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

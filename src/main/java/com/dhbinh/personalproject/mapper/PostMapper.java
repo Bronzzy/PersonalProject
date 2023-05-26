@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface PostMapper {
 
-    @Mapping(source = "restaurant.name", target = "restaurantName")
-    @Mapping(source = "adminAccount.adminName", target = "adminName")
+    @Mapping(target = "restaurantName", source = "restaurant.name")
+    @Mapping(target = "adminName", source = "adminAccount.adminName")
     PostDTO toDTO(Post post);
 
     List<PostDTO> toDTOs(List<Post> postList);

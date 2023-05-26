@@ -20,7 +20,7 @@ public class DistrictResource implements DistrictAPI {
 
     private final DistrictService districtService;
 
-    public ResponseEntity<DistrictDTO> createDistrict(DistrictDTO districtDTO){
+    public ResponseEntity<DistrictDTO> createDistrict(DistrictDTO districtDTO) {
         log.debug("Request to create district {}", districtDTO);
         DistrictDTO createdDTO = districtService.createDistrict(districtDTO);
         return ResponseEntity.created(URI.create("/districts" + createdDTO.getName())).body(districtDTO);

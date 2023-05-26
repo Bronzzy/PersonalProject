@@ -30,10 +30,10 @@ public class JwtUtils implements Serializable {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
     }
 
-    public String getUserNameFromJwtToken(String token){
+    public String getUserNameFromJwtToken(String token) {
         logger.warn("signing key " + jwtSecret);
-        String nameToken ="";
-        if(StringUtils.hasText(token) && token.startsWith("Bearer ")){
+        String nameToken = "";
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
             nameToken = token.substring(7);
         }
 

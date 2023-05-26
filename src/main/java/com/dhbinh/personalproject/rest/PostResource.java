@@ -20,10 +20,9 @@ public class PostResource implements PostAPI {
 
     private final PostService postService;
 
-
     @Override
     public ResponseEntity<PostDTO> createPost(PostDTO postDTO) {
-        log.info("Request to create post {}",postDTO);
+        log.info("Request to create post {}", postDTO);
         PostDTO dto = postService.createPost(postDTO);
         return ResponseEntity.created(URI.create("/api/posts" + dto.getID())).body(dto);
     }
@@ -44,7 +43,7 @@ public class PostResource implements PostAPI {
         return ResponseEntity.created(URI.create("/api/posts" + dto.getID())).body(dto);
     }
 
-    public ResponseEntity<Void> deleteByPostID(Long postID){
+    public ResponseEntity<Void> deleteByPostID(Long postID) {
         postService.deleteByPostID(postID);
         return ResponseEntity.noContent().build();
     }

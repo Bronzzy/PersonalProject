@@ -18,7 +18,6 @@ public class CityResource implements CityAPI {
 
     private final CityService cityService;
 
-
     @Override
     public ResponseEntity<CityDTO> createCity(CityDTO cityDTO) {
         log.debug("Request to create new city{}", cityDTO);

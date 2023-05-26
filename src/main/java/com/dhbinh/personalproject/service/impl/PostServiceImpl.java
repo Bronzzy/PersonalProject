@@ -37,10 +37,10 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO createPost(PostDTO postDTO) {
-        if(restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
+        if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
-        if(adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
+        if (adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
             throw PersonalProjectException.adminNotFound();
 
         Post post = Post.builder()
@@ -90,7 +90,7 @@ public class PostServiceImpl implements PostService {
 
         Post existingPost = postRepository.findById(postID)
                 .orElseThrow(PersonalProjectException::postNotFound);
-        if(restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
+        if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
         existingPost.setCreateDate(LocalDate.now());

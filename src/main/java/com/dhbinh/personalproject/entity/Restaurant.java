@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 
 @Entity
@@ -20,10 +21,12 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @Column(name = "name", nullable = false)
+    @NotNull
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "address", length = 1000, nullable = false)
+    @NotNull
+    @Column(name = "address", length = 1000)
     @Length(max = 1000)
     private String address;
 
@@ -35,10 +38,12 @@ public class Restaurant {
     @Length(max = 50)
     private String phoneNumber;
 
-    @Column(name = "open_hour",nullable = false)
+    @NotNull
+    @Column(name = "open_hour")
     private LocalTime openHour;
 
-    @Column(name = "closing_hour",nullable = false)
+    @NotNull
+    @Column(name = "closing_hour")
     private LocalTime closingHour;
 
     @Column(name = "picture", length = 1000)

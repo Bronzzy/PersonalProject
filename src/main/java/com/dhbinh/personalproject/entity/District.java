@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 public class District {
+
     @Id
     private String name;
 

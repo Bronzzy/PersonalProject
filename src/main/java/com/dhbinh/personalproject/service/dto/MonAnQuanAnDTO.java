@@ -12,9 +12,14 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MonAnQuanAnDTO {
+
     private String dishCategory;
+
     private String restaurantName;
+
     private String address;
+
     private LocalTime openHour;
+
     private LocalTime closeHour;
 }

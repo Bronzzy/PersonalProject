@@ -20,10 +20,11 @@ public class DishCategoryServiceImpl implements DishCategoryService {
     private final DishCategoryRepository dishCategoryRepository;
 
     private final DishCategoryMapper dishCategoryMapper;
+
     @Override
     public DishCategoryDTO createDishCategory(DishCategoryDTO dishCategoryDTO) {
-        if(dishCategoryRepository.existsByType(dishCategoryDTO.getType()))
-            throw PersonalProjectException.badRequest("DishCategoryAlreadyExists","Dish Category already exists");
+        if (dishCategoryRepository.existsByType(dishCategoryDTO.getType()))
+            throw PersonalProjectException.badRequest("DishCategoryAlreadyExists", "Dish Category already exists");
 
         DishCategory dishCategory = DishCategory.builder()
                 .ID(dishCategoryDTO.getID())
@@ -47,7 +48,7 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
     @Override
     public DishCategoryDTO updateDishCategory(Long ID, DishCategoryDTO dishCategoryDTO) {
-        if(!dishCategoryRepository.existsById(ID))
+        if (!dishCategoryRepository.existsById(ID))
             throw PersonalProjectException.dishCategoryNotFound();
 
         DishCategory dishCategory = DishCategory.builder()

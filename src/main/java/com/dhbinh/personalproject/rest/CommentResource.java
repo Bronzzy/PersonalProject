@@ -18,7 +18,6 @@ public class CommentResource implements CommentAPI {
 
     private final CommentService commentService;
 
-
     @Override
     public ResponseEntity<CommentDTO> userCreateComment(String token, CommentDTO commentDTO) {
         CommentDTO dto = commentService.userCreateComment(token, commentDTO);

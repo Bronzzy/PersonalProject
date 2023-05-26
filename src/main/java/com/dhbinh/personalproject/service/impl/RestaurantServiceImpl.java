@@ -25,8 +25,11 @@ import java.util.List;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+
     private final RestaurantMapper restaurantMapper;
+
     private final DistrictRepository districtRepository;
+
     private final FoodBrandRepository foodBrandRepository;
 
     @Override

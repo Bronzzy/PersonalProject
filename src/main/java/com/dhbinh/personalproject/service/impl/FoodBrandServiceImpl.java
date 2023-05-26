@@ -21,9 +21,9 @@ public class FoodBrandServiceImpl implements FoodBrandService {
 
     private final FoodBrandMapper foodBrandMapper;
 
-    public FoodBrandDTO createFoodBrand(FoodBrandDTO foodBrandDTO){
-        if(foodBrandRepository.existsById(foodBrandDTO.getName()))
-            throw PersonalProjectException.badRequest("FoodBrandAlreadyExisted","Foodbrand is already existed");
+    public FoodBrandDTO createFoodBrand(FoodBrandDTO foodBrandDTO) {
+        if (foodBrandRepository.existsById(foodBrandDTO.getName()))
+            throw PersonalProjectException.badRequest("FoodBrandAlreadyExisted", "Foodbrand is already existed");
 
         FoodBrand foodBrand = FoodBrand.builder()
                 .name(foodBrandDTO.getName())
@@ -32,22 +32,22 @@ public class FoodBrandServiceImpl implements FoodBrandService {
         return foodBrandMapper.toDTO(foodBrandRepository.save(foodBrand));
     }
 
-    public List<FoodBrandDTO> getAllFoodBrand(){
+    public List<FoodBrandDTO> getAllFoodBrand() {
         List<FoodBrand> foodBrands = foodBrandRepository.findAll();
-        if(foodBrands.isEmpty())
+        if (foodBrands.isEmpty())
             throw PersonalProjectException.foodBrandNotFound();
 
         return foodBrandMapper.toDTOs(foodBrands);
     }
 
-    public FoodBrandDTO getByFoodBrandID(String foodBrand){
+    public FoodBrandDTO getByFoodBrandID(String foodBrand) {
         FoodBrand existingFoodBrand = foodBrandRepository.findById(foodBrand).
                 orElseThrow(PersonalProjectException::foodBrandNotFound);
 
         return foodBrandMapper.toDTO(existingFoodBrand);
     }
 
-    public void deleteByFoodBrandID(String foodBrand){
+    public void deleteByFoodBrandID(String foodBrand) {
         FoodBrand existingFoodBrand = foodBrandRepository.findById(foodBrand)
                 .orElseThrow(PersonalProjectException::foodBrandNotFound);
 

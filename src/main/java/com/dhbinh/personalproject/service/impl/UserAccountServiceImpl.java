@@ -45,9 +45,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         if (exist)
             throw PersonalProjectException.badRequest("UsernameExisted", "Username is already existed");
 
-        boolean validUsername= isUsernameValid(userAccountDTO.getUsername());
-        if(!validUsername)
-            throw PersonalProjectException.badRequest("InvalidUsername","Username can't contain special character");
+        boolean validUsername = isUsernameValid(userAccountDTO.getUsername());
+        if (!validUsername)
+            throw PersonalProjectException.badRequest("InvalidUsername", "Username can't contain special character");
 
         boolean validPassword = isValidPassword(userAccountDTO.getPassword());
         if (!validPassword)
@@ -96,9 +96,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         if (exist)
             throw PersonalProjectException.badRequest("UsernameExisted", "Username is already existed");
 
-        boolean validUsername= isUsernameValid(userAccountDTO.getUsername());
-        if(!validUsername)
-            throw PersonalProjectException.badRequest("InvalidUsername","Username can't contain special character");
+        boolean validUsername = isUsernameValid(userAccountDTO.getUsername());
+        if (!validUsername)
+            throw PersonalProjectException.badRequest("InvalidUsername", "Username can't contain special character");
 
         boolean validPassword = isValidPassword(userAccountDTO.getPassword());
         if (!validPassword)
@@ -140,7 +140,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         return signupDTO;
     }
 
-    public UserAccountDTO getUserFromToken(String token){
+    public UserAccountDTO getUserFromToken(String token) {
         String username = jwtUtils.getUserNameFromJwtToken(token);
         return userAccountMapper.toDTO(userAccountRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Username not found")));
     }

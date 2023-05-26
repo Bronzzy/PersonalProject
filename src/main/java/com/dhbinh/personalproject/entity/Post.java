@@ -7,6 +7,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDate;
 
 @Entity
@@ -22,11 +26,16 @@ public class Post {
     @Column(name = "create_date")
     private LocalDate createDate;
 
-    @Column(name = "description", length = 10000,nullable = false)
+    @NotNull
+    @Column(name = "description", length = 10000)
     @Length(max = 10000)
     private String description;
 
-    @Column(name = "rating",nullable = false)
+    @NotNull
+    @PositiveOrZero
+    @Min(0)
+    @Max(10)
+    @Column(name = "rating")
     private Double rating;
 
     @Column(name = "picture", length = 10000)

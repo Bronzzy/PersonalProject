@@ -28,10 +28,10 @@ public class DistrictServiceImpl implements DistrictService {
 
     public DistrictDTO createDistrict(DistrictDTO districtDTO) {
 
-        if(districtRepository.existsById(districtDTO.getName()))
-            throw PersonalProjectException.badRequest("DistrictNameExisted","District name is already existed");
+        if (districtRepository.existsById(districtDTO.getName()))
+            throw PersonalProjectException.badRequest("DistrictNameExisted", "District name is already existed");
 
-        if(!cityRepository.existsById(districtDTO.getCityName()))
+        if (!cityRepository.existsById(districtDTO.getCityName()))
             throw PersonalProjectException.cityNotFound();
 
         District district = District.builder()

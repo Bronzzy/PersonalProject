@@ -40,14 +40,13 @@ public class CommentServiceImpl implements CommentService {
 
         String username = jwtUtils.getUserNameFromJwtToken(token);
 
-        if(postRepository.findById(commentDTO.getPostID()).isEmpty())
+        if (postRepository.findById(commentDTO.getPostID()).isEmpty())
             throw PersonalProjectException.postNotFound();
 
         Comment comment = Comment.builder()
                 .ID(commentDTO.getCommentID())
                 .content(commentDTO.getContent())
                 .userAccount(userAccountRepository.findByUsername(username).get())
-                .createDate(LocalDate.now())
                 .post(postRepository.findById(commentDTO.getPostID()).get())
                 .build();
 
@@ -86,7 +85,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public void deleteComment(Long commentID) {
-        if(!commentRepository.existsById(commentID))
+        if (!commentRepository.existsById(commentID))
             throw PersonalProjectException.commentNotFound();
         commentRepository.deleteById(commentID);
     }

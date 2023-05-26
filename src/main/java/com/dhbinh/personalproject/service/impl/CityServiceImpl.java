@@ -76,7 +76,7 @@ public class CityServiceImpl implements CityService {
         return cityMapper.toDTO(city);
     }
 
-    public CityDTO updateCity(String cityID,CityDTO cityDTO) {
+    public CityDTO updateCity(String cityID, CityDTO cityDTO) {
 
         City existingCity = cityRepository.findById(cityID)
                 .orElseThrow(PersonalProjectException::cityNotFound);

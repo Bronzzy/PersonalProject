@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Transactional
-    public UserDetails validateUser(String username){
+    public UserDetails validateUser(String username) {
         UserAccount userAccount = userAccountRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 

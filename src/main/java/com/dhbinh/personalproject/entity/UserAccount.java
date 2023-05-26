@@ -32,16 +32,18 @@ public class UserAccount {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "username",nullable = false)
+    @NotNull
+    @Column(name = "username")
     private String username;
 
+    @NotNull
     @JsonIgnore
-    @Column(name = "password",nullable = false)
+    @Column(name = "password")
     private String password;
 
     private Boolean active;
 
-    @OneToMany(mappedBy = "userAccounts",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "userAccounts", cascade = CascadeType.PERSIST)
     private List<UserRoleAssignment> roles = new ArrayList<>();
 
 }

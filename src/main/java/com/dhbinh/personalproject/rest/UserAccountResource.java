@@ -18,7 +18,6 @@ public class UserAccountResource implements UserAccountAPI {
 
     private final UserAccountServiceImpl userAccountService;
 
-
     @Override
     public ResponseEntity<SignupDTO> createUserAccount(UserAccountDTO userAccountDTO) {
         SignupDTO signupDTO = userAccountService.createUserAccount(userAccountDTO);

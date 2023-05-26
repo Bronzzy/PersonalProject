@@ -46,35 +46,35 @@ public class PersonalProjectException {
         return notFound(CITY_NOT_FOUND_MSG_KEY, CITY_NOT_FOUND_MSG);
     }
 
-    public static ResponseException districtNotFound(){
-        return notFound(DISTRICT_NOT_FOUND_MSG_KEY,DISTRICT_NOT_FOUND_MSG);
+    public static ResponseException districtNotFound() {
+        return notFound(DISTRICT_NOT_FOUND_MSG_KEY, DISTRICT_NOT_FOUND_MSG);
     }
 
-    public static ResponseException foodBrandNotFound(){
-        return notFound(FOODBRAND_NOT_FOUND_MSG_KEY,FOODBRAND_NOT_FOUND_MSG);
+    public static ResponseException foodBrandNotFound() {
+        return notFound(FOODBRAND_NOT_FOUND_MSG_KEY, FOODBRAND_NOT_FOUND_MSG);
     }
 
-    public static ResponseException restaurantNotFound(){
-        return notFound(RESTAURANT_NOT_FOUND_MSG_KEY,RESTAURANT_NOT_FOUND_MSG);
+    public static ResponseException restaurantNotFound() {
+        return notFound(RESTAURANT_NOT_FOUND_MSG_KEY, RESTAURANT_NOT_FOUND_MSG);
     }
 
-    public static ResponseException postNotFound(){
-        return notFound(POST_NOT_FOUND_MSG_KEY,POST_NOT_FOUND_MSG);
+    public static ResponseException postNotFound() {
+        return notFound(POST_NOT_FOUND_MSG_KEY, POST_NOT_FOUND_MSG);
     }
 
-    public static ResponseException adminNotFound(){
-        return notFound(ADMINACCOUNT_NOT_FOUND_MSG_KEY,ADMINACCOUNT_NOT_FOUND_MSG);
+    public static ResponseException adminNotFound() {
+        return notFound(ADMINACCOUNT_NOT_FOUND_MSG_KEY, ADMINACCOUNT_NOT_FOUND_MSG);
     }
 
-    public static ResponseException commentNotFound(){
-        return notFound(COMMENT_NOT_FOUND_MSG_KEY,COMMENT_NOT_FOUND_MSG);
+    public static ResponseException commentNotFound() {
+        return notFound(COMMENT_NOT_FOUND_MSG_KEY, COMMENT_NOT_FOUND_MSG);
     }
 
-    public static ResponseException dishCategoryNotFound(){
-        return notFound(DISHCATEGORY_NOT_FOUND_MSG_KEY,DISHCATEGORY_NOT_FOUND_MSG);
+    public static ResponseException dishCategoryNotFound() {
+        return notFound(DISHCATEGORY_NOT_FOUND_MSG_KEY, DISHCATEGORY_NOT_FOUND_MSG);
     }
 
-    public static ResponseException menuNotFound(){
-        return notFound(MENU_NOT_FOUND_MSG_KEY,MENU_NOT_FOUND_MSG);
+    public static ResponseException menuNotFound() {
+        return notFound(MENU_NOT_FOUND_MSG_KEY, MENU_NOT_FOUND_MSG);
     }
 }

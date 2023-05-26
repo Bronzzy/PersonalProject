@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignupDTO {
+
     @JsonIgnore
     private Long ID;
 

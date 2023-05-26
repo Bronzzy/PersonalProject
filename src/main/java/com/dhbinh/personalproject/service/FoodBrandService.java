@@ -7,7 +7,10 @@ import java.util.List;
 public interface FoodBrandService {
 
     FoodBrandDTO createFoodBrand(FoodBrandDTO foodBrandDTO);
+
     List<FoodBrandDTO> getAllFoodBrand();
+
     FoodBrandDTO getByFoodBrandID(String foodBrand);
+
     void deleteByFoodBrandID(String foodBrand);
 }

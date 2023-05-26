@@ -20,10 +20,10 @@ public class CountryResource implements CountryAPI {
 
     @Override
     public ResponseEntity<CountryDTO> createCountry(CountryDTO countryDTO) {
-          log.debug("Request to create new country {}", countryDTO);
-          CountryDTO createCountryDTO = countryService.createCountry(countryDTO);
-          return ResponseEntity.created(URI.create("/countries/" + createCountryDTO.getName())).body(createCountryDTO);
-      }
+        log.debug("Request to create new country {}", countryDTO);
+        CountryDTO createCountryDTO = countryService.createCountry(countryDTO);
+        return ResponseEntity.created(URI.create("/countries/" + createCountryDTO.getName())).body(createCountryDTO);
+    }
 
     @Override
     public ResponseEntity<List<CountryDTO>> getAllCountry() {

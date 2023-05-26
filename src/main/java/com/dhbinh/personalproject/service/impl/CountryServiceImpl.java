@@ -51,8 +51,8 @@ public class CountryServiceImpl implements CountryService {
     }
 
     public CountryDTO updateByCountryID(CountryDTO countryDTO) {
-         Country existingCountry = countryRepository.findById(countryDTO.getName()).
-                 orElseThrow(PersonalProjectException::countryNotFound);
+        Country existingCountry = countryRepository.findById(countryDTO.getName()).
+                orElseThrow(PersonalProjectException::countryNotFound);
 
         existingCountry.setName(countryDTO.getName());
 
