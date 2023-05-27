@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalTime;
 
 
@@ -25,6 +28,7 @@ public class RestaurantDTO {
 
     private String description;
 
+    @Pattern(regexp = "^\\d{1,15}$",message = "Phone number can't contain characters")
     private String phoneNumber;
 
     private LocalTime openHour;

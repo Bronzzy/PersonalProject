@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,7 +39,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public CommentDTO userCreateComment(String token, CommentDTO commentDTO) {
 
-        String username = jwtUtils.getUserNameFromJwtToken(token);
+        String nameToken = "";
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            nameToken = token.substring(7);
+        }
+        String username = jwtUtils.getUserNameFromJwtToken(nameToken);
 
         if (postRepository.findById(commentDTO.getPostID()).isEmpty())
             throw PersonalProjectException.postNotFound();
@@ -46,6 +51,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment = Comment.builder()
                 .ID(commentDTO.getCommentID())
                 .content(commentDTO.getContent())
+                .createDate(LocalDate.now())
                 .userAccount(userAccountRepository.findByUsername(username).get())
                 .post(postRepository.findById(commentDTO.getPostID()).get())
                 .build();
@@ -77,7 +83,12 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDTO> getByUsername(String token) {
 
-        String username = jwtUtils.getUserNameFromJwtToken(token);
+        String nameToken = "";
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            nameToken = token.substring(7);
+        }
+
+        String username = jwtUtils.getUserNameFromJwtToken(nameToken);
         log.info("username: {}", username);
 
         List<Comment> comments = commentRepository.getByUsername(username);

@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalTime;
 
 @Entity
@@ -34,8 +35,9 @@ public class Restaurant {
     @Length(max = 10000)
     private String description;
 
-    @Column(name = "phone_number", length = 50)
-    @Length(max = 50)
+    @Pattern(regexp = "^\\d{1,15}$",message = "Phone number can't contain characters")
+    @Column(name = "phone_number", length = 15)
+    @Length(max = 15)
     private String phoneNumber;
 
     @NotNull

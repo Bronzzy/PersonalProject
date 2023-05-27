@@ -2,6 +2,7 @@ package com.dhbinh.personalproject.security.jwt;
 
 import com.dhbinh.personalproject.service.impl.UserDetailsImpl;
 import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class JwtUtils implements Serializable {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
@@ -32,12 +34,7 @@ public class JwtUtils implements Serializable {
 
     public String getUserNameFromJwtToken(String token) {
         logger.warn("signing key " + jwtSecret);
-        String nameToken = "";
-        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
-            nameToken = token.substring(7);
-        }
-
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(nameToken).getBody().getSubject();
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 
     public boolean validateJwtToken(String authToken) {

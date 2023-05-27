@@ -4,13 +4,14 @@ import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/auth/restaurants")
 public interface RestaurantAPI {
 
     @PostMapping
-    ResponseEntity<RestaurantDTO> createRestaurant(@RequestBody RestaurantDTO restaurantDTO);
+    ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO);
 
     @GetMapping
     ResponseEntity<List<RestaurantDTO>> getAllRestaurants();

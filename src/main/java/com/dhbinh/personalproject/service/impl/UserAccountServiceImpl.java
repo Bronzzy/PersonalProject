@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -141,7 +142,12 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     public UserAccountDTO getUserFromToken(String token) {
-        String username = jwtUtils.getUserNameFromJwtToken(token);
+
+        String nameToken = "";
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            nameToken = token.substring(7);
+        }
+        String username = jwtUtils.getUserNameFromJwtToken(nameToken);
         return userAccountMapper.toDTO(userAccountRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Username not found")));
     }
 

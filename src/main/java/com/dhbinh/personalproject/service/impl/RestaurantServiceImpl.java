@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final FoodBrandRepository foodBrandRepository;
 
     @Override
-    public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
+    public RestaurantDTO createRestaurant(@Valid RestaurantDTO restaurantDTO) {
         log.info("restaurantDTO {}", restaurantDTO);
         Restaurant restaurant = Restaurant.builder()
                 .name(restaurantDTO.getName())

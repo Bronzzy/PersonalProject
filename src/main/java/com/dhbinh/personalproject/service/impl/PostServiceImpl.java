@@ -27,13 +27,10 @@ public class PostServiceImpl implements PostService {
 
     private final PostMapper postMapper;
 
-    private final RestaurantService restaurantService;
-
     private final RestaurantRepository restaurantRepository;
 
     private final AdminAccountRepository adminAccountRepository;
 
-    private final RestaurantMapper restaurantMapper;
 
     @Override
     public PostDTO createPost(PostDTO postDTO) {

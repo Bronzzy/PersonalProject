@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RequestMapping("/auth/countries")
+@RequestMapping("/countries")
 public interface CountryAPI {
 
-    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping
     ResponseEntity<CountryDTO> createCountry(@RequestBody CountryDTO countryDTO);
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping
     ResponseEntity<List<CountryDTO>> getAllCountry();
 
