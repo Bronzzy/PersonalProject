@@ -1,7 +1,6 @@
 package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.Comment;
-import com.dhbinh.personalproject.entity.UserAccount;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CommentMapper;
 import com.dhbinh.personalproject.repository.CommentRepository;
@@ -10,8 +9,10 @@ import com.dhbinh.personalproject.repository.UserAccountRepository;
 import com.dhbinh.personalproject.security.jwt.JwtUtils;
 import com.dhbinh.personalproject.service.CommentService;
 import com.dhbinh.personalproject.service.dto.CommentDTO;
+import com.dhbinh.personalproject.service.dto.MonthlyUserCountDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -47,6 +48,9 @@ public class CommentServiceImpl implements CommentService {
 
         if (postRepository.findById(commentDTO.getPostID()).isEmpty())
             throw PersonalProjectException.postNotFound();
+
+        if(commentDTO.getContent().isBlank() || commentDTO.getContent() == null)
+            throw PersonalProjectException.badRequest("ContentEmptyOrNull", "Content is empty or null");
 
         Comment comment = Comment.builder()
                 .ID(commentDTO.getCommentID())
@@ -100,4 +104,17 @@ public class CommentServiceImpl implements CommentService {
             throw PersonalProjectException.commentNotFound();
         commentRepository.deleteById(commentID);
     }
+
+    @Override
+    public List<Object[]> getTopUserWithMostComment(Pageable pageable) {
+        return commentRepository.getTopUserWithMostComment(pageable);
+    }
+
+
+    @Override
+    public List<MonthlyUserCountDTO> getMonthlyUserCount() {
+        return commentRepository.getMonthlyUserCount();
+    }
+
+
 }

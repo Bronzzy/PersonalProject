@@ -35,7 +35,25 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public RestaurantDTO createRestaurant(@Valid RestaurantDTO restaurantDTO) {
-        log.info("restaurantDTO {}", restaurantDTO);
+
+        if(restaurantDTO.getName().isBlank() || restaurantDTO.getName().isEmpty() || restaurantDTO.getName() == null)
+            throw PersonalProjectException.badRequest("NameInvalid","Name is required");
+
+        if(restaurantDTO.getAddress().isBlank() || restaurantDTO.getAddress().isEmpty() || restaurantDTO.getAddress() == null)
+            throw PersonalProjectException.badRequest("AddressInvalid","Address is required");
+
+        if(restaurantDTO.getPhoneNumber().isBlank() || restaurantDTO.getPhoneNumber().isEmpty() || restaurantDTO.getPhoneNumber() == null)
+            throw PersonalProjectException.badRequest("PhoneNumberInvalid","Phone number is required");
+
+        if(restaurantDTO.getOpenHour() == null)
+            throw PersonalProjectException.badRequest("OpenHourInvalid","Open hour is required");
+
+        if(restaurantDTO.getClosingHour() == null)
+            throw PersonalProjectException.badRequest("ClosingHourInvalid","Closing hour is required");
+
+        if(restaurantDTO.getDistrictName().isBlank() || restaurantDTO.getDistrictName().isEmpty() || restaurantDTO.getDistrictName() == null)
+            throw PersonalProjectException.badRequest("DistrictNameInvalid","District name is required");
+
         Restaurant restaurant = Restaurant.builder()
                 .name(restaurantDTO.getName())
                 .address(restaurantDTO.getAddress())
@@ -90,6 +108,21 @@ public class RestaurantServiceImpl implements RestaurantService {
     public RestaurantDTO updateRestaurant(Long restaurantID, RestaurantDTO restaurantDTO) {
         Restaurant existingRestaurant = restaurantRepository.findById(restaurantID)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
+
+        if(restaurantDTO.getName().isBlank() || restaurantDTO.getName().isEmpty() || restaurantDTO.getName() == null)
+            throw PersonalProjectException.badRequest("NameInvalid","Name is required");
+
+        if(restaurantDTO.getAddress().isBlank() || restaurantDTO.getAddress().isEmpty() || restaurantDTO.getAddress() == null)
+            throw PersonalProjectException.badRequest("AddressInvalid","Address is required");
+
+        if(restaurantDTO.getOpenHour() == null)
+            throw PersonalProjectException.badRequest("OpenHourInvalid","Open hour is required");
+
+        if(restaurantDTO.getClosingHour() == null)
+            throw PersonalProjectException.badRequest("ClosingHourInvalid","Closing hour is required");
+
+        if(restaurantDTO.getDistrictName().isBlank() || restaurantDTO.getDistrictName().isEmpty() || restaurantDTO.getDistrictName() == null)
+            throw PersonalProjectException.badRequest("DistrictNameInvalid","District name is required");
 
         existingRestaurant.setName(restaurantDTO.getName());
         existingRestaurant.setAddress(restaurantDTO.getAddress());
@@ -148,6 +181,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public List<RestaurantDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
+
         if (!isValidTimeFormat(openHour))
             throw PersonalProjectException.badRequest("WrongTimeFormat", "Time format must be hh:mm:ss");
 

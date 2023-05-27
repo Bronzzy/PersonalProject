@@ -25,7 +25,7 @@ public class CountryServiceImpl implements CountryService {
 
         Optional<Country> existingCountry = countryRepository.findById(countryDTO.getName());
         if (existingCountry.isPresent()) {
-            throw PersonalProjectException.badRequest("CountryExisted", "Country is already existed");
+            throw PersonalProjectException.badRequest("CountryExisted", "Country name is already existed");
         }
 
         Country country = Country.builder()

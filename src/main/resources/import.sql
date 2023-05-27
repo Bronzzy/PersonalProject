@@ -275,32 +275,32 @@ INSERT INTO user_account (first_name,last_name,password,username) VALUES ('Lonni
 
 
 -----INSERT DATA INTO ROLE ASSIGNMENT----
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_ADMIN', 1);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 2);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 3);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 4);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 5);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 6);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 7);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 8);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 9);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 10);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 11);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 12);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 13);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 14);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 15);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 16);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 17);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 18);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 19);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 20);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 21);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 22);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 23);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 24);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 25);
-insert into user_role_assignment (assigned_date, "role", user_account_id) values ('2023-05-22','ROLE_USER', 26);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-01-13 00:00:00.000','ROLE_ADMIN',NULL,1);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-01-28 00:00:00.000','ROLE_USER',NULL,2);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-02-04 00:00:00.000','ROLE_USER',NULL,3);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-04-04 00:00:00.000','ROLE_USER',NULL,4);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-04-29 00:00:00.000','ROLE_USER',NULL,5);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-05-17 00:00:00.000','ROLE_USER',NULL,6);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-05-18 00:00:00.000','ROLE_USER',NULL,7);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-06-24 00:00:00.000','ROLE_USER',NULL,8);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-07-05 00:00:00.000','ROLE_USER',NULL,9);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-07-14 00:00:00.000','ROLE_USER',NULL,10);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-08-19 00:00:00.000','ROLE_USER',NULL,11);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2022-09-29 00:00:00.000','ROLE_USER',NULL,12);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-01-19 00:00:00.000','ROLE_USER',NULL,13);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-02-09 00:00:00.000','ROLE_USER',NULL,14);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-02-17 00:00:00.000','ROLE_USER',NULL,15);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-02-25 00:00:00.000','ROLE_USER',NULL,16);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-03-05 00:00:00.000','ROLE_USER',NULL,17);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-03-12 00:00:00.000','ROLE_USER',NULL,19);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-04-10 00:00:00.000','ROLE_USER',NULL,20);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-04-18 00:00:00.000','ROLE_USER',NULL,21);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-04-22 00:00:00.000','ROLE_USER',NULL,22);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-05-03 00:00:00.000','ROLE_USER',NULL,23);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-05-13 00:00:00.000','ROLE_USER',NULL,24);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-05-19 00:00:00.000','ROLE_USER',NULL,25);
+INSERT INTO user_role_assignment (assigned_date,"role",modified_date,user_account_id) VALUES ('2023-05-22 00:00:00.000','ROLE_USER',NULL,26);
+
 
 
 

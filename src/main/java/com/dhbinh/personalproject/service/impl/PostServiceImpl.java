@@ -34,11 +34,29 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PostDTO createPost(PostDTO postDTO) {
+
+
         if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
         if (adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
             throw PersonalProjectException.adminNotFound();
+
+        if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
+            throw PersonalProjectException.restaurantNotFound();
+
+        if (adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
+            throw PersonalProjectException.adminNotFound();
+
+        if(postDTO.getDescription().isBlank() || postDTO.getDescription().isEmpty() || postDTO.getDescription() == null)
+            throw PersonalProjectException.badRequest("DescriptionInvalid","Description is required");
+
+        if(postDTO.getRating() == null)
+            throw PersonalProjectException.badRequest("RatingInvalid","Rating is required");
+
+        if(postDTO.getRating() < 0 || postDTO.getRating() > 10)
+            throw PersonalProjectException.badRequest("RatingInvalid","Rating must be between 0 and 10");
+
 
         Post post = Post.builder()
                 .createDate(LocalDate.now())
@@ -90,6 +108,15 @@ public class PostServiceImpl implements PostService {
         if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
+        if(postDTO.getDescription().isBlank() || postDTO.getDescription().isEmpty() || postDTO.getDescription() == null)
+            throw PersonalProjectException.badRequest("DescriptionInvalid","Description is required");
+
+        if(postDTO.getRating() == null)
+            throw PersonalProjectException.badRequest("RatingInvalid","Rating is required");
+
+        if(postDTO.getRating() < 0 || postDTO.getRating() > 10)
+            throw PersonalProjectException.badRequest("RatingInvalid","Rating must be between 0 and 10");
+
         existingPost.setCreateDate(LocalDate.now());
         existingPost.setDescription(postDTO.getDescription());
         existingPost.setRating(postDTO.getRating());
@@ -114,5 +141,9 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
         return postMapper.toDTOs(postList);
+    }
+
+    private void isPostValid(PostDTO postDTO){
+
     }
 }

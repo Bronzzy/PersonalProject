@@ -52,6 +52,7 @@ public class Restaurant {
     @Length(max = 1000)
     private String picture;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "district_name")
     private District district;

@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.rest.api;
 
 import com.dhbinh.personalproject.service.dto.CommentDTO;
+import com.dhbinh.personalproject.service.dto.MonthlyUserCountDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,4 +22,11 @@ public interface CommentAPI {
 
     @DeleteMapping("/delete/{commentID}")
     ResponseEntity<Void> deleteComment(@PathVariable("commentID") Long commentID);
+
+    @GetMapping("/topusers")
+    ResponseEntity<List<Object[]>> getTopUserWithMostComment(@RequestParam("limit") int limit);
+
+    @GetMapping("/monthlyusercount")
+    ResponseEntity<List<MonthlyUserCountDTO>> getMonthlyUserCount();
+
 }

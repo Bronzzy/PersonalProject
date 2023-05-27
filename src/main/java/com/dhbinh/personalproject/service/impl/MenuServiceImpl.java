@@ -35,6 +35,10 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuDTO createMenu(MenuDTO menuDTO) {
+        log.info("Creating menu {}", menuDTO);
+
+        isMenuDTOValid(menuDTO);
+
         Menu menu = Menu.builder()
                 .ID(menuDTO.getID())
                 .startingPrice(menuDTO.getStartingPrice())
@@ -107,4 +111,45 @@ public class MenuServiceImpl implements MenuService {
         return result;
     }
 
+
+    private static void isMenuDTOValid(MenuDTO menuDTO){
+        if(menuDTO.getRestaurantName().isEmpty() || menuDTO.getRestaurantName().isBlank() || menuDTO.getRestaurantName() == null)
+            throw PersonalProjectException.badRequest("InvalidRestaurantName",
+                    "Restaurant name must not be empty or null");
+
+        if(menuDTO.getDishCategory().isEmpty() || menuDTO.getDishCategory().isBlank() || menuDTO.getDishCategory() == null)
+            throw PersonalProjectException.badRequest("InvalidDishCategory",
+                    "Dish category must not be empty or null");
+
+        if(menuDTO.getDescription().isEmpty() || menuDTO.getDescription().isBlank() || menuDTO.getDescription() == null)
+            throw PersonalProjectException.badRequest("InvalidDescription",
+                    "Description must not be empty or null");
+        if(menuDTO.getStartingPrice() == null || menuDTO.getEndingPrice() == null)
+            throw PersonalProjectException.badRequest("InvalidPrice","Price can't be null");
+
+        if(menuDTO.getStartingPrice().equals(menuDTO.getEndingPrice()) || menuDTO.getStartingPrice() == menuDTO.getEndingPrice())
+            throw PersonalProjectException.badRequest("InvalidPrice",
+                    "Starting price and ending price must be different");
+
+        if(menuDTO.getStartingPrice() > menuDTO.getEndingPrice())
+            throw PersonalProjectException.badRequest("InvalidPrice",
+                    "Starting price must be less than ending price");
+
+        if(menuDTO.getEndingPrice() < menuDTO.getStartingPrice())
+            throw PersonalProjectException.badRequest("InvalidPrice",
+                    "Ending price must be greater than starting price");
+
+        if(menuDTO.getStartingPrice() < 0)
+            throw PersonalProjectException.badRequest("InvalidPrice",
+                    "Starting price must be greater than 0");
+
+        if(menuDTO.getEndingPrice() < 0)
+            throw PersonalProjectException.badRequest("InvalidPrice",
+                    "Ending price must be greater than 0");
+
+
+        if(menuDTO.getIngredients().isEmpty() || menuDTO.getIngredients().isBlank() || menuDTO.getIngredients() == null)
+            throw PersonalProjectException.badRequest("InvalidIngredients",
+                    "Ingredients must not be empty or null");
+    }
 }
