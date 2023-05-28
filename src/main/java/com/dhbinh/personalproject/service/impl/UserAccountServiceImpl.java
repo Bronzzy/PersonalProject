@@ -67,10 +67,13 @@ public class UserAccountServiceImpl implements UserAccountService {
         if (userAccountDTO.getPassword().isBlank() || userAccountDTO.getPassword() == null)
             throw PersonalProjectException.badRequest("PasswordEmpty", "Password can't be empty or null");
 
+        if (userAccountDTO.getPassword().contains(" "))
+            throw PersonalProjectException.badRequest("PasswordContainSpaceCharacter","Password can't contain space character");
+
         UserAccount userAccount = UserAccount.builder()
-                .firstName(userAccountDTO.getFirstName())
-                .lastName(userAccountDTO.getLastName())
-                .username(userAccountDTO.getUsername())
+                .firstName(userAccountDTO.getFirstName().trim())
+                .lastName(userAccountDTO.getLastName().trim())
+                .username(userAccountDTO.getUsername().trim())
                 .password(encoder.encode(userAccountDTO.getPassword()))
                 .active(true)
                 .build();
@@ -82,9 +85,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         userRoleAssignmentRepository.save(assignment);
 
         SignupDTO signupDTO = SignupDTO.builder()
-                .firstName(userAccountDTO.getFirstName())
-                .lastName(userAccountDTO.getLastName())
-                .username(userAccountDTO.getUsername())
+                .firstName(userAccountDTO.getFirstName().trim())
+                .lastName(userAccountDTO.getLastName().trim())
+                .username(userAccountDTO.getUsername().trim())
                 .build();
 
         return signupDTO;
@@ -118,13 +121,16 @@ public class UserAccountServiceImpl implements UserAccountService {
         if (userAccountDTO.getPassword().isBlank() || userAccountDTO.getPassword() == null)
             throw PersonalProjectException.badRequest("PasswordEmpty", "Password can't be empty or null");
 
-        UserAccount userAccount = UserAccount.builder()
-                .firstName(userAccountDTO.getFirstName())
-                .lastName(userAccountDTO.getLastName())
-                .username(userAccountDTO.getUsername())
-                .password(encoder.encode(userAccountDTO.getPassword()))
-                .active(true)
-                .build();
+        if (userAccountDTO.getPassword().contains(" "))
+            throw PersonalProjectException.badRequest("PasswordContainSpaceCharacter","Password can't contain space character");
+
+            UserAccount userAccount = UserAccount.builder()
+                    .firstName(userAccountDTO.getFirstName().trim())
+                    .lastName(userAccountDTO.getLastName().trim())
+                    .username(userAccountDTO.getUsername().trim())
+                    .password(encoder.encode(userAccountDTO.getPassword()))
+                    .active(true)
+                    .build();
         userAccount = userAccountRepository.save(userAccount);
 
         UserRoleAssignment assignment = new UserRoleAssignment();
@@ -133,9 +139,9 @@ public class UserAccountServiceImpl implements UserAccountService {
         userRoleAssignmentRepository.save(assignment);
 
         SignupDTO signupDTO = SignupDTO.builder()
-                .firstName(userAccountDTO.getFirstName())
-                .lastName(userAccountDTO.getLastName())
-                .username(userAccountDTO.getUsername())
+                .firstName(userAccountDTO.getFirstName().trim())
+                .lastName(userAccountDTO.getLastName().trim())
+                .username(userAccountDTO.getUsername().trim())
                 .build();
 
         return signupDTO;

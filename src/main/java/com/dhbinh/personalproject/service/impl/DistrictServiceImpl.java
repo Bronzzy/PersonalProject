@@ -28,36 +28,26 @@ public class DistrictServiceImpl implements DistrictService {
 
     public DistrictDTO createDistrict(DistrictDTO districtDTO) {
 
-        if (districtRepository.existsById(districtDTO.getName()))
+        if (districtRepository.existsById(districtDTO.getName().trim()))
             throw PersonalProjectException.badRequest("DistrictNameExisted", "District name is already existed");
 
-        if (!cityRepository.existsById(districtDTO.getCityName()))
-            throw PersonalProjectException.cityNotFound();
-
         District district = District.builder()
-                .name(districtDTO.getName())
-                .city(cityRepository.findById(districtDTO.getCityName()).get())
+                .name(districtDTO.getName().trim())
+                .city(cityRepository.findById(districtDTO.getCityName().trim())
+                        .orElseThrow(PersonalProjectException::cityNotFound))
                 .build();
 
-        return districtMapper.toDTO(districtRepository.save(district));
+        districtRepository.save(district);
+        return districtMapper.toDTO(district);
     }
 
     public List<DistrictDTO> getAllDistrict() {
-        List<DistrictDTO> results = new ArrayList<>();
 
         List<District> districtList = districtRepository.findAll();
         if (districtList.isEmpty())
             throw PersonalProjectException.districtNotFound();
 
-        for (District district : districtList) {
-            DistrictDTO dto = DistrictDTO.builder()
-                    .name(district.getName())
-                    .cityName(district.getCity().getName())
-                    .build();
-            results.add(dto);
-        }
-
-        return results;
+        return districtMapper.toDTOs(districtList);
     }
 
 //    public DistrictDTO getByDistrictID(String districtName) {
@@ -82,7 +72,7 @@ public class DistrictServiceImpl implements DistrictService {
 //    }
 
     public void deleteByDistrictID(String districtName) {
-        District existingDistrict = districtRepository.findById(districtName).
+        District existingDistrict = districtRepository.findById(districtName.trim()).
                 orElseThrow(PersonalProjectException::countryNotFound);
 
         districtRepository.delete(existingDistrict);

@@ -34,37 +34,45 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final FoodBrandRepository foodBrandRepository;
 
     @Override
-    public RestaurantDTO createRestaurant(@Valid RestaurantDTO restaurantDTO) {
+    public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
 
-        if(restaurantDTO.getName().isBlank() || restaurantDTO.getName().isEmpty() || restaurantDTO.getName() == null)
-            throw PersonalProjectException.badRequest("NameInvalid","Name is required");
+        if (restaurantDTO.getName() == null || restaurantDTO.getName().isEmpty() || restaurantDTO.getName().isBlank())
+            throw PersonalProjectException.badRequest("NameInvalid", "Name is required");
 
-        if(restaurantDTO.getAddress().isBlank() || restaurantDTO.getAddress().isEmpty() || restaurantDTO.getAddress() == null)
-            throw PersonalProjectException.badRequest("AddressInvalid","Address is required");
+        if (restaurantDTO.getAddress() == null || restaurantDTO.getAddress().isEmpty() || restaurantDTO.getAddress().isBlank())
+            throw PersonalProjectException.badRequest("AddressInvalid", "Address is required");
 
-        if(restaurantDTO.getPhoneNumber().isBlank() || restaurantDTO.getPhoneNumber().isEmpty() || restaurantDTO.getPhoneNumber() == null)
-            throw PersonalProjectException.badRequest("PhoneNumberInvalid","Phone number is required");
+        String phoneNumber = restaurantDTO.getPhoneNumber();
+        if (phoneNumber != null && !phoneNumber.isEmpty() && !phoneNumber.isBlank()) {
+            if (!isValidPhoneNumber(phoneNumber)) {
+                throw PersonalProjectException.badRequest("PhoneNumberInvalid", "Phone number can only contain numbers");
+            }
+        }
 
-        if(restaurantDTO.getOpenHour() == null)
-            throw PersonalProjectException.badRequest("OpenHourInvalid","Open hour is required");
+        if (restaurantDTO.getOpenHour() == null)
+            throw PersonalProjectException.badRequest("OpenHourInvalid", "Open hour is required");
 
-        if(restaurantDTO.getClosingHour() == null)
-            throw PersonalProjectException.badRequest("ClosingHourInvalid","Closing hour is required");
+        if (restaurantDTO.getClosingHour() == null)
+            throw PersonalProjectException.badRequest("ClosingHourInvalid", "Closing hour is required");
 
-        if(restaurantDTO.getDistrictName().isBlank() || restaurantDTO.getDistrictName().isEmpty() || restaurantDTO.getDistrictName() == null)
-            throw PersonalProjectException.badRequest("DistrictNameInvalid","District name is required");
+        if (restaurantDTO.getOpenHour().isAfter(restaurantDTO.getClosingHour()))
+            throw PersonalProjectException.badRequest("InvalidHour", "Open hour cant be after closing hour");
+
+        if (restaurantDTO.getDistrictName() == null || restaurantDTO.getDistrictName().isEmpty() || restaurantDTO.getDistrictName().isBlank())
+            throw PersonalProjectException.badRequest("DistrictNameInvalid", "District name is required");
 
         Restaurant restaurant = Restaurant.builder()
-                .name(restaurantDTO.getName())
-                .address(restaurantDTO.getAddress())
+                .name(restaurantDTO.getName().trim())
+                .address(restaurantDTO.getAddress().trim())
                 .description(restaurantDTO.getDescription())
                 .phoneNumber(restaurantDTO.getPhoneNumber())
                 .openHour(restaurantDTO.getOpenHour())
                 .closingHour(restaurantDTO.getClosingHour())
-                .district(districtRepository.findById(restaurantDTO.getDistrictName())
+                .district(districtRepository.findById(restaurantDTO.getDistrictName().trim())
                         .orElseThrow(PersonalProjectException::districtNotFound))
-                .foodBrand(foodBrandRepository.findById(restaurantDTO.getFoodBrand()).isEmpty() ? null :
-                        foodBrandRepository.findById(restaurantDTO.getFoodBrand()).get())
+                .foodBrand(restaurantDTO.getFoodBrand() == null ? null :
+                        foodBrandRepository.findById(restaurantDTO.getFoodBrand())
+                                .orElseThrow(PersonalProjectException::foodBrandNotFound))
                 .build();
 
         return restaurantMapper.toDTO(restaurantRepository.save(restaurant));
@@ -98,6 +106,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     public RestaurantDTO getByRestaurantName(String restaurantName) {
+
         Restaurant restaurant = restaurantRepository.findByName(restaurantName)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
@@ -109,45 +118,58 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant existingRestaurant = restaurantRepository.findById(restaurantID)
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
-        if(restaurantDTO.getName().isBlank() || restaurantDTO.getName().isEmpty() || restaurantDTO.getName() == null)
-            throw PersonalProjectException.badRequest("NameInvalid","Name is required");
+        if (restaurantDTO.getName() == null || restaurantDTO.getName().isEmpty() || restaurantDTO.getName().isBlank())
+            throw PersonalProjectException.badRequest("NameInvalid", "Name is required");
 
-        if(restaurantDTO.getAddress().isBlank() || restaurantDTO.getAddress().isEmpty() || restaurantDTO.getAddress() == null)
-            throw PersonalProjectException.badRequest("AddressInvalid","Address is required");
+        if (restaurantDTO.getAddress() == null || restaurantDTO.getAddress().isEmpty() || restaurantDTO.getAddress().isBlank())
+            throw PersonalProjectException.badRequest("AddressInvalid", "Address is required");
 
-        if(restaurantDTO.getOpenHour() == null)
-            throw PersonalProjectException.badRequest("OpenHourInvalid","Open hour is required");
+        String phoneNumber = restaurantDTO.getPhoneNumber();
+        if (phoneNumber != null) {
+            if (!isValidPhoneNumber(phoneNumber)) {
+                throw PersonalProjectException.badRequest("PhoneNumberInvalid", "Phone number can only contain numbers");
+            }
+        }
 
-        if(restaurantDTO.getClosingHour() == null)
-            throw PersonalProjectException.badRequest("ClosingHourInvalid","Closing hour is required");
+        if (restaurantDTO.getOpenHour() == null)
+            throw PersonalProjectException.badRequest("OpenHourInvalid", "Open hour is required");
 
-        if(restaurantDTO.getDistrictName().isBlank() || restaurantDTO.getDistrictName().isEmpty() || restaurantDTO.getDistrictName() == null)
-            throw PersonalProjectException.badRequest("DistrictNameInvalid","District name is required");
+        if (restaurantDTO.getClosingHour() == null)
+            throw PersonalProjectException.badRequest("ClosingHourInvalid", "Closing hour is required");
 
-        existingRestaurant.setName(restaurantDTO.getName());
-        existingRestaurant.setAddress(restaurantDTO.getAddress());
+        if (restaurantDTO.getOpenHour().isAfter(restaurantDTO.getClosingHour()))
+            throw PersonalProjectException.badRequest("InvalidHour", "Open hour cant be after closing hour");
+
+        if (restaurantDTO.getDistrictName() == null || restaurantDTO.getDistrictName().isEmpty() || restaurantDTO.getDistrictName().isBlank())
+            throw PersonalProjectException.badRequest("DistrictNameInvalid", "District name is required");
+
+        existingRestaurant.setName(restaurantDTO.getName().trim());
+        existingRestaurant.setAddress(restaurantDTO.getAddress().trim());
         existingRestaurant.setDescription(restaurantDTO.getDescription());
         existingRestaurant.setPhoneNumber(restaurantDTO.getPhoneNumber());
         existingRestaurant.setOpenHour(restaurantDTO.getOpenHour());
         existingRestaurant.setClosingHour(restaurantDTO.getClosingHour());
         existingRestaurant.setPicture(restaurantDTO.getPicture());
-        existingRestaurant.setDistrict(districtRepository.findById(restaurantDTO.getDistrictName())
+        existingRestaurant.setDistrict(districtRepository.findById(restaurantDTO.getDistrictName().trim())
                 .orElseThrow(PersonalProjectException::districtNotFound));
-        existingRestaurant.setFoodBrand(foodBrandRepository.findById(restaurantDTO.getFoodBrand()).isEmpty() ? null :
-                foodBrandRepository.findById(restaurantDTO.getFoodBrand()).get());
+        existingRestaurant.setFoodBrand(restaurantDTO.getFoodBrand() == null ? null :
+                foodBrandRepository.findById(restaurantDTO.getFoodBrand())
+                        .orElseThrow(PersonalProjectException::foodBrandNotFound));
 
         return restaurantMapper.toDTO(restaurantRepository.save(existingRestaurant));
     }
 
     public void deleteByRestaurantName(String restaurantName) {
-        Restaurant restaurant = restaurantRepository.findByName(restaurantName)
+
+        Restaurant restaurant = restaurantRepository.findByName(restaurantName.trim())
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
         restaurantRepository.delete(restaurant);
     }
 
     @Override
-    public List<RestaurantDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable) {
+    public List<RestaurantDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable
+            pageable) {
 
         dishCategory = "%" + dishCategory + "%";
         districtName = "%" + districtName + "%";
@@ -158,15 +180,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         for (Restaurant res : restaurantList) {
             RestaurantDTO dto = RestaurantDTO.builder()
-                    .name(res.getName())
-                    .address(res.getAddress())
-                    .description(res.getDescription())
-                    .phoneNumber(res.getPhoneNumber())
+                    .ID(res.getID())
+                    .name(res.getName().trim())
+                    .address(res.getAddress().trim())
+                    .description(res.getDescription().trim())
+                    .phoneNumber(res.getPhoneNumber().trim())
                     .openHour(res.getOpenHour())
                     .closingHour(res.getClosingHour())
                     .picture(res.getPicture())
-                    .districtName(res.getDistrict().getName())
-                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getName())
+                    .districtName(res.getDistrict().getName().trim())
+                    .foodBrand(res.getFoodBrand() == null ? null : res.getFoodBrand().getName().trim())
                     .build();
 
             dtoList.add(dto);
@@ -180,7 +203,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<RestaurantDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
+    public List<RestaurantDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String
+            closingHour) {
 
         if (!isValidTimeFormat(openHour))
             throw PersonalProjectException.badRequest("WrongTimeFormat", "Time format must be hh:mm:ss");
@@ -196,6 +220,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         List<Restaurant> raw = restaurantRepository.getByRatingOpenHourAndClosingHour(rating, open, closing);
         for (Restaurant restaurant : raw) {
             RestaurantDTO dto = RestaurantDTO.builder()
+                    .ID(restaurant.getID())
                     .name(restaurant.getName())
                     .address(restaurant.getAddress())
                     .description(restaurant.getDescription())
@@ -212,8 +237,13 @@ public class RestaurantServiceImpl implements RestaurantService {
         return results;
     }
 
-    public boolean isValidTimeFormat(String timeString) {
+    private boolean isValidTimeFormat(String timeString) {
         String pattern = "^(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$";
         return timeString.matches(pattern);
+    }
+
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        String pattern = "^\\d+$";
+        return phoneNumber.matches(pattern);
     }
 }

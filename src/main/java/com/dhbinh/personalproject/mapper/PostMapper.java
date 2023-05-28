@@ -11,7 +11,7 @@ import java.util.List;
 public interface PostMapper {
 
     @Mapping(target = "restaurantName", source = "restaurant.name")
-    @Mapping(target = "adminName", source = "adminAccount.adminName")
+    @Mapping(target = "adminName", source = "userAccount.lastName")
     PostDTO toDTO(Post post);
 
     List<PostDTO> toDTOs(List<Post> postList);

@@ -23,12 +23,11 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
     @Override
     public DishCategoryDTO createDishCategory(DishCategoryDTO dishCategoryDTO) {
-        if (dishCategoryRepository.existsByType(dishCategoryDTO.getType()))
+        if (dishCategoryRepository.existsByType(dishCategoryDTO.getType().trim()))
             throw PersonalProjectException.badRequest("DishCategoryAlreadyExists", "Dish Category already exists");
 
         DishCategory dishCategory = DishCategory.builder()
-                .ID(dishCategoryDTO.getID())
-                .type(dishCategoryDTO.getType())
+                .type(dishCategoryDTO.getType().trim())
                 .build();
 
         return dishCategoryMapper.toDTO(dishCategoryRepository.save(dishCategory));
@@ -41,7 +40,7 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
     @Override
     public DishCategoryDTO getByType(String type) {
-        DishCategory existing = dishCategoryRepository.findByType(type)
+        DishCategory existing = dishCategoryRepository.findByType(type.trim())
                 .orElseThrow(PersonalProjectException::dishCategoryNotFound);
         return dishCategoryMapper.toDTO(existing);
     }
@@ -51,17 +50,16 @@ public class DishCategoryServiceImpl implements DishCategoryService {
         if (!dishCategoryRepository.existsById(ID))
             throw PersonalProjectException.dishCategoryNotFound();
 
-        DishCategory dishCategory = DishCategory.builder()
-                .ID(ID)
-                .type(dishCategoryDTO.getType())
-                .build();
+        DishCategory dishCategory = new DishCategory();
+
+        dishCategory.setType(dishCategoryDTO.getType().trim());
 
         return dishCategoryMapper.toDTO(dishCategoryRepository.save(dishCategory));
     }
 
     @Override
     public void deleteByType(String type) {
-        if(!dishCategoryRepository.existsByType(type))
+        if(!dishCategoryRepository.existsByType(type.trim()))
             throw PersonalProjectException.dishCategoryNotFound();
         dishCategoryRepository.deleteByType(type);
     }

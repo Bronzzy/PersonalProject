@@ -43,8 +43,8 @@ public class Post {
     private String picture;
 
     @ManyToOne
-    @JoinColumn(name = "admin_name")
-    private AdminAccount adminAccount;
+    @JoinColumn(name = "user_account")
+    private UserAccount userAccount;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

@@ -30,18 +30,16 @@ public class CityServiceImpl implements CityService {
 
     private final CityMapper cityMapper;
 
-    private final CountryService countryService;
-
     private final CountryRepository countryRepository;
 
     public CityDTO createCity(CityDTO cityDTO) {
 
-        if (cityRepository.existsById(cityDTO.getName()))
+        if (cityRepository.existsById(cityDTO.getName().trim()))
             throw PersonalProjectException.badRequest("CityNameExisted", "City name is already existed");
 
         City city = City.builder()
-                .name(cityDTO.getName())
-                .country(countryRepository.findById(cityDTO.getCountryName())
+                .name(cityDTO.getName().trim())
+                .country(countryRepository.findById(cityDTO.getCountryName().trim())
                         .orElseThrow(PersonalProjectException::countryNotFound))
                 .build();
 
@@ -58,8 +56,8 @@ public class CityServiceImpl implements CityService {
 
         for (City city : cityList) {
             CityDTO cityDTO = CityDTO.builder()
-                    .name(city.getName())
-                    .countryName(city.getCountry().getName())
+                    .name(city.getName().trim())
+                    .countryName(city.getCountry().getName().trim())
                     .build();
 
             results.add(cityDTO);
@@ -68,7 +66,7 @@ public class CityServiceImpl implements CityService {
     }
 
     public CityDTO getByCityID(String cityName) {
-        City city = cityRepository.findById(cityName).
+        City city = cityRepository.findById(cityName.trim()).
                 orElseThrow(PersonalProjectException::cityNotFound);
 
         return cityMapper.toDTO(city);
@@ -79,17 +77,17 @@ public class CityServiceImpl implements CityService {
         City existingCity = cityRepository.findById(cityID)
                 .orElseThrow(PersonalProjectException::cityNotFound);
 
-        Country existingCountry = countryRepository.findById(cityDTO.getCountryName())
+        Country existingCountry = countryRepository.findById(cityDTO.getCountryName().trim())
                 .orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCity.setName(cityDTO.getName());
+        existingCity.setName(cityDTO.getName().trim());
         existingCity.setCountry(existingCountry);
 
         return cityMapper.toDTO(cityRepository.save(existingCity));
     }
 
     public void deleteByCityID(String cityName) {
-        Optional<City> existingCountry = cityRepository.findById(cityName);
+        Optional<City> existingCountry = cityRepository.findById(cityName.trim());
         if (existingCountry.isEmpty())
             throw PersonalProjectException.badRequest("CountryNotFound", "Country is not existed");
 

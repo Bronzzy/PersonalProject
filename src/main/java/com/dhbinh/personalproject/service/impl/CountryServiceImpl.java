@@ -23,13 +23,13 @@ public class CountryServiceImpl implements CountryService {
 
     public CountryDTO createCountry(CountryDTO countryDTO) {
 
-        Optional<Country> existingCountry = countryRepository.findById(countryDTO.getName());
+        Optional<Country> existingCountry = countryRepository.findById(countryDTO.getName().trim());
         if (existingCountry.isPresent()) {
             throw PersonalProjectException.badRequest("CountryExisted", "Country name is already existed");
         }
 
         Country country = Country.builder()
-                .name(countryDTO.getName())
+                .name(countryDTO.getName().trim())
                 .build();
 
         return countryMapper.toDTO(countryRepository.save(country));
@@ -44,24 +44,24 @@ public class CountryServiceImpl implements CountryService {
     }
 
     public CountryDTO getByCountryID(String countryName) {
-        Country existingCountry = countryRepository.findById(countryName)
+        Country existingCountry = countryRepository.findById(countryName.trim())
                 .orElseThrow(PersonalProjectException::countryNotFound);
 
         return (countryMapper.toDTO(existingCountry));
     }
 
     public CountryDTO updateByCountryID(CountryDTO countryDTO) {
-        Country existingCountry = countryRepository.findById(countryDTO.getName()).
+        Country existingCountry = countryRepository.findById(countryDTO.getName().trim()).
                 orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCountry.setName(countryDTO.getName());
+        existingCountry.setName(countryDTO.getName().trim());
 
         return countryMapper.toDTO(countryRepository.save(existingCountry));
     }
 
     public void deleteByCountryID(String countryName) {
 
-        Country existingCountry = countryRepository.findById(countryName).
+        Country existingCountry = countryRepository.findById(countryName.trim()).
                 orElseThrow(PersonalProjectException::countryNotFound);
 
         countryRepository.delete(existingCountry);

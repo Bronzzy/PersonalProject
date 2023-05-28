@@ -28,7 +28,6 @@ public class RestaurantDTO {
 
     private String description;
 
-    @Pattern(regexp = "^\\d{1,15}$",message = "Phone number can't contain characters")
     private String phoneNumber;
 
     private LocalTime openHour;

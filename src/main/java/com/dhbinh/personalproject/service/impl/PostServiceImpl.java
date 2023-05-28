@@ -3,12 +3,10 @@ package com.dhbinh.personalproject.service.impl;
 import com.dhbinh.personalproject.entity.Post;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.PostMapper;
-import com.dhbinh.personalproject.mapper.RestaurantMapper;
-import com.dhbinh.personalproject.repository.AdminAccountRepository;
 import com.dhbinh.personalproject.repository.PostRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
+import com.dhbinh.personalproject.repository.UserAccountRepository;
 import com.dhbinh.personalproject.service.PostService;
-import com.dhbinh.personalproject.service.RestaurantService;
 import com.dhbinh.personalproject.service.dto.PostDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +27,7 @@ public class PostServiceImpl implements PostService {
 
     private final RestaurantRepository restaurantRepository;
 
-    private final AdminAccountRepository adminAccountRepository;
+    private final UserAccountRepository userAccountRepository;
 
 
     @Override
@@ -39,13 +37,7 @@ public class PostServiceImpl implements PostService {
         if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
-        if (adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
-            throw PersonalProjectException.adminNotFound();
-
-        if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
-            throw PersonalProjectException.restaurantNotFound();
-
-        if (adminAccountRepository.findByAdminName(postDTO.getAdminName()).isEmpty())
+        if (userAccountRepository.findByLastName(postDTO.getAdminName()).isEmpty())
             throw PersonalProjectException.adminNotFound();
 
         if(postDTO.getDescription().isBlank() || postDTO.getDescription().isEmpty() || postDTO.getDescription() == null)
@@ -60,10 +52,12 @@ public class PostServiceImpl implements PostService {
 
         Post post = Post.builder()
                 .createDate(LocalDate.now())
-                .description(postDTO.getDescription())
+                .description(postDTO.getDescription().trim())
                 .rating(postDTO.getRating())
-                .restaurant(restaurantRepository.findByName(postDTO.getRestaurantName()).get())
-                .adminAccount(adminAccountRepository.findByAdminName(postDTO.getAdminName()).get())
+                .restaurant(restaurantRepository.findByName(postDTO.getRestaurantName().trim())
+                        .orElseThrow(PersonalProjectException::restaurantNotFound))
+                .userAccount(userAccountRepository.findByUsername(postDTO.getAdminName().trim())
+                        .orElseThrow(PersonalProjectException::adminNotFound))
                 .picture(postDTO.getPicture())
                 .build();
 
@@ -82,11 +76,11 @@ public class PostServiceImpl implements PostService {
             PostDTO dto = PostDTO.builder()
                     .ID(post.getID())
                     .createDate(post.getCreateDate())
-                    .description(post.getDescription())
+                    .description(post.getDescription().trim())
                     .rating(post.getRating())
-                    .restaurantName(post.getRestaurant().getName())
-                    .picture(post.getPicture())
-                    .adminName(post.getAdminAccount().getAdminName())
+                    .restaurantName(post.getRestaurant().getName().trim())
+                    .picture(post.getPicture().trim())
+                    .adminName(post.getUserAccount().getLastName())
                     .build();
             result.add(dto);
         }
@@ -105,6 +99,7 @@ public class PostServiceImpl implements PostService {
 
         Post existingPost = postRepository.findById(postID)
                 .orElseThrow(PersonalProjectException::postNotFound);
+
         if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
@@ -118,10 +113,11 @@ public class PostServiceImpl implements PostService {
             throw PersonalProjectException.badRequest("RatingInvalid","Rating must be between 0 and 10");
 
         existingPost.setCreateDate(LocalDate.now());
-        existingPost.setDescription(postDTO.getDescription());
+        existingPost.setDescription(postDTO.getDescription().trim());
         existingPost.setRating(postDTO.getRating());
-        existingPost.setPicture(postDTO.getPicture());
-        existingPost.setRestaurant(restaurantRepository.findByName(postDTO.getRestaurantName()).get());
+        existingPost.setPicture(postDTO.getPicture().trim());
+        existingPost.setRestaurant(restaurantRepository.findByName(postDTO.getRestaurantName().trim())
+                .orElseThrow(PersonalProjectException::restaurantNotFound));
 
         return postMapper.toDTO(postRepository.save(existingPost));
     }
@@ -137,7 +133,7 @@ public class PostServiceImpl implements PostService {
 
     public List<PostDTO> getPostByRestaurantName(String restaurantName) {
 
-        List<Post> postList = postRepository.getPostByRestaurantName(restaurantName)
+        List<Post> postList = postRepository.getPostByRestaurantName(restaurantName.trim())
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
         return postMapper.toDTOs(postList);

@@ -11,7 +11,7 @@ import java.util.List;
 public interface RestaurantAPI {
 
     @PostMapping
-    ResponseEntity<RestaurantDTO> createRestaurant(@Valid @RequestBody RestaurantDTO restaurantDTO);
+    ResponseEntity<RestaurantDTO> createRestaurant(@RequestBody RestaurantDTO restaurantDTO);
 
     @GetMapping
     ResponseEntity<List<RestaurantDTO>> getAllRestaurants();

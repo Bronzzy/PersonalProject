@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserAccount userAccount = userAccountRepository.findByUsername(username)
+        UserAccount userAccount = userAccountRepository.findByUsername(username.trim())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
         return UserDetailsImpl.build(userAccount);
@@ -30,7 +30,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Transactional
     public UserDetails validateUser(String username) {
-        UserAccount userAccount = userAccountRepository.findByUsername(username)
+        UserAccount userAccount = userAccountRepository.findByUsername(username.trim())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
         return UserDetailsImpl.build(userAccount);

@@ -54,9 +54,9 @@ public class CommentServiceImpl implements CommentService {
 
         Comment comment = Comment.builder()
                 .ID(commentDTO.getCommentID())
-                .content(commentDTO.getContent())
+                .content(commentDTO.getContent().trim())
                 .createDate(LocalDate.now())
-                .userAccount(userAccountRepository.findByUsername(username).get())
+                .userAccount(userAccountRepository.findByUsername(username.trim()).get())
                 .post(postRepository.findById(commentDTO.getPostID()).get())
                 .build();
 
@@ -74,9 +74,9 @@ public class CommentServiceImpl implements CommentService {
         for (Comment comment : commentList) {
             CommentDTO dto = CommentDTO.builder()
                     .commentID(comment.getID())
-                    .content(comment.getContent())
+                    .content(comment.getContent().trim())
                     .createDate(comment.getCreateDate())
-                    .username(comment.getUserAccount().getUsername())
+                    .username(comment.getUserAccount().getUsername().trim())
                     .postID(comment.getPost().getID())
                     .build();
             resultList.add(dto);
