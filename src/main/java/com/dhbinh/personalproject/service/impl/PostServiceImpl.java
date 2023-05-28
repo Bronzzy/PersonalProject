@@ -8,6 +8,7 @@ import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.repository.UserAccountRepository;
 import com.dhbinh.personalproject.service.PostService;
 import com.dhbinh.personalproject.service.dto.PostDTO;
+import com.dhbinh.personalproject.service.dto.PostWithAllCommentDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -37,10 +39,10 @@ public class PostServiceImpl implements PostService {
         if (restaurantRepository.findByName(postDTO.getRestaurantName()).isEmpty())
             throw PersonalProjectException.restaurantNotFound();
 
-        if (userAccountRepository.findByLastName(postDTO.getAdminName()).isEmpty())
-            throw PersonalProjectException.adminNotFound();
+//        if (userAccountRepository.findByLastName(postDTO.getAdminName()).isEmpty())
+//            throw PersonalProjectException.adminNotFound();
 
-        if(postDTO.getDescription().isBlank() || postDTO.getDescription().isEmpty() || postDTO.getDescription() == null)
+        if(postDTO.getDescription() == null || postDTO.getDescription().isBlank() || postDTO.getDescription().isEmpty())
             throw PersonalProjectException.badRequest("DescriptionInvalid","Description is required");
 
         if(postDTO.getRating() == null)
@@ -56,7 +58,7 @@ public class PostServiceImpl implements PostService {
                 .rating(postDTO.getRating())
                 .restaurant(restaurantRepository.findByName(postDTO.getRestaurantName().trim())
                         .orElseThrow(PersonalProjectException::restaurantNotFound))
-                .userAccount(userAccountRepository.findByUsername(postDTO.getAdminName().trim())
+                .userAccount(userAccountRepository.findByLastName(postDTO.getAdminName().trim())
                         .orElseThrow(PersonalProjectException::adminNotFound))
                 .picture(postDTO.getPicture())
                 .build();
@@ -139,7 +141,10 @@ public class PostServiceImpl implements PostService {
         return postMapper.toDTOs(postList);
     }
 
-    private void isPostValid(PostDTO postDTO){
-
+    @Override
+    public Optional<List<PostWithAllCommentDTO>> getPostWithAllCommentByRestaurant(String restaurantName) {
+        return postRepository.getPostWithAllCommentByRestaurant(restaurantName);
     }
+
+
 }

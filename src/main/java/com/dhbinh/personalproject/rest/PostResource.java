@@ -3,6 +3,7 @@ package com.dhbinh.personalproject.rest;
 import com.dhbinh.personalproject.rest.api.PostAPI;
 import com.dhbinh.personalproject.service.PostService;
 import com.dhbinh.personalproject.service.dto.PostDTO;
+import com.dhbinh.personalproject.service.dto.PostWithAllCommentDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import com.dhbinh.personalproject.service.impl.PostServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -51,5 +53,10 @@ public class PostResource implements PostAPI {
     @Override
     public ResponseEntity<List<PostDTO>> getPostByRestaurantName(String restaurant) {
         return ResponseEntity.ok(postService.getPostByRestaurantName(restaurant));
+    }
+
+    @Override
+    public ResponseEntity<Optional<List<PostWithAllCommentDTO>>> getPostWithAllCommentByRestaurant(String restaurantName) {
+        return ResponseEntity.ok(postService.getPostWithAllCommentByRestaurant(restaurantName));
     }
 }

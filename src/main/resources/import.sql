@@ -246,7 +246,7 @@ insert into admin_account(user_account,admin_username,admin_password) values (1,
 
 
 -----INSERT DATA INTO USER_ACCOUNT-------
-INSERT INTO user_account (first_name,last_name,password,username) VALUES ('Dao',1,'$2y$10$wxHnxbfjN6CFqMh4f9VgE.GM8Nft9SEY0EFSihLPy5Di2QI8CjOiW','hoabinh0911@gmail.com');
+INSERT INTO user_account (first_name,last_name,password,username) VALUES ('Dao','Binh','$2y$10$wxHnxbfjN6CFqMh4f9VgE.GM8Nft9SEY0EFSihLPy5Di2QI8CjOiW','hoabinh0911@gmail.com');
 INSERT INTO user_account (first_name,last_name,password,username) VALUES ('Federico','Capron','$2y$10$yfPnFue265XH43KXRsBZ3O1sgx5z2zurZfiUIqTm5Hsa6dVvcpHcq','fcapron0@columbia.edu');
 INSERT INTO user_account (first_name,last_name,password,username) VALUES ('Hubey','Ohrtmann','$2y$10$Fc8UD0xTqy2KEflCc9cAGOzzCVOgKcwcmbhIhdhJbTNdTDiC7nDOG','hohrtmann1@alibaba.com');
 INSERT INTO user_account (first_name,last_name,password,username) VALUES ('Reinald','Tunesi','$2y$10$nGTL8yjIvJBG3MYRJnOsF.fCOl9gdstXHzNgBY5Wvov3.5gR3i5jq','rtunesi2@phoca.cz');

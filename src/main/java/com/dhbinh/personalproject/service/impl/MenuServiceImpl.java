@@ -40,7 +40,6 @@ public class MenuServiceImpl implements MenuService {
         isMenuDTOValid(menuDTO);
 
         Menu menu = Menu.builder()
-                .ID(menuDTO.getID())
                 .startingPrice(menuDTO.getStartingPrice())
                 .endingPrice(menuDTO.getEndingPrice())
                 .ingredients(menuDTO.getIngredients().trim())
@@ -96,13 +95,13 @@ public class MenuServiceImpl implements MenuService {
 
         List<Menu> rawList = menuRepository.findAll().stream()
                 .filter(m -> m.getStartingPrice() < startingPrice)
-                .filter(m -> "Quan 1".equals(m.getRestaurant().getDistrict().getName().trim()))
+                .filter(m -> "Quan 1".equals(m.getRestaurant().getDistrict().getName()))
                 .collect(Collectors.toList());
         for (Menu menu : rawList) {
             MonAnQuanAnDTO dto = MonAnQuanAnDTO.builder()
-                    .dishCategory(menu.getDishCategory().getType().trim())
-                    .restaurantName(menu.getRestaurant().getName().trim())
-                    .address(menu.getRestaurant().getAddress().trim())
+                    .dishCategory(menu.getDishCategory().getType())
+                    .restaurantName(menu.getRestaurant().getName())
+                    .address(menu.getRestaurant().getAddress())
                     .openHour(menu.getRestaurant().getOpenHour())
                     .closeHour(menu.getRestaurant().getClosingHour())
                     .build();

@@ -38,4 +38,5 @@ public interface RestaurantAPI {
     ResponseEntity<List<RestaurantDTO>> getByRatingOpenHourAndClosingHour(@RequestParam("rating") double rating,
                                                                           @RequestParam("openHour") String openHour,
                                                                           @RequestParam("closingHour") String closingHour);
+
 }

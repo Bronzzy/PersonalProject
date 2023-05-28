@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 public interface UserAccountAPI {
 
 
-    @PostMapping
-    ResponseEntity<SignupDTO> createUserAccount(@RequestBody UserAccountDTO userAccountDTO);
+//    @PostMapping
+//    ResponseEntity<SignupDTO> createUserAccount(@RequestBody UserAccountDTO userAccountDTO);
 
     @GetMapping
     ResponseEntity<UserAccountDTO> getUserFromToken(@RequestHeader("Authorization") String token);

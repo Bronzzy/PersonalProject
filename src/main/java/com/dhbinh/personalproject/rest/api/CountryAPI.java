@@ -12,21 +12,23 @@ import java.util.List;
 @RequestMapping("/countries")
 public interface CountryAPI {
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     ResponseEntity<CountryDTO> createCountry(@RequestBody CountryDTO countryDTO);
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     ResponseEntity<List<CountryDTO>> getAllCountry();
 
     @GetMapping("/bycountryid")
     ResponseEntity<CountryDTO> getByCountryID(@Param("countryName") String countryName);
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{countryid}")
     ResponseEntity<CountryDTO> updateCountry(@PathVariable
                                              @RequestBody CountryDTO countryDTO);
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteCountry(@RequestParam("countryName") String countryName);
 }

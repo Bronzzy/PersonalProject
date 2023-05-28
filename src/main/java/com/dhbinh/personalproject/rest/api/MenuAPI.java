@@ -17,10 +17,10 @@ public interface MenuAPI {
     ResponseEntity<List<MenuDTO>> getAllMenu();
 
     @GetMapping("/bymenuid/{menuid}")
-    ResponseEntity<MenuDTO> getMenuByID(@PathVariable("menuID") Long menuID);
+    ResponseEntity<MenuDTO> getMenuByID(@PathVariable("menuid") Long menuID);
 
     @PutMapping("/update/{menuid}")
-    ResponseEntity<MenuDTO> updateMenu(@PathVariable("menuID") Long menuID, @RequestBody MenuDTO menuDTO);
+    ResponseEntity<MenuDTO> updateMenu(@PathVariable("menuid") Long menuID, @RequestBody MenuDTO menuDTO);
 
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteMenu(@RequestParam("menuID") Long menuID);

@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.repository;
 
 import com.dhbinh.personalproject.entity.Post;
+import com.dhbinh.personalproject.service.dto.PostWithAllCommentDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             " WHERE p.restaurant.ID = r.ID " +
             " AND r.name like :restaurantName")
     Optional<List<Post>> getPostByRestaurantName(@Param("restaurantName") String restaurantName);
+
+    @Query(" SELECT new com.dhbinh.personalproject.service.dto.PostWithAllCommentDTO " +
+    "(p.createDate, p.userAccount.lastName, p.restaurant.name, p.picture, p.description, p.rating , c.userAccount.username, c.createDate, c.content)" +
+            " FROM Post p, Comment c, Restaurant r" +
+            " WHERE p.restaurant.ID = r.ID " +
+            " AND c.post.ID = p.ID " +
+            " AND r.name like :restaurantName")
+    Optional<List<PostWithAllCommentDTO>> getPostWithAllCommentByRestaurant(@Param("restaurantName") String restaurantName);
+
+
 }
