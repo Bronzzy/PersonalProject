@@ -32,11 +32,7 @@ public interface PostAPI {
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteByPostID(@RequestParam("postID") Long postID);
 
-
-    @GetMapping("/byrestaurant")
-    ResponseEntity<List<PostDTO>> getPostByRestaurantName(@RequestParam("restaurantName") String restaurantName);
-
-    @GetMapping("/byrestaurant1")
-    ResponseEntity<Optional<List<PostWithAllCommentDTO>>> getPostWithAllCommentByRestaurant(@RequestParam("restaurantName") String restaurantName);
+    @GetMapping("/postwithcomments")
+    ResponseEntity<PostWithAllCommentDTO> getPostWithAllComment(@RequestParam("restaurantName") String restaurantName);
 
 }

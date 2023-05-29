@@ -1,11 +1,15 @@
 package com.dhbinh.personalproject.service;
 
+import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantService {
+
+    Restaurant findByName(String restaurantName);
 
     RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO);
 

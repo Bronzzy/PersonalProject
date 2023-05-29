@@ -59,7 +59,7 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
     @Override
     public void deleteByType(String type) {
-        if(!dishCategoryRepository.existsByType(type.trim()))
+        if (!dishCategoryRepository.existsByType(type.trim()))
             throw PersonalProjectException.dishCategoryNotFound();
         dishCategoryRepository.deleteByType(type);
     }

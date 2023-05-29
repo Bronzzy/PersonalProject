@@ -51,12 +51,7 @@ public class PostResource implements PostAPI {
     }
 
     @Override
-    public ResponseEntity<List<PostDTO>> getPostByRestaurantName(String restaurant) {
-        return ResponseEntity.ok(postService.getPostByRestaurantName(restaurant));
-    }
-
-    @Override
-    public ResponseEntity<Optional<List<PostWithAllCommentDTO>>> getPostWithAllCommentByRestaurant(String restaurantName) {
-        return ResponseEntity.ok(postService.getPostWithAllCommentByRestaurant(restaurantName));
+    public ResponseEntity<PostWithAllCommentDTO> getPostWithAllComment(String restaurantName) {
+        return ResponseEntity.ok(postService.getPostWithAllCommentByRestaurantName(restaurantName));
     }
 }

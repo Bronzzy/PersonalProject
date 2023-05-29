@@ -18,6 +18,7 @@ import javax.validation.Valid;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -32,6 +33,8 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final DistrictRepository districtRepository;
 
     private final FoodBrandRepository foodBrandRepository;
+
+
 
     @Override
     public RestaurantDTO createRestaurant(RestaurantDTO restaurantDTO) {
@@ -235,6 +238,12 @@ public class RestaurantServiceImpl implements RestaurantService {
             results.add(dto);
         }
         return results;
+    }
+
+    @Override
+    public Restaurant findByName(String restaurantName) {
+        return restaurantRepository.findByName(restaurantName.trim())
+                .orElseThrow(PersonalProjectException::restaurantNotFound);
     }
 
     private boolean isValidTimeFormat(String timeString) {

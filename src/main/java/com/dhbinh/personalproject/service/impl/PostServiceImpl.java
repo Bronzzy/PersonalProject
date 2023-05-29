@@ -1,11 +1,16 @@
 package com.dhbinh.personalproject.service.impl;
 
+import com.dhbinh.personalproject.entity.Comment;
 import com.dhbinh.personalproject.entity.Post;
+import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
+import com.dhbinh.personalproject.mapper.CommentMapper;
 import com.dhbinh.personalproject.mapper.PostMapper;
+import com.dhbinh.personalproject.repository.CommentRepository;
 import com.dhbinh.personalproject.repository.PostRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.repository.UserAccountRepository;
+import com.dhbinh.personalproject.service.CommentService;
 import com.dhbinh.personalproject.service.PostService;
 import com.dhbinh.personalproject.service.dto.PostDTO;
 import com.dhbinh.personalproject.service.dto.PostWithAllCommentDTO;
@@ -16,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,6 +34,10 @@ public class PostServiceImpl implements PostService {
     private final RestaurantRepository restaurantRepository;
 
     private final UserAccountRepository userAccountRepository;
+
+    private final CommentService commentService;
+
+    private final CommentMapper commentMapper;
 
 
     @Override
@@ -78,10 +86,10 @@ public class PostServiceImpl implements PostService {
             PostDTO dto = PostDTO.builder()
                     .ID(post.getID())
                     .createDate(post.getCreateDate())
-                    .description(post.getDescription().trim())
+                    .description(post.getDescription())
                     .rating(post.getRating())
-                    .restaurantName(post.getRestaurant().getName().trim())
-                    .picture(post.getPicture().trim())
+                    .restaurantName(post.getRestaurant().getName())
+                    .picture(post.getPicture())
                     .adminName(post.getUserAccount().getLastName())
                     .build();
             result.add(dto);
@@ -133,18 +141,20 @@ public class PostServiceImpl implements PostService {
         postRepository.delete(existingPost);
     }
 
-    public List<PostDTO> getPostByRestaurantName(String restaurantName) {
+    public PostWithAllCommentDTO getPostWithAllCommentByRestaurantName(String restaurantName) {
 
-        List<Post> postList = postRepository.getPostByRestaurantName(restaurantName.trim())
+        Restaurant existingRestaurant = restaurantRepository.findByName(restaurantName.trim())
                 .orElseThrow(PersonalProjectException::restaurantNotFound);
 
-        return postMapper.toDTOs(postList);
+        Post existingPost = postRepository.findByRestaurant(existingRestaurant)
+                .orElseThrow(PersonalProjectException::postNotFound);
+
+        List<Comment> comments = commentService.findByPost(existingPost);
+
+        return PostWithAllCommentDTO.builder()
+                .postDTO(postMapper.toDTO(existingPost))
+                .comments(commentMapper.toDTOs(comments))
+                .build();
+
     }
-
-    @Override
-    public Optional<List<PostWithAllCommentDTO>> getPostWithAllCommentByRestaurant(String restaurantName) {
-        return postRepository.getPostWithAllCommentByRestaurant(restaurantName);
-    }
-
-
 }

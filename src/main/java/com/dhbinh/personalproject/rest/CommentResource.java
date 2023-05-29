@@ -4,6 +4,7 @@ import com.dhbinh.personalproject.rest.api.CommentAPI;
 import com.dhbinh.personalproject.service.CommentService;
 import com.dhbinh.personalproject.service.dto.CommentDTO;
 import com.dhbinh.personalproject.service.dto.MonthlyUserCountDTO;
+import com.dhbinh.personalproject.service.dto.UserWithMostCommentDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -43,9 +44,10 @@ public class CommentResource implements CommentAPI {
         return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<List<Object[]>> getTopUserWithMostComment(int limit) {
+    @Override
+    public ResponseEntity<List<UserWithMostCommentDTO>> getUserWithMostComment(int year, int month, int limit) {
         Pageable pageable = PageRequest.of(0, limit);
-        return ResponseEntity.ok(commentService.getTopUserWithMostComment(pageable));
+        return ResponseEntity.ok(commentService.getUserWithMostComment(year, month, pageable));
     }
 
     @Override

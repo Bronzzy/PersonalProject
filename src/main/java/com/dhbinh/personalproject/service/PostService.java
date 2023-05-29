@@ -18,8 +18,6 @@ public interface PostService {
 
     void deleteByPostID(Long postID);
 
-    List<PostDTO> getPostByRestaurantName(String restaurantName);
-
-    Optional<List<PostWithAllCommentDTO>> getPostWithAllCommentByRestaurant(String restaurantName);
+    PostWithAllCommentDTO getPostWithAllCommentByRestaurantName(String restaurantName);
 
 }

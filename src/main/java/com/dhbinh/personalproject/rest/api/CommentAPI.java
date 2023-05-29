@@ -2,6 +2,7 @@ package com.dhbinh.personalproject.rest.api;
 
 import com.dhbinh.personalproject.service.dto.CommentDTO;
 import com.dhbinh.personalproject.service.dto.MonthlyUserCountDTO;
+import com.dhbinh.personalproject.service.dto.UserWithMostCommentDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +29,10 @@ public interface CommentAPI {
     ResponseEntity<Void> deleteComment(@PathVariable("commentID") Long commentID);
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/topusers")
-    ResponseEntity<List<Object[]>> getTopUserWithMostComment(@RequestParam("limit") int limit);
+    @GetMapping("/topusercomment")
+    ResponseEntity<List<UserWithMostCommentDTO>> getUserWithMostComment(@RequestParam("year") int year,
+                                                                        @RequestParam("month") int month,
+                                                                        @RequestParam("limit") int limit);
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/monthlyusercount")

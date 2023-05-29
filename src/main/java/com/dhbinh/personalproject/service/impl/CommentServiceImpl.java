@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.service.impl;
 
 import com.dhbinh.personalproject.entity.Comment;
+import com.dhbinh.personalproject.entity.Post;
 import com.dhbinh.personalproject.exception.PersonalProjectException;
 import com.dhbinh.personalproject.mapper.CommentMapper;
 import com.dhbinh.personalproject.repository.CommentRepository;
@@ -10,8 +11,10 @@ import com.dhbinh.personalproject.security.jwt.JwtUtils;
 import com.dhbinh.personalproject.service.CommentService;
 import com.dhbinh.personalproject.service.dto.CommentDTO;
 import com.dhbinh.personalproject.service.dto.MonthlyUserCountDTO;
+import com.dhbinh.personalproject.service.dto.UserWithMostCommentDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -106,14 +109,19 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Object[]> getTopUserWithMostComment(Pageable pageable) {
-        return commentRepository.getTopUserWithMostComment(pageable);
+    public List<UserWithMostCommentDTO> getUserWithMostComment(int year, int month, Pageable pageable) {
+        return commentRepository.getUserWithMostComment(year, month, pageable);
     }
 
 
     @Override
     public List<MonthlyUserCountDTO> getMonthlyUserCount() {
         return commentRepository.getMonthlyUserCount();
+    }
+
+    @Override
+    public List<Comment> findByPost(Post post) {
+        return commentRepository.findByPost(post);
     }
 
 

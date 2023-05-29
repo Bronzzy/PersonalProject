@@ -15,21 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class PostWithAllCommentDTO {
 
-    private LocalDate createDate;
+    private PostDTO postDTO;
 
-    private String adminName;
-
-    private String restaurantName;
-
-    private String picture;
-
-    private String description;
-
-    private Double rating;
-
-    private String username;
-
-    private LocalDate commentDate;
-
-    private String content;
+    private List<CommentDTO> comments;
 }
