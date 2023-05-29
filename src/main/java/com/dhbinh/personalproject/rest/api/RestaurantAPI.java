@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@RequestMapping("/auth/restaurants")
+@RequestMapping("/restaurants")
 public interface RestaurantAPI {
 
     @PostMapping

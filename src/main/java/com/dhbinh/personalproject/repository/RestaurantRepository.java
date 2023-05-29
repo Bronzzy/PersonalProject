@@ -1,5 +1,6 @@
 package com.dhbinh.personalproject.repository;
 
+import com.dhbinh.personalproject.entity.FoodBrand;
 import com.dhbinh.personalproject.entity.Restaurant;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +15,8 @@ import java.util.Optional;
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Optional<Restaurant> findByName(String restaurantName);
+
+    Optional<List<Restaurant>> findByFoodBrand(FoodBrand foodBrand);
 
     @Query(" SELECT distinct r " +
             " FROM Restaurant r, Menu m, DishCategory dc, District d, FoodBrand f " +

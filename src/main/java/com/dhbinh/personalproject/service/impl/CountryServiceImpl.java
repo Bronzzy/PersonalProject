@@ -59,7 +59,7 @@ public class CountryServiceImpl implements CountryService {
         Country existingCountry = countryRepository.findById(countryDTO.getName().trim()).
                 orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCountry.setName(countryDTO.getName().trim());
+        existingCountry.setName(countryDTO.getName() == null ? existingCountry.getName() : countryDTO.getName());
 
         return countryMapper.toDTO(countryRepository.save(existingCountry));
     }

@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,17 +69,17 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuDTO updateMenu(Long menuID, MenuDTO menuDTO) {
-        log.info("Updating menu {}", menuID);
+
         Menu existingMenu = menuRepository.findById(menuID)
                 .orElseThrow(PersonalProjectException::menuNotFound);
 
-        existingMenu.setStartingPrice(menuDTO.getStartingPrice());
-        existingMenu.setEndingPrice(menuDTO.getEndingPrice());
-        existingMenu.setIngredients(menuDTO.getIngredients().trim());
-        existingMenu.setDescription(menuDTO.getDescription().trim());
-        existingMenu.setDishCategory(dishCategoryRepository.findByType(menuDTO.getDishCategory().trim())
+        existingMenu.setStartingPrice(menuDTO.getStartingPrice() == null ? existingMenu.getStartingPrice() : menuDTO.getStartingPrice());
+        existingMenu.setEndingPrice(menuDTO.getEndingPrice() == null ? existingMenu.getEndingPrice() : menuDTO.getEndingPrice());
+        existingMenu.setIngredients(menuDTO.getIngredients() == null ? existingMenu.getIngredients() : menuDTO.getIngredients().trim());
+        existingMenu.setDescription(menuDTO.getDescription() == null ? existingMenu.getDescription() : menuDTO.getDescription().trim());
+        existingMenu.setDishCategory(menuDTO.getDishCategory() == null ? existingMenu.getDishCategory() : dishCategoryRepository.findByType(menuDTO.getDishCategory())
                 .orElseThrow(PersonalProjectException::dishCategoryNotFound));
-        existingMenu.setRestaurant(restaurantRepository.findByName(menuDTO.getRestaurantName().trim())
+        existingMenu.setRestaurant(menuDTO.getRestaurantName() == null ? existingMenu.getRestaurant() : restaurantRepository.findByName(menuDTO.getRestaurantName())
                 .orElseThrow(PersonalProjectException::restaurantNotFound));
 
         return menuMapper.toDTO(menuRepository.save(existingMenu));

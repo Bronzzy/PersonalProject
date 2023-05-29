@@ -116,18 +116,14 @@ public class PostServiceImpl implements PostService {
         if(postDTO.getDescription().isBlank() || postDTO.getDescription().isEmpty() || postDTO.getDescription() == null)
             throw PersonalProjectException.badRequest("DescriptionInvalid","Description is required");
 
-        if(postDTO.getRating() == null)
-            throw PersonalProjectException.badRequest("RatingInvalid","Rating is required");
-
         if(postDTO.getRating() < 0 || postDTO.getRating() > 10)
             throw PersonalProjectException.badRequest("RatingInvalid","Rating must be between 0 and 10");
 
         existingPost.setCreateDate(LocalDate.now());
-        existingPost.setDescription(postDTO.getDescription().trim());
-        existingPost.setRating(postDTO.getRating());
-        existingPost.setPicture(postDTO.getPicture().trim());
-        existingPost.setRestaurant(restaurantRepository.findByName(postDTO.getRestaurantName().trim())
-                .orElseThrow(PersonalProjectException::restaurantNotFound));
+        existingPost.setDescription(postDTO.getDescription() == null ? existingPost.getDescription() : postDTO.getDescription().trim());
+        existingPost.setRating(postDTO.getRating() == null ? existingPost.getRating() : postDTO.getRating());
+        existingPost.setPicture(postDTO.getPicture() == null ? existingPost.getPicture() : postDTO.getPicture());
+        existingPost.setRestaurant(restaurantRepository.findByName(postDTO.getRestaurantName().trim()).orElseThrow(PersonalProjectException::restaurantNotFound));
 
         return postMapper.toDTO(postRepository.save(existingPost));
     }

@@ -52,7 +52,7 @@ public class DishCategoryServiceImpl implements DishCategoryService {
 
         DishCategory dishCategory = new DishCategory();
 
-        dishCategory.setType(dishCategoryDTO.getType().trim());
+        dishCategory.setType(dishCategoryDTO.getType() == null ? dishCategory.getType() : dishCategoryDTO.getType().trim());
 
         return dishCategoryMapper.toDTO(dishCategoryRepository.save(dishCategory));
     }

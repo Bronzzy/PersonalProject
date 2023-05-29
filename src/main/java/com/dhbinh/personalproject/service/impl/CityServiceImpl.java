@@ -80,7 +80,7 @@ public class CityServiceImpl implements CityService {
         Country existingCountry = countryRepository.findById(cityDTO.getCountryName().trim())
                 .orElseThrow(PersonalProjectException::countryNotFound);
 
-        existingCity.setName(cityDTO.getName().trim());
+        existingCity.setName(cityDTO.getName() == null ? existingCity.getName() : cityDTO.getName().trim());
         existingCity.setCountry(existingCountry);
 
         return cityMapper.toDTO(cityRepository.save(existingCity));

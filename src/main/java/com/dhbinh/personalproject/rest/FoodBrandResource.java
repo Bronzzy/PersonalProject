@@ -3,6 +3,7 @@ package com.dhbinh.personalproject.rest;
 import com.dhbinh.personalproject.rest.api.FoodBrandAPI;
 import com.dhbinh.personalproject.service.FoodBrandService;
 import com.dhbinh.personalproject.service.dto.FoodBrandDTO;
+import com.dhbinh.personalproject.service.dto.FoodBrandWithAllRestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +40,10 @@ public class FoodBrandResource implements FoodBrandAPI {
     public ResponseEntity<Void> deleteFoodBrand(String foodBrand) {
         foodBrandService.deleteByFoodBrandID(foodBrand);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<FoodBrandWithAllRestaurantDTO> getFoodBrandWithAllRestaurant(String foodbrand) {
+        return ResponseEntity.ok(foodBrandService.getFoodBrandWithAllRestaurant(foodbrand));
     }
 }

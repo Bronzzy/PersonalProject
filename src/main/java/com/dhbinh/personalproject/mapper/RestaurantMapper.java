@@ -2,15 +2,17 @@ package com.dhbinh.personalproject.mapper;
 
 import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;
 
 
 @Mapper(componentModel = "spring")
 public interface RestaurantMapper {
-
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "districtName", source = "district.name")
     @Mapping(target = "foodBrand", source = "foodBrand.name")
     RestaurantDTO toDTO(Restaurant restaurant);
