@@ -7,6 +7,7 @@ import com.dhbinh.personalproject.repository.DistrictRepository;
 import com.dhbinh.personalproject.repository.FoodBrandRepository;
 import com.dhbinh.personalproject.repository.RestaurantRepository;
 import com.dhbinh.personalproject.service.RestaurantService;
+import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -201,7 +202,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    public List<Object[]> getNumberOfRestaurantByDistrict() {
+    public List<NumberOfRestaurantByDistrictDTO> getNumberOfRestaurantByDistrict() {
         return restaurantRepository.getNumberOfRestaurantByDistrict();
     }
 
@@ -238,6 +239,11 @@ public class RestaurantServiceImpl implements RestaurantService {
             results.add(dto);
         }
         return results;
+    }
+
+    @Override
+    public List<RestaurantDTO> getRestaurantByPrice(double startingPrice, double endingPrice) {
+        return restaurantMapper.toDTOs(restaurantRepository.getRestaurantByPrice(startingPrice,endingPrice));
     }
 
     @Override

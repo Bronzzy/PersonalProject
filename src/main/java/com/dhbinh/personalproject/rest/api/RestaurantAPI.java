@@ -1,5 +1,6 @@
 package com.dhbinh.personalproject.rest.api;
 
+import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,11 +33,15 @@ public interface RestaurantAPI {
                                                                     @RequestParam("limit") int limit);
 
     @GetMapping("/numberofrestaurantbydistrict")
-    ResponseEntity<List<Object[]>> getNumberOfRestaurantByDistrict();
+    ResponseEntity<List<NumberOfRestaurantByDistrictDTO>> getNumberOfRestaurantByDistrict();
 
     @GetMapping("/byratingopenhourclosinghour")
     ResponseEntity<List<RestaurantDTO>> getByRatingOpenHourAndClosingHour(@RequestParam("rating") double rating,
                                                                           @RequestParam("openHour") String openHour,
                                                                           @RequestParam("closingHour") String closingHour);
+
+    @GetMapping("/byprice")
+    ResponseEntity<List<RestaurantDTO>> getRestaurantByPrice(@RequestParam("startingPrice") double startingPrice,
+                                                            @RequestParam("endingPrice") double endingPrice);
 
 }

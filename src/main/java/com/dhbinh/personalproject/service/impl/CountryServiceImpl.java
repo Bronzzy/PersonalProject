@@ -48,7 +48,7 @@ public class CountryServiceImpl implements CountryService {
 
     public CountryDTO getByCountryID(String countryName) {
 
-        Country existingCountry = countryRepository.findById(countryName.trim())
+        Country existingCountry = countryRepository.findById(countryName)
                 .orElseThrow(PersonalProjectException::countryNotFound);
 
         return (countryMapper.toDTO(existingCountry));

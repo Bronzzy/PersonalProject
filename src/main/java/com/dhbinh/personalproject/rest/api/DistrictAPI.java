@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/auth/districts")
+@RequestMapping("/districts")
 public interface DistrictAPI {
 
     @PostMapping
@@ -14,11 +14,11 @@ public interface DistrictAPI {
 
     @GetMapping
     ResponseEntity<List<DistrictDTO>> getAllDistrict();
-//
-//    @GetMapping("/bycityid")
-//    ResponseEntity<DistrictDTO> getByDistrictID(@RequestParam("districtName") String districtName);
-//
-//    @DeleteMapping("/delete")
-//    ResponseEntity<Void> deleteCity(@RequestParam("districtName") String districtName);
+
+    @GetMapping("/bycityid")
+    ResponseEntity<DistrictDTO> getByDistrictID(@RequestParam("districtName") String districtName);
+
+    @DeleteMapping("/delete")
+    ResponseEntity<Void> deleteCity(@RequestParam("districtName") String districtName);
 
 }

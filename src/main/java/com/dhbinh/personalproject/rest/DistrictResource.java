@@ -31,17 +31,17 @@ public class DistrictResource implements DistrictAPI {
         return ResponseEntity.ok(districtService.getAllDistrict());
     }
 
+
+    @Override
+    public ResponseEntity<DistrictDTO> getByDistrictID(String districtName) {
+        return ResponseEntity.ok(districtService.getByDistrictID(districtName));
+    }
 //
-//    @Override
-//    public ResponseEntity<DistrictDTO> getByDistrictID(String districtName) {
-//        return ResponseEntity.ok(districtService.getByDistrictID(districtName));
-//    }
-//
-//    @Override
-//    public ResponseEntity<Void> deleteCity(String districtName) {
-//        districtService.deleteByDistrictID(districtName);
-//        return ResponseEntity.noContent().build();
-//    }
+    @Override
+    public ResponseEntity<Void> deleteCity(String districtName) {
+        districtService.deleteByDistrictID(districtName);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

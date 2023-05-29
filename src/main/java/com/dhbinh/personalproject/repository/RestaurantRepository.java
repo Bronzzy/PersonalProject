@@ -2,6 +2,7 @@ package com.dhbinh.personalproject.repository;
 
 import com.dhbinh.personalproject.entity.FoodBrand;
 import com.dhbinh.personalproject.entity.Restaurant;
+import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -29,11 +30,20 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
                                                  @Param("name") String districtName,
                                                  Pageable pageable);
 
-    @Query(" SELECT count(r.ID), d.name" +
-            " FROM Restaurant r, District d" +
-            " WHERE r.district.name = d.name" +
-            " group by d.name")
-    List<Object[]> getNumberOfRestaurantByDistrict();
+    @Query(" SELECT DISTINCT r " +
+            " FROM Restaurant r, Menu m" +
+            " WHERE r.ID = m.restaurant.ID " +
+            " AND m.startingPrice > :startingPrice " +
+            " AND m.endingPrice < :endingPrice")
+    List<Restaurant> getRestaurantByPrice(@Param("startingPrice") Double startingPrice,
+                                          @Param("endingPrice") Double endingPrice);
+
+    @Query(" SELECT new com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO(d.name, count(r.id)) " +
+            " FROM Restaurant r, District d " +
+            " WHERE r.district.name = d.name "+
+            " GROUP BY d.name " +
+            " ORDER BY d.name ")
+    List<NumberOfRestaurantByDistrictDTO> getNumberOfRestaurantByDistrict();
 
     @Query(" SELECT distinct r " +
             " FROM Restaurant r, Post p " +

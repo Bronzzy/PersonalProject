@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.service;
 
 import com.dhbinh.personalproject.entity.Restaurant;
+import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.data.domain.Pageable;
 
@@ -23,9 +24,11 @@ public interface RestaurantService {
 
     List<RestaurantDTO> getRestaurantByDishCategory(String dishCategory, String districtName, Pageable pageable);
 
-    List<Object[]> getNumberOfRestaurantByDistrict();
+    List<NumberOfRestaurantByDistrictDTO> getNumberOfRestaurantByDistrict();
 
     List<RestaurantDTO> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour);
+
+    List<RestaurantDTO> getRestaurantByPrice(double startingPrice, double endingPrice);
 
 }
 

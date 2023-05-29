@@ -50,26 +50,12 @@ public class DistrictServiceImpl implements DistrictService {
         return districtMapper.toDTOs(districtList);
     }
 
-//    public DistrictDTO getByDistrictID(String districtName) {
-//        District existingDistrict = districtRepository.findById(districtName)
-//                .orElseThrow(PersonalProjectException::districtNotFound);
-//
-//        return DistrictDTO.builder()
-//                .districtName(districtName)
-//                .cityName(existingDistrict.getCity())
-//                .build();
-//    }
+    public DistrictDTO getByDistrictID(String districtName) {
+        District existingDistrict = districtRepository.findById(districtName)
+                .orElseThrow(PersonalProjectException::districtNotFound);
 
-//    private DistrictDTO updateDistrict(DistrictDTO districtDTO){
-//        District existingDistrict = districtRepository.findById(districtDTO.getDistrictName()).
-//                orElseThrow(PersonalProjectException::districtNotFound);
-//
-//        existingDistrict.setDistrictName(districtDTO.getDistrictName());
-//        existingDistrict.setCity(districtDTO.getCity());
-//
-//        return districtMapper.toDTO(districtRepository.save(existingDistrict));
-//
-//    }
+        return districtMapper.toDTO(existingDistrict);
+    }
 
     public void deleteByDistrictID(String districtName) {
         District existingDistrict = districtRepository.findById(districtName.trim()).

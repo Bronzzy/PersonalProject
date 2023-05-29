@@ -2,6 +2,7 @@ package com.dhbinh.personalproject.rest;
 
 import com.dhbinh.personalproject.rest.api.RestaurantAPI;
 import com.dhbinh.personalproject.service.RestaurantService;
+import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -63,13 +64,18 @@ public class RestaurantResource implements RestaurantAPI {
     }
 
     @Override
-    public ResponseEntity<List<Object[]>> getNumberOfRestaurantByDistrict() {
+    public ResponseEntity<List<NumberOfRestaurantByDistrictDTO>> getNumberOfRestaurantByDistrict() {
         return ResponseEntity.ok(restaurantService.getNumberOfRestaurantByDistrict());
     }
 
     @Override
     public ResponseEntity<List<RestaurantDTO>> getByRatingOpenHourAndClosingHour(double rating, String openHour, String closingHour) {
         return ResponseEntity.ok(restaurantService.getByRatingOpenHourAndClosingHour(rating, openHour, closingHour));
+    }
+
+    @Override
+    public ResponseEntity<List<RestaurantDTO>> getRestaurantByPrice(double startingPrice, double endingPrice) {
+        return ResponseEntity.ok(restaurantService.getRestaurantByPrice(startingPrice, endingPrice));
     }
 
 

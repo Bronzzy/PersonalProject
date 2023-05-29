@@ -43,8 +43,8 @@ public class MenuServiceImpl implements MenuService {
         Menu menu = Menu.builder()
                 .startingPrice(menuDTO.getStartingPrice())
                 .endingPrice(menuDTO.getEndingPrice())
-                .ingredients(menuDTO.getIngredients().trim())
-                .description(menuDTO.getDescription().trim())
+                .ingredients(menuDTO.getIngredients())
+                .description(menuDTO.getDescription())
                 .dishCategory(dishCategoryRepository.findByType(menuDTO.getDishCategory().trim())
                         .orElseThrow(PersonalProjectException::dishCategoryNotFound))
                 .restaurant(restaurantRepository.findByName(menuDTO.getRestaurantName().trim())
@@ -61,7 +61,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuDTO getMenuByID(Long menuID) {
-        log.info("Getting menu {}", menuID);
+
         Menu existingMenu = menuRepository.findById(menuID)
                 .orElseThrow(PersonalProjectException::menuNotFound);
         return menuMapper.toDTO(existingMenu);
@@ -146,7 +146,6 @@ public class MenuServiceImpl implements MenuService {
         if(menuDTO.getEndingPrice() < 0)
             throw PersonalProjectException.badRequest("InvalidPrice",
                     "Ending price must be greater than 0");
-
 
         if(menuDTO.getIngredients().isEmpty() || menuDTO.getIngredients().isBlank() || menuDTO.getIngredients() == null)
             throw PersonalProjectException.badRequest("InvalidIngredients",

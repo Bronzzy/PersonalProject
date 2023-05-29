@@ -123,7 +123,9 @@ public class PostServiceImpl implements PostService {
         existingPost.setDescription(postDTO.getDescription() == null ? existingPost.getDescription() : postDTO.getDescription().trim());
         existingPost.setRating(postDTO.getRating() == null ? existingPost.getRating() : postDTO.getRating());
         existingPost.setPicture(postDTO.getPicture() == null ? existingPost.getPicture() : postDTO.getPicture());
-        existingPost.setRestaurant(restaurantRepository.findByName(postDTO.getRestaurantName().trim()).orElseThrow(PersonalProjectException::restaurantNotFound));
+        existingPost.setRestaurant(postDTO.getRestaurantName() == null ? existingPost.getRestaurant() :
+                restaurantRepository.findByName(postDTO.getRestaurantName())
+                        .orElseThrow(PersonalProjectException::restaurantNotFound));
 
         return postMapper.toDTO(postRepository.save(existingPost));
     }

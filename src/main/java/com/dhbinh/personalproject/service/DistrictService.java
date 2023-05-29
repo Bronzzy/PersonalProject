@@ -10,7 +10,7 @@ public interface DistrictService {
 
     List<DistrictDTO> getAllDistrict();
 
-//    DistrictDTO getByDistrictID(String districtName);
-//
-//    void deleteByDistrictID(String districtName);
+    DistrictDTO getByDistrictID(String districtName);
+
+    void deleteByDistrictID(String districtName);
 }
