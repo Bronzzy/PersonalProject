@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.rest.api;
 
 import com.dhbinh.personalproject.service.dto.MenuDTO;
-import com.dhbinh.personalproject.service.dto.MonAnQuanAnDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ public interface MenuAPI {
     @DeleteMapping("/delete")
     ResponseEntity<Void> deleteMenu(@RequestParam("menuID") Long menuID);
 
-    @GetMapping("/bypriceanddistrict")
-    ResponseEntity<List<MonAnQuanAnDTO>> getByPriceAndDistrict(@RequestParam("price") Double price,
-                                                         @RequestParam("district") String district);
+//    @GetMapping("/bypriceanddistrict")
+//    ResponseEntity<List<RestaurantByRatingAndDistrictDTO>> getByPriceAndDistrict(@RequestParam("price") Double price,
+//                                                                                 @RequestParam("district") String district);
 }

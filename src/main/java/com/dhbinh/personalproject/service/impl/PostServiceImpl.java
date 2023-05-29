@@ -153,6 +153,5 @@ public class PostServiceImpl implements PostService {
                 .postDTO(postMapper.toDTO(existingPost))
                 .comments(commentMapper.toDTOs(comments))
                 .build();
-
     }
 }

@@ -34,5 +34,4 @@ public interface PostAPI {
 
     @GetMapping("/postwithcomments")
     ResponseEntity<PostWithAllCommentDTO> getPostWithAllComment(@RequestParam("restaurantName") String restaurantName);
-
 }

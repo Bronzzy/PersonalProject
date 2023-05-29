@@ -11,15 +11,17 @@ import java.time.LocalTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MonAnQuanAnDTO {
-
-    private String dishCategory;
+public class RestaurantByRatingAndDistrictDTO {
 
     private String restaurantName;
 
     private String address;
 
+    private String district;
+
     private LocalTime openHour;
 
     private LocalTime closeHour;
+
+    private Double rating;
 }

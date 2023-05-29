@@ -3,6 +3,7 @@ package com.dhbinh.personalproject.rest;
 import com.dhbinh.personalproject.rest.api.RestaurantAPI;
 import com.dhbinh.personalproject.service.RestaurantService;
 import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +79,9 @@ public class RestaurantResource implements RestaurantAPI {
         return ResponseEntity.ok(restaurantService.getRestaurantByPrice(startingPrice, endingPrice));
     }
 
-
+    @Override
+    public ResponseEntity<List<RestaurantByRatingAndDistrictDTO>> getRestaurantByRatingAndDistrict(double rating, String districtName) {
+        return ResponseEntity.ok(restaurantService.getRestaurantByRatingAndDistrict(rating, districtName));
+    }
 }
 

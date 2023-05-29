@@ -19,5 +19,4 @@ public interface PostService {
     void deleteByPostID(Long postID);
 
     PostWithAllCommentDTO getPostWithAllCommentByRestaurantName(String restaurantName);
-
 }

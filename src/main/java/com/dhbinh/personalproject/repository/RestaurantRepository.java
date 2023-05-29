@@ -3,6 +3,7 @@ package com.dhbinh.personalproject.repository;
 import com.dhbinh.personalproject.entity.FoodBrand;
 import com.dhbinh.personalproject.entity.Restaurant;
 import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -54,4 +55,14 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> getByRatingOpenHourAndClosingHour(@Param("rating") double rating,
                                                        @Param("openHour") LocalTime openHour,
                                                        @Param("closingHour") LocalTime closingHour);
+
+    @Query(" SELECT new com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO " +
+            "(r.name, r.address, r.district.name, r.openHour, r.closingHour, p.rating) " +
+            " FROM Restaurant r, Post p, District d " +
+            " WHERE d.name = r.district.name " +
+            " AND r.ID = p.restaurant.ID " +
+            " AND p.rating > :rating " +
+            " AND d.name like :districtName ")
+    List<RestaurantByRatingAndDistrictDTO> getRestaurantByRatingAndDistrict(@Param("rating") double rating,
+                                                                            @Param("districtName") String districtName);
 }

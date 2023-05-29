@@ -1,7 +1,7 @@
 package com.dhbinh.personalproject.service;
 
 import com.dhbinh.personalproject.service.dto.MenuDTO;
-import com.dhbinh.personalproject.service.dto.MonAnQuanAnDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO;
 
 import java.util.List;
 
@@ -17,5 +17,5 @@ public interface MenuService {
 
     void deleteMenu(Long menuID);
 
-    List<MonAnQuanAnDTO> getByPriceAndDistrict(Double price, String district);
+//    List<RestaurantByRatingAndDistrictDTO> getByPriceAndDistrict(Double price, String district);
 }

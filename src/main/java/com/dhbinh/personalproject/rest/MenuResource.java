@@ -3,7 +3,7 @@ package com.dhbinh.personalproject.rest;
 import com.dhbinh.personalproject.rest.api.MenuAPI;
 import com.dhbinh.personalproject.service.MenuService;
 import com.dhbinh.personalproject.service.dto.MenuDTO;
-import com.dhbinh.personalproject.service.dto.MonAnQuanAnDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -46,11 +46,4 @@ public class MenuResource implements MenuAPI {
         menuService.deleteMenu(menuID);
         return ResponseEntity.noContent().build();
     }
-
-    @Override
-    public ResponseEntity<List<MonAnQuanAnDTO>> getByPriceAndDistrict(Double price, String district) {
-        return ResponseEntity.ok(menuService.getByPriceAndDistrict(price, district));
-    }
-
-
 }

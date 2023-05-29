@@ -1,6 +1,7 @@
 package com.dhbinh.personalproject.rest.api;
 
 import com.dhbinh.personalproject.service.dto.NumberOfRestaurantByDistrictDTO;
+import com.dhbinh.personalproject.service.dto.RestaurantByRatingAndDistrictDTO;
 import com.dhbinh.personalproject.service.dto.RestaurantDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,9 @@ public interface RestaurantAPI {
 
     @GetMapping("/byprice")
     ResponseEntity<List<RestaurantDTO>> getRestaurantByPrice(@RequestParam("startingPrice") double startingPrice,
-                                                            @RequestParam("endingPrice") double endingPrice);
+                                                             @RequestParam("endingPrice") double endingPrice);
 
+    @GetMapping("/byratinganddistrict")
+    ResponseEntity<List<RestaurantByRatingAndDistrictDTO>> getRestaurantByRatingAndDistrict(@RequestParam("rating") double rating,
+                                                                                            @RequestParam("districtName") String districtName);
 }
